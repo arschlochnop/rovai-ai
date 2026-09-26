@@ -1,0 +1,211 @@
+/* Team Presets workspace. Reuses the shared tokens and member-workspace density. */
+
+.content.teams-content {
+  display: flex;
+  min-height: 0;
+  flex-direction: column;
+  overflow: hidden;
+  padding: 0;
+  background: var(--home-surface);
+}
+/* The 50px window drag strip owns grid row 1; the teams workspace must start in
+   row 2 so its header and "新建队伍" button are never under the drag region. */
+.content.teams-content { grid-row: 2; }
+
+/* Centered content column shared by the header, action and list, matching the
+   other workspaces. Card text stays left-aligned inside the column. */
+.teams-workspace {
+  display: flex;
+  width: min(980px, 100%);
+  max-width: 980px;
+  min-width: 0;
+  min-height: 0;
+  flex: 1 1 auto;
+  flex-direction: column;
+  gap: 14px;
+  overflow-y: auto;
+  margin: 0 auto;
+  padding: 30px 26px 48px;
+  background: var(--home-surface);
+  overscroll-behavior: contain;
+}
+
+.teams-header { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; }
+.teams-header h2 { margin: 0; color: var(--ink); font-size: 18px; font-weight: 650; letter-spacing: -0.01em; }
+.teams-header p { margin: 5px 0 0; color: var(--faint); font-size: 12px; line-height: 1.5; }
+.teams-header-actions { display: flex; flex: 0 0 auto; gap: 8px; }
+.teams-header-actions .primary-button { display: inline-flex; align-items: center; justify-content: center; gap: 5px; white-space: nowrap; color: var(--ink); background: var(--surface-muted); border-color: transparent; }
+.teams-header-actions .primary-button:hover:not(:disabled) { border-color: transparent; background: var(--neutral-hover); }
+
+.teams-page-notices { display: grid; gap: 8px; }
+
+.teams-error,
+.teams-feedback {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--surface-raised);
+  font-size: 12px;
+}
+.teams-error { color: var(--danger); }
+.teams-error > span { min-width: 0; flex: 1 1 auto; overflow-wrap: anywhere; }
+.teams-feedback { color: var(--ink); }
+
+.teams-empty {
+  display: grid;
+  gap: 8px;
+  justify-items: start;
+  padding: 34px 24px;
+  border: 1px dashed var(--line-strong);
+  border-radius: 14px;
+  color: var(--faint);
+  text-align: left;
+}
+.teams-empty strong { color: var(--ink); font-size: 14px; }
+.teams-empty p { margin: 0; font-size: 12px; line-height: 1.6; }
+
+.teams-list { display: grid; gap: 12px; margin: 0; padding: 0; list-style: none; }
+.team-card {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 14px;
+  padding: 16px 18px;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: var(--surface-raised);
+}
+.team-card-main { display: grid; min-width: 0; flex: 1 1 auto; gap: 10px; }
+.team-card-title { display: flex; align-items: baseline; gap: 10px; }
+.team-card-title strong { color: var(--ink); font-size: 14px; font-weight: 650; }
+.team-card-title span { color: var(--faint); font-size: 11px; }
+.team-card-description {
+  display: -webkit-box;
+  overflow: hidden;
+  margin: 0;
+  color: var(--faint);
+  font-size: 12px;
+  line-height: 1.5;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
+/* Settings "默认队员" tile style: 4 columns, avatar + name + team role, no
+   checkbox. Two full rows (8 members) are visible; the 9th scrolls inside the
+   member area while the card title, description and actions stay fixed. */
+.team-card-members {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 8px;
+  max-height: 132px;
+  margin: 0;
+  padding: 0 4px 0 0;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-gutter: stable;
+  list-style: none;
+}
+.team-card-member {
+  display: flex;
+  min-width: 0;
+  min-height: 62px;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 12px;
+  border: 1px solid var(--settings-choice-line);
+  border-radius: 8px;
+  background: var(--home-surface);
+}
+.team-card-member:hover { border-color: var(--settings-choice-selected-line); background: var(--settings-choice-hover); }
+.team-card-member.is-unavailable { border-color: var(--attention); background: var(--attention-soft); color: var(--attention); }
+.team-card-member-copy { display: grid; min-width: 0; flex: 1 1 auto; gap: 1px; }
+.team-card-member-copy strong { overflow: hidden; color: var(--ink); font-size: 12px; font-weight: 550; text-overflow: ellipsis; white-space: nowrap; }
+.team-card-member-copy small { overflow: hidden; color: var(--muted); font-size: 10.5px; text-overflow: ellipsis; white-space: nowrap; }
+.team-card-member.is-unavailable .team-card-member-copy small { color: var(--attention); }
+.team-card-lead-badge { flex: 0 0 auto; padding: 1px 6px; border-radius: 999px; color: var(--conversation-action, var(--brand)); background: var(--surface-selected); font-size: 10px; font-weight: 600; white-space: nowrap; }
+
+.team-card-warning { margin: 0; color: var(--danger); font-size: 11px; line-height: 1.5; }
+.team-card-actions { display: flex; flex: 0 0 auto; gap: 6px; }
+.quiet-button.is-danger { color: var(--danger); }
+.primary-button.is-danger { color: var(--danger); background: var(--danger-soft); }
+.primary-button.is-danger:hover:not(:disabled) { background: color-mix(in srgb, var(--danger-soft) 80%, var(--ink)); }
+
+.team-delete-body { margin: 0; color: var(--ink); font-size: 13px; line-height: 1.6; }
+
+.team-editor-field { display: grid; gap: 6px; margin-bottom: 16px; }
+.team-editor-field > span { display: inline-flex; align-items: baseline; gap: 6px; color: var(--faint); font-size: 11px; font-weight: 600; }
+.team-editor-optional { color: var(--faint); font-size: 10px; font-weight: 500; }
+.team-editor-field input,
+.team-editor-field textarea { width: 100%; }
+.team-editor-field textarea { min-height: 64px; resize: vertical; line-height: 1.5; }
+.team-editor-field small { justify-self: end; color: var(--faint); font-size: 10px; }
+
+.team-editor-fieldset { margin: 0 0 16px; padding: 12px 14px; border: 1px solid var(--line); border-radius: 12px; }
+.team-editor-fieldset legend { display: flex; gap: 8px; padding: 0 4px; color: var(--ink); font-size: 12px; font-weight: 600; }
+.team-editor-fieldset legend span { color: var(--faint); font-weight: 500; }
+.team-editor-empty { margin: 0; color: var(--faint); font-size: 12px; }
+/* Bounded member list: with many members it scrolls on its own so the lead
+   fieldset and footer stay reachable and the Dialog stays within the viewport. */
+.team-editor-member-list {
+  display: grid;
+  gap: 4px;
+  max-height: 200px;
+  margin: 0;
+  padding: 0 4px 0 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  list-style: none;
+}
+.team-editor-member-list label { display: flex; min-width: 0; align-items: center; gap: 8px; padding: 6px 8px; border-radius: 8px; cursor: pointer; }
+.team-editor-member-list label:hover { background: var(--surface-muted); }
+.team-editor-member-list label > span { display: grid; min-width: 0; gap: 1px; color: var(--ink); font-size: 12px; }
+.team-editor-member-list label > span strong { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.team-editor-member-list label small { overflow: hidden; color: var(--faint); font-size: 10px; text-overflow: ellipsis; white-space: nowrap; }
+.team-editor-fieldset .general-lead-trigger { min-height: 44px; }
+/* The lead combobox popup is portaled into this Dialog content so the parent
+   Dialog never treats an option click as an outside interaction. Allow the
+   popup to extend past the dialog box instead of being clipped by it. */
+.dialog-content.app-dialog.team-preset-editor-dialog { overflow: visible; }
+
+.team-editor-unavailable { margin-top: 10px; padding: 10px 12px; border-radius: 10px; background: var(--danger-soft); }
+.team-editor-unavailable p { margin: 0 0 8px; color: var(--danger); font-size: 11px; line-height: 1.5; }
+.team-editor-unavailable ul { display: grid; gap: 6px; max-height: 120px; margin: 0; padding: 0; overflow-y: auto; overscroll-behavior: contain; list-style: none; }
+.team-editor-unavailable li { display: flex; align-items: center; justify-content: space-between; gap: 10px; font-size: 12px; }
+.team-editor-unavailable li em { margin-left: 6px; color: var(--danger); font-size: 10px; font-style: normal; }
+
+/* Mobile: the members/teams segmented switch stays at the top of the shared
+   workspace; no extra bottom-navigation entry is added. */
+.mobile-workspace-switch {
+  display: flex;
+  gap: 4px;
+  padding: 8px 14px 0;
+  background: var(--home-surface);
+}
+.mobile-workspace-switch button {
+  flex: 1 1 0;
+  padding: 8px 10px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  color: var(--faint);
+  background: transparent;
+  font-size: 12px;
+}
+.mobile-workspace-switch button.active { color: var(--ink); background: var(--surface-selected); border-color: transparent; }
+
+@media (max-width: 767px) {
+  .teams-workspace { padding: 18px 14px 40px; }
+  .team-card { flex-direction: column; }
+  .team-card-actions { width: 100%; justify-content: flex-end; }
+  /* Narrow screens keep the same fixed member area height and internal scroll,
+     only the column count changes. */
+  .team-card-members { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 479px) {
+  .team-card-members { grid-template-columns: minmax(0, 1fr); }
+}

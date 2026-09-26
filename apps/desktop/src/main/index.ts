@@ -328,7 +328,10 @@ const allowedMethods = new Set<CoreMethod>([
   'notifications.preference.get',
   'notifications.preference.update',
   'events.subscribe',
-  'diagnostics.export'
+  'diagnostics.export',
+  'preferences.teamPresets.list',
+  'preferences.teamPresets.save',
+  'preferences.teamPresets.delete'
 ])
 const APP_NAME = 'Rovai AI'
 app.setName(APP_NAME)

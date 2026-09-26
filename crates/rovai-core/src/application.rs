@@ -1,6 +1,7 @@
 mod config;
 mod conversation_preferences;
 mod mission;
+mod team_presets;
 mod transport;
 mod web_commands;
 pub use config::{CoreConfig, RemovedSkillProjectRoots};
@@ -140,7 +141,7 @@ use rovai_core::{
         DiscardPendingCampCommand, ExecutionRequest, ProjectBindingKind,
         ReconcileDefaultLeadCommand, RemoveCampMemberCommand, RenameCampCommand,
         SendUserAutomationCampMessageCommand, SendUserCampMessageCommand, TaskAssigneeFilter,
-        TaskAssigneeUpdate, TaskListQuery, TaskStatus, UpdateTaskCommand,
+        TaskAssigneeUpdate, TaskListQuery, TaskStatus, TeamPresetSelection, UpdateTaskCommand,
         WithdrawCampMessageCommand,
     },
     command::{
@@ -541,6 +542,15 @@ struct ErrorBody {
 }
 
 fn request_error_body(error: &anyhow::Error) -> ErrorBody {
+    if let Some(error) = error.downcast_ref::<team_presets::TeamPresetFailure>() {
+        return ErrorBody {
+            kind: "domain_rejection",
+            code: error.code().as_str().to_string(),
+            message: error.to_string(),
+            retryable: false,
+            details: json!({}),
+        };
+    }
     if let Some(error) = error.downcast_ref::<LocalAttachmentFailure>() {
         return ErrorBody {
             kind: "domain_rejection",
@@ -1201,11 +1211,32 @@ struct CreateCampParams {
     command_id: String,
     name: Option<String>,
     workspace: Option<SelectedWorkspaceParams>,
-    member_agent_ids: Vec<String>,
-    default_lead_agent_id: String,
+    #[serde(default)]
+    member_agent_ids: Option<Vec<String>>,
+    #[serde(default)]
+    default_lead_agent_id: Option<String>,
+    #[serde(default)]
+    team_preset_selection: Option<TeamPresetSelection>,
     collaboration_mode: CampCollaborationMode,
     #[serde(default)]
     activation_state: CampActivationState,
+}
+
+impl CreateCampParams {
+    /// The two creation branches are strict alternatives: an editable custom
+    /// team, or a saved Team Preset. Exactly one must be present.
+    fn validate_creation_input(&self) -> Result<()> {
+        match (
+            &self.team_preset_selection,
+            &self.member_agent_ids,
+            &self.default_lead_agent_id,
+        ) {
+            (Some(_), None, None) | (None, Some(_), Some(_)) => Ok(()),
+            _ => anyhow::bail!(
+                "camps.create requires exactly one of memberAgentIds/defaultLeadAgentId or teamPresetSelection"
+            ),
+        }
+    }
 }
 
 #[derive(Debug, Serialize)]
@@ -7966,6 +7997,21 @@ impl Core {
                 }
                 Ok(snapshot)
             }
+            "preferences.teamPresets.list"
+            | "preferences.teamPresets.save"
+            | "preferences.teamPresets.delete" => {
+                let database = self.database.lock().await;
+                let (snapshot, changed) = team_presets::execute(
+                    &self.data_dir,
+                    &database,
+                    &request.method,
+                    request.params.clone(),
+                )?;
+                if changed {
+                    emit(&self.output, "preferences.team_presets_changed", json!({}));
+                }
+                Ok(snapshot)
+            }
             "app.info" => Ok(json!({
                 "name": "Rovai-ai",
                 "version": env!("CARGO_PKG_VERSION"),
@@ -9013,6 +9059,9 @@ impl Core {
             | "missions.linkPr" => self.handle_mission(request).await,
             "camps.create" => {
                 let params: CreateCampParams = serde_json::from_value(request.params.clone())?;
+                // Exactly one creation branch: an editable custom team, or a
+                // saved Team Preset selected by id and revision.
+                params.validate_creation_input()?;
                 let (project_binding_kind, requested_path) = match &params.workspace {
                     Some(workspace) => (
                         ProjectBindingKind::Directory,
@@ -9050,16 +9099,31 @@ impl Core {
                     name: params.name,
                     project_binding_kind,
                     project_path: selection.project_path,
-                    member_agent_ids: params.member_agent_ids,
-                    default_lead_agent_id: params.default_lead_agent_id,
+                    member_agent_ids: params.member_agent_ids.unwrap_or_default(),
+                    default_lead_agent_id: params.default_lead_agent_id.unwrap_or_default(),
                     collaboration_mode: params.collaboration_mode,
                     activation_state: params.activation_state,
+                    team_preset_selection: params.team_preset_selection,
                 };
+                let envelope = user_command_envelope(params.command_id, command);
                 let mut database = self.database.lock().await;
-                let execution = CollaborationService::default().create_camp(
-                    &mut database,
-                    &user_command_envelope(params.command_id, command),
-                )?;
+                let execution = match team_presets::resolve_camp_creation(
+                    &self.data_dir,
+                    &database,
+                    &envelope,
+                )? {
+                    team_presets::CampCreationResolution::Replay(replay) => replay,
+                    team_presets::CampCreationResolution::Resolved(resolved) => {
+                        CollaborationService::default().create_camp_with_team(
+                            &mut database,
+                            &envelope,
+                            resolved,
+                        )?
+                    }
+                    team_presets::CampCreationResolution::Custom => {
+                        CollaborationService::default().create_camp(&mut database, &envelope)?
+                    }
+                };
                 if execution.result.status == CommandResultStatus::Applied
                     && let Some(camp_id) = execution.result.payload["campId"].as_str()
                 {
@@ -24775,6 +24839,15 @@ mod tests {
 
     #[cfg(all(feature = "slow-tests", any(target_os = "macos", windows)))]
     pub(super) fn runtime_resolution_test_core(root: &Path) -> Result<Core> {
+        Ok(runtime_resolution_test_core_with_output(root)?.0)
+    }
+
+    /// Same as [`runtime_resolution_test_core`], but keeps the output receiver so
+    /// tests can assert which events a request emitted.
+    #[cfg(all(feature = "slow-tests", any(target_os = "macos", windows)))]
+    pub(super) fn runtime_resolution_test_core_with_output(
+        root: &Path,
+    ) -> Result<(Core, mpsc::UnboundedReceiver<String>)> {
         let data_dir = root.join("data");
         let skill_library_root = root.join("skills");
         let runtime_camp_files_root = root.join("runtime-files");
@@ -24792,7 +24865,7 @@ mod tests {
         let mcp_projection = McpProjectionService::new(&data_dir);
         let compaction_detector_policies =
             DesiredCompactionDetectorPolicies::from_process_environment();
-        let (output, _output_rx) = mpsc::unbounded_channel();
+        let (output, output_rx) = mpsc::unbounded_channel();
         let (runtime_check_requests, _runtime_check_rx) = mpsc::unbounded_channel();
         let (attachment_projection_requests, _attachment_projection_rx) = mpsc::unbounded_channel();
         let (codex_tx, _codex_rx) = mpsc::unbounded_channel();
@@ -24805,167 +24878,170 @@ mod tests {
             builtin_tool_leases.clone(),
         ));
 
-        Ok(Core {
-            database: Mutex::new(database),
-            automation_scheduler_control: RwLock::new(None),
-            subsystems: CoreSubsystems::ready_for_test(),
-            subsystem_initialization: Mutex::new(SubsystemInitialization::default()),
-            removed_skill_project_roots: RemovedSkillProjectRoots::default(),
-            startup_pending_camp_ids: Vec::new(),
-            builtin_tool_listener: Mutex::new(None),
-            builtin_tool_listener_notify: Notify::new(),
-            runtime_usage: Mutex::new(RuntimeUsageBuffer::default()),
-            runtime_usage_flush: Mutex::new(()),
-            output,
-            runtime_search_update: Mutex::new(()),
-            mission_workspace_gate: Mutex::new(()),
-            mission_workspace_cleanup_gate: Mutex::new(()),
-            mission_workspace_cleanup_notify: Notify::new(),
-            camp_deletion_gate: Mutex::new(()),
-            camp_deletion_notify: Notify::new(),
-            mission_git_read_capacity: Semaphore::new(MISSION_GIT_READ_CONCURRENCY_LIMIT),
-            mission_diff_snapshots: Mutex::new(
-                crate::mission_workspace::MissionDiffSnapshotCache::default(),
-            ),
-            runtime_search_capture: None,
-            runtime_search_environment: RwLock::new(Arc::new(
-                RuntimeSearchEnvironment::for_test_paths(1, Vec::new()),
-            )),
-            runtime_discovery: RwLock::new(BTreeMap::new()),
-            runtime_product_diagnostics: RwLock::new(BTreeMap::new()),
-            runtime_check_activity: RwLock::new(BTreeMap::new()),
-            runtime_check_requests,
-            attachment_projection_requests,
-            compaction_detector_policies: compaction_detector_policies.clone(),
-            agent_run_cancellation_notify: Notify::new(),
-            delivery_batch_scheduler_notify: Notify::new(),
-            agent_run_cleanup_inflight: Mutex::new(HashSet::new()),
-            runtime_phases: Mutex::new(HashMap::new()),
-            network_recovery: Mutex::new(NetworkRecoveryQueue::default()),
-            network_recovery_notify: Notify::new(),
-            pending_execution_recovery: Mutex::new(()),
-            skill_library,
-            native_skill_discovery: Arc::new(
-                rovai_core::native_skills::NativeSkillDiscovery::default(),
-            ),
-            mcp_config: Ok(mcp_config),
-            mcp_projection,
-            codex_cli: CodexCliRuntimeAdapter::new(codex_tx, runtime_fleet.clone()),
-            pi: PiRpcRuntimeAdapter::deferred(&data_dir, pi_tx, runtime_fleet.clone()),
-            opencode_cli: AcpCliRuntimeAdapter::new(
-                AdapterKind::OpencodeCli,
-                acp_tx.clone(),
-                data_dir.join("runtime/opencode"),
-                runtime_fleet.clone(),
-                compaction_detector_policies
-                    .policy_for(AdapterKind::OpencodeCli)
-                    .unwrap_or(CompactionDetectorPolicy::Disabled),
-            )?,
-            copilot_cli: AcpCliRuntimeAdapter::new(
-                AdapterKind::CopilotCli,
-                acp_tx.clone(),
-                data_dir.join("runtime/copilot"),
-                runtime_fleet.clone(),
-                compaction_detector_policies
-                    .policy_for(AdapterKind::CopilotCli)
-                    .unwrap_or(CompactionDetectorPolicy::Disabled),
-            )?,
-            kiro_cli: AcpCliRuntimeAdapter::new(
-                AdapterKind::KiroCli,
-                acp_tx.clone(),
-                data_dir.join("runtime/kiro"),
-                runtime_fleet.clone(),
-                compaction_detector_policies
-                    .policy_for(AdapterKind::KiroCli)
-                    .unwrap_or(CompactionDetectorPolicy::Disabled),
-            )?,
-            qoder_cli: AcpCliRuntimeAdapter::new(
-                AdapterKind::QoderCli,
-                acp_tx.clone(),
-                data_dir.join("runtime/qoder"),
-                runtime_fleet.clone(),
-                compaction_detector_policies
-                    .policy_for(AdapterKind::QoderCli)
-                    .unwrap_or(CompactionDetectorPolicy::Disabled),
-            )?,
-            codebuddy_cli: AcpCliRuntimeAdapter::new(
-                AdapterKind::CodebuddyCli,
-                acp_tx.clone(),
-                data_dir.join("runtime/codebuddy"),
-                runtime_fleet.clone(),
-                compaction_detector_policies
-                    .policy_for(AdapterKind::CodebuddyCli)
-                    .unwrap_or(CompactionDetectorPolicy::Disabled),
-            )?,
-            qwen_code: AcpCliRuntimeAdapter::new(
-                AdapterKind::QwenCode,
-                acp_tx.clone(),
-                data_dir.join("runtime/qwen"),
-                runtime_fleet.clone(),
-                compaction_detector_policies
-                    .policy_for(AdapterKind::QwenCode)
-                    .unwrap_or(CompactionDetectorPolicy::Disabled),
-            )?,
-            trae_cn_cli: AcpCliRuntimeAdapter::new(
-                AdapterKind::TraeCnCli,
-                acp_tx.clone(),
-                data_dir.join("runtime/trae-cn"),
-                runtime_fleet.clone(),
-                CompactionDetectorPolicy::Disabled,
-            )?,
-            cursor_agent: AcpCliRuntimeAdapter::new(
-                AdapterKind::CursorAgent,
-                acp_tx.clone(),
-                data_dir.join("runtime/cursor"),
-                runtime_fleet.clone(),
-                CompactionDetectorPolicy::Disabled,
-            )?,
-            kimi_code_cli: AcpCliRuntimeAdapter::new(
-                AdapterKind::KimiCodeCli,
-                acp_tx.clone(),
-                data_dir.join("runtime/kimi-code"),
-                runtime_fleet.clone(),
-                compaction_detector_policies
-                    .policy_for(AdapterKind::KimiCodeCli)
-                    .unwrap_or(CompactionDetectorPolicy::Disabled),
-            )?,
-            deepseek_harness: AcpCliRuntimeAdapter::new(
-                AdapterKind::DeepseekHarness,
-                acp_tx.clone(),
-                data_dir.join("runtime/deepseek-harness"),
-                runtime_fleet.clone(),
-                compaction_detector_policies
-                    .policy_for(AdapterKind::DeepseekHarness)
-                    .unwrap_or(CompactionDetectorPolicy::Disabled),
-            )?,
-            grok_build: AcpCliRuntimeAdapter::new(
-                AdapterKind::GrokBuild,
-                acp_tx.clone(),
-                data_dir.join("runtime/grok-build"),
-                runtime_fleet.clone(),
-                compaction_detector_policies
-                    .policy_for(AdapterKind::GrokBuild)
-                    .unwrap_or(CompactionDetectorPolicy::Disabled),
-            )?,
-            zcode_app: AcpCliRuntimeAdapter::new(
-                AdapterKind::ZcodeApp,
-                acp_tx,
-                data_dir.join("runtime/zcode-app"),
-                runtime_fleet.clone(),
-                compaction_detector_policies
-                    .policy_for(AdapterKind::ZcodeApp)
-                    .unwrap_or(CompactionDetectorPolicy::Disabled),
-            )?,
-            claude_code_cli: ClaudeCodeCliRuntimeAdapter::new(&data_dir)?,
-            antigravity_app: AntigravityAppRuntimeAdapter::new(&data_dir)?,
-            planned_shutdown: PlannedShutdownCoordinator::new(uuid::Uuid::new_v4().to_string()),
-            agent_run_tasks: Mutex::new(tokio::task::JoinSet::new()),
-            attachment_views,
-            attachment_view_gates: Mutex::new(HashMap::new()),
-            data_dir,
-            runtime_fleet,
-            builtin_tool_leases,
-        })
+        Ok((
+            Core {
+                database: Mutex::new(database),
+                automation_scheduler_control: RwLock::new(None),
+                subsystems: CoreSubsystems::ready_for_test(),
+                subsystem_initialization: Mutex::new(SubsystemInitialization::default()),
+                removed_skill_project_roots: RemovedSkillProjectRoots::default(),
+                startup_pending_camp_ids: Vec::new(),
+                builtin_tool_listener: Mutex::new(None),
+                builtin_tool_listener_notify: Notify::new(),
+                runtime_usage: Mutex::new(RuntimeUsageBuffer::default()),
+                runtime_usage_flush: Mutex::new(()),
+                output,
+                runtime_search_update: Mutex::new(()),
+                mission_workspace_gate: Mutex::new(()),
+                mission_workspace_cleanup_gate: Mutex::new(()),
+                mission_workspace_cleanup_notify: Notify::new(),
+                camp_deletion_gate: Mutex::new(()),
+                camp_deletion_notify: Notify::new(),
+                mission_git_read_capacity: Semaphore::new(MISSION_GIT_READ_CONCURRENCY_LIMIT),
+                mission_diff_snapshots: Mutex::new(
+                    crate::mission_workspace::MissionDiffSnapshotCache::default(),
+                ),
+                runtime_search_capture: None,
+                runtime_search_environment: RwLock::new(Arc::new(
+                    RuntimeSearchEnvironment::for_test_paths(1, Vec::new()),
+                )),
+                runtime_discovery: RwLock::new(BTreeMap::new()),
+                runtime_product_diagnostics: RwLock::new(BTreeMap::new()),
+                runtime_check_activity: RwLock::new(BTreeMap::new()),
+                runtime_check_requests,
+                attachment_projection_requests,
+                compaction_detector_policies: compaction_detector_policies.clone(),
+                agent_run_cancellation_notify: Notify::new(),
+                delivery_batch_scheduler_notify: Notify::new(),
+                agent_run_cleanup_inflight: Mutex::new(HashSet::new()),
+                runtime_phases: Mutex::new(HashMap::new()),
+                network_recovery: Mutex::new(NetworkRecoveryQueue::default()),
+                network_recovery_notify: Notify::new(),
+                pending_execution_recovery: Mutex::new(()),
+                skill_library,
+                native_skill_discovery: Arc::new(
+                    rovai_core::native_skills::NativeSkillDiscovery::default(),
+                ),
+                mcp_config: Ok(mcp_config),
+                mcp_projection,
+                codex_cli: CodexCliRuntimeAdapter::new(codex_tx, runtime_fleet.clone()),
+                pi: PiRpcRuntimeAdapter::deferred(&data_dir, pi_tx, runtime_fleet.clone()),
+                opencode_cli: AcpCliRuntimeAdapter::new(
+                    AdapterKind::OpencodeCli,
+                    acp_tx.clone(),
+                    data_dir.join("runtime/opencode"),
+                    runtime_fleet.clone(),
+                    compaction_detector_policies
+                        .policy_for(AdapterKind::OpencodeCli)
+                        .unwrap_or(CompactionDetectorPolicy::Disabled),
+                )?,
+                copilot_cli: AcpCliRuntimeAdapter::new(
+                    AdapterKind::CopilotCli,
+                    acp_tx.clone(),
+                    data_dir.join("runtime/copilot"),
+                    runtime_fleet.clone(),
+                    compaction_detector_policies
+                        .policy_for(AdapterKind::CopilotCli)
+                        .unwrap_or(CompactionDetectorPolicy::Disabled),
+                )?,
+                kiro_cli: AcpCliRuntimeAdapter::new(
+                    AdapterKind::KiroCli,
+                    acp_tx.clone(),
+                    data_dir.join("runtime/kiro"),
+                    runtime_fleet.clone(),
+                    compaction_detector_policies
+                        .policy_for(AdapterKind::KiroCli)
+                        .unwrap_or(CompactionDetectorPolicy::Disabled),
+                )?,
+                qoder_cli: AcpCliRuntimeAdapter::new(
+                    AdapterKind::QoderCli,
+                    acp_tx.clone(),
+                    data_dir.join("runtime/qoder"),
+                    runtime_fleet.clone(),
+                    compaction_detector_policies
+                        .policy_for(AdapterKind::QoderCli)
+                        .unwrap_or(CompactionDetectorPolicy::Disabled),
+                )?,
+                codebuddy_cli: AcpCliRuntimeAdapter::new(
+                    AdapterKind::CodebuddyCli,
+                    acp_tx.clone(),
+                    data_dir.join("runtime/codebuddy"),
+                    runtime_fleet.clone(),
+                    compaction_detector_policies
+                        .policy_for(AdapterKind::CodebuddyCli)
+                        .unwrap_or(CompactionDetectorPolicy::Disabled),
+                )?,
+                qwen_code: AcpCliRuntimeAdapter::new(
+                    AdapterKind::QwenCode,
+                    acp_tx.clone(),
+                    data_dir.join("runtime/qwen"),
+                    runtime_fleet.clone(),
+                    compaction_detector_policies
+                        .policy_for(AdapterKind::QwenCode)
+                        .unwrap_or(CompactionDetectorPolicy::Disabled),
+                )?,
+                trae_cn_cli: AcpCliRuntimeAdapter::new(
+                    AdapterKind::TraeCnCli,
+                    acp_tx.clone(),
+                    data_dir.join("runtime/trae-cn"),
+                    runtime_fleet.clone(),
+                    CompactionDetectorPolicy::Disabled,
+                )?,
+                cursor_agent: AcpCliRuntimeAdapter::new(
+                    AdapterKind::CursorAgent,
+                    acp_tx.clone(),
+                    data_dir.join("runtime/cursor"),
+                    runtime_fleet.clone(),
+                    CompactionDetectorPolicy::Disabled,
+                )?,
+                kimi_code_cli: AcpCliRuntimeAdapter::new(
+                    AdapterKind::KimiCodeCli,
+                    acp_tx.clone(),
+                    data_dir.join("runtime/kimi-code"),
+                    runtime_fleet.clone(),
+                    compaction_detector_policies
+                        .policy_for(AdapterKind::KimiCodeCli)
+                        .unwrap_or(CompactionDetectorPolicy::Disabled),
+                )?,
+                deepseek_harness: AcpCliRuntimeAdapter::new(
+                    AdapterKind::DeepseekHarness,
+                    acp_tx.clone(),
+                    data_dir.join("runtime/deepseek-harness"),
+                    runtime_fleet.clone(),
+                    compaction_detector_policies
+                        .policy_for(AdapterKind::DeepseekHarness)
+                        .unwrap_or(CompactionDetectorPolicy::Disabled),
+                )?,
+                grok_build: AcpCliRuntimeAdapter::new(
+                    AdapterKind::GrokBuild,
+                    acp_tx.clone(),
+                    data_dir.join("runtime/grok-build"),
+                    runtime_fleet.clone(),
+                    compaction_detector_policies
+                        .policy_for(AdapterKind::GrokBuild)
+                        .unwrap_or(CompactionDetectorPolicy::Disabled),
+                )?,
+                zcode_app: AcpCliRuntimeAdapter::new(
+                    AdapterKind::ZcodeApp,
+                    acp_tx,
+                    data_dir.join("runtime/zcode-app"),
+                    runtime_fleet.clone(),
+                    compaction_detector_policies
+                        .policy_for(AdapterKind::ZcodeApp)
+                        .unwrap_or(CompactionDetectorPolicy::Disabled),
+                )?,
+                claude_code_cli: ClaudeCodeCliRuntimeAdapter::new(&data_dir)?,
+                antigravity_app: AntigravityAppRuntimeAdapter::new(&data_dir)?,
+                planned_shutdown: PlannedShutdownCoordinator::new(uuid::Uuid::new_v4().to_string()),
+                agent_run_tasks: Mutex::new(tokio::task::JoinSet::new()),
+                attachment_views,
+                attachment_view_gates: Mutex::new(HashMap::new()),
+                data_dir,
+                runtime_fleet,
+                builtin_tool_leases,
+            },
+            output_rx,
+        ))
     }
 
     #[cfg(all(target_os = "macos", feature = "slow-tests"))]
@@ -25840,6 +25916,7 @@ done
                             default_lead_agent_id: agent_id,
                             collaboration_mode: CampCollaborationMode::Peer,
                             activation_state: CampActivationState::Active,
+                            team_preset_selection: None,
                         },
                     },
                 )
@@ -25922,6 +25999,7 @@ done
                             default_lead_agent_id: agent_id,
                             collaboration_mode: CampCollaborationMode::Peer,
                             activation_state: CampActivationState::Active,
+                            team_preset_selection: None,
                         },
                     },
                 )
@@ -26072,6 +26150,7 @@ done
                             default_lead_agent_id: agent_id,
                             collaboration_mode: CampCollaborationMode::Peer,
                             activation_state: CampActivationState::Active,
+                            team_preset_selection: None,
                         },
                     },
                 )
@@ -28740,6 +28819,7 @@ done
                             default_lead_agent_id: agent_id,
                             collaboration_mode: CampCollaborationMode::Peer,
                             activation_state: CampActivationState::Active,
+                            team_preset_selection: None,
                         },
                     },
                 )

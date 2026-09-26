@@ -1,24 +1,39 @@
 import { useCampClient } from './camp-client'
 import { readErrorMessage } from './error-message'
-import { useEffect, useMemo, useRef, useState, type FormEvent, type KeyboardEvent, type RefObject } from 'react'
+import { useEffect, useMemo, useRef, useState, useCallback, type FormEvent, type KeyboardEvent, type RefObject } from 'react'
 import * as Dialog from '@radix-ui/react-dialog'
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu'
 import * as Popover from '@radix-ui/react-popover'
 import type {
   AgentProfile,
   CampCreationPreflight,
-  CreateCampRequest,
+  CreateCampDraft,
   NewConversationDefaults,
   MissionCreate,
   ProjectNavigationGroup,
+  TeamPreset,
+  TeamPresetsSnapshot,
   WorkspaceInspection,
   WorkspaceSelection
 } from '@contracts'
 import { isNewConversationMemberAvailable, newConversationMemberStatus } from './new-conversation-availability'
+import {
+  campCreationSubmissionBlocked,
+  campCreationSubmitError,
+  campCreationTeamInput,
+  type CampCreationTeamMode
+} from './new-conversation-team-mode'
+import {
+  readTeamPresetErrorCode,
+  teamPresetErrorMessage,
+  teamPresetHasUnavailableMembers,
+  teamPresetMemberViews
+} from './team-presets'
 import { useMobileLayout } from './MobileLayout'
 import { NewConversationPicker } from './NewConversationPicker'
 import { NewConversationQuickHelp } from './NewConversationQuickHelp'
 import { MemberAvatar } from './MemberAvatar'
+import { TeamPresetMemberSummary } from './TeamPresetMemberSummary'
 import { NavigationIcon } from './NavigationIcon'
 import { DialogControlIcon } from './AppDialog'
 import {
@@ -33,8 +48,8 @@ import {
   type MissionWritingPlaneHandle
 } from './MissionDefinitionEditor'
 import { displayProjectPath } from '../../shared/project-display-name'
+import './new-conversation-team-mode.css'
 
-type CreateCampDraft = Omit<CreateCampRequest, 'commandId' | 'activationState'>
 type WorkspaceChoice = WorkspaceSelection | WorkspaceInspection
 type GitInspectionStatus = 'idle' | 'loading' | 'ready' | 'failed'
 
@@ -84,6 +99,13 @@ export function NewConversationDialog({
   const [projectMenuOpen, setProjectMenuOpen] = useState(false)
   const [memberMenuOpen, setMemberMenuOpen] = useState(false)
   const [leadMenuOpen, setLeadMenuOpen] = useState(false)
+  const [teamMode, setTeamMode] = useState<CampCreationTeamMode>('custom')
+  const [presetMenuOpen, setPresetMenuOpen] = useState(false)
+  const [presetId, setPresetId] = useState<string | null>(null)
+  const [presets, setPresets] = useState<TeamPreset[]>([])
+  const [presetsLoading, setPresetsLoading] = useState(false)
+  const [presetsError, setPresetsError] = useState<string | null>(null)
+  const presetsGeneration = useRef(0)
   const [selectedMemberIds, setSelectedMemberIds] = useState<string[]>([])
   const [leadId, setLeadId] = useState('')
   const [optionalOpen, setOptionalOpen] = useState(false)
@@ -130,8 +152,21 @@ export function NewConversationDialog({
   const leadProfile = lead ? profileById.get(lead.agentId) : undefined
   const projectActionsDisabled = projectWorkspaceActionsDisabled(busy, projectAccessReady)
   const projectSubmissionBlocked = workspaceSubmissionBlocked(workspace, projectAccessReady)
-  const submissionBlocked = busy || projectSubmissionBlocked || availableMembers.length === 0
-    || hasUnavailableSelection || (selectedMemberIds.length > 0 && !lead) || Boolean(nameError)
+  const selectedPreset = presets.find((preset) => preset.id === presetId) ?? null
+  const presetMemberViews = selectedPreset ? teamPresetMemberViews(selectedPreset, agents) : []
+  const selectedPresetUnavailable = selectedPreset ? teamPresetHasUnavailableMembers(presetMemberViews) : false
+  const presetMode = !isMission && teamMode === 'preset'
+  const customMemberBlocked = availableMembers.length === 0
+    || hasUnavailableSelection || (selectedMemberIds.length > 0 && !lead)
+  const submissionBlocked = campCreationSubmissionBlocked({
+    busy,
+    projectBlocked: projectSubmissionBlocked,
+    nameError: Boolean(nameError),
+    mode: presetMode ? 'preset' : 'custom',
+    customMemberBlocked,
+    presetSelected: selectedPreset !== null,
+    presetUnavailable: selectedPresetUnavailable
+  })
 
   useEffect(() => {
     if (!open) {
@@ -150,6 +185,10 @@ export function NewConversationDialog({
     setProjectMenuOpen(false)
     setMemberMenuOpen(false)
     setLeadMenuOpen(false)
+    setPresetMenuOpen(false)
+    setTeamMode('custom')
+    setPresetId(null)
+    setPresetsError(null)
     setSelectedMemberIds(memberIds)
     setLeadId(recommendedLead)
     setOptionalOpen(false)
@@ -163,6 +202,39 @@ export function NewConversationDialog({
     setMemberError(null)
     setSubmitError(null)
   }, [initialSelectionPlan, initialWorkspace, isMission, open, recovery])
+
+  const loadPresets = useCallback(async (): Promise<TeamPreset[]> => {
+    const request = ++presetsGeneration.current
+    setPresetsLoading(true)
+    try {
+      const snapshot = await client.request<TeamPresetsSnapshot>('preferences.teamPresets.list', {})
+      if (request !== presetsGeneration.current) return []
+      setPresets(snapshot.presets)
+      setPresetsError(null)
+      return snapshot.presets
+    } catch (error) {
+      if (request === presetsGeneration.current) setPresetsError(errorMessage(error))
+      return []
+    } finally {
+      if (request === presetsGeneration.current) setPresetsLoading(false)
+    }
+  }, [client])
+
+  useEffect(() => {
+    if (!open || isMission) return
+    void loadPresets()
+  }, [open, isMission, loadPresets])
+
+  useEffect(() => {
+    if (!open || isMission) return
+    const unsubscribes = [
+      client.onEvent?.((event) => {
+        if (event.method === 'preferences.team_presets_changed') void loadPresets()
+      }),
+      client.onInvalidated?.(() => { void loadPresets() })
+    ].filter((unsubscribe): unsubscribe is () => void => typeof unsubscribe === 'function')
+    return () => { for (const unsubscribe of unsubscribes) unsubscribe() }
+  }, [open, isMission, client, loadPresets])
 
   const pendingGitInspectionPath = workspace && !hasGitObservation(workspace)
     ? workspace.projectPath
@@ -241,11 +313,29 @@ export function NewConversationDialog({
       submissionBlocked || submittingRef.current
     ) return
     if (isMission && !normalizedName) { setSubmitError('请填写使命标题。'); nameInputRef.current?.focus(); return }
-    if (selectedMemberIds.length === 0) {
-      setMemberError('请至少选择一位队员。')
-      memberTriggerRef.current?.focus()
+    const mode: CampCreationTeamMode = isMission ? 'custom' : teamMode
+    const customError = selectedMemberIds.length === 0 ? '请至少选择一位队员。' : null
+    const modeError = campCreationSubmitError({
+      mode,
+      customError,
+      presetSelected: selectedPreset !== null,
+      presetUnavailable: selectedPresetUnavailable
+    })
+    if (modeError) {
+      if (mode === 'custom' && selectedMemberIds.length === 0) {
+        setMemberError(modeError)
+        memberTriggerRef.current?.focus()
+      } else {
+        setSubmitError(modeError)
+      }
       return
     }
+    const teamInput = campCreationTeamInput(
+      mode,
+      { memberAgentIds: selectedMemberIds, defaultLeadAgentId: leadId },
+      selectedPreset ? { id: selectedPreset.id, expectedRevision: selectedPreset.revision } : null
+    )
+    if (!teamInput) { setSubmitError('请选择一支队伍。'); return }
     submittingRef.current = true
     setSubmitting(true)
     setSubmitError(null)
@@ -253,10 +343,9 @@ export function NewConversationDialog({
       await onCreate({
         name: normalizedName || null,
         workspace: workspace ? { projectPath: workspace.projectPath } : null,
-        memberAgentIds: selectedMemberIds,
-        defaultLeadAgentId: leadId,
-        collaborationMode: 'peer'
-      }, enableOneClick, isMission ? {description, tags, attachments: missionAttachmentDrafts(attachments), start:(event.nativeEvent as SubmitEvent).submitter?.getAttribute('value') === 'start'} : undefined)
+        collaborationMode: 'peer',
+        ...teamInput
+      }, mode === 'custom' ? enableOneClick : false, isMission ? {description, tags, attachments: missionAttachmentDrafts(attachments), start:(event.nativeEvent as SubmitEvent).submitter?.getAttribute('value') === 'start'} : undefined)
       if (isMission) {
         draftInitializedRef.current = false
         setName('')
@@ -267,7 +356,20 @@ export function NewConversationDialog({
         setSubmitError(null)
       }
     } catch (error) {
-      setSubmitError(errorMessage(error))
+      const code = readTeamPresetErrorCode(error)
+      if (mode === 'preset' && (
+        code === 'team_preset_not_found'
+        || code === 'team_preset_revision_conflict'
+        || code === 'team_preset_members_unavailable'
+      )) {
+        // Keep the Dialog open, re-read the authoritative list, and let the user
+        // recover instead of silently filtering members or converting to custom.
+        const refreshed = await loadPresets()
+        if (selectedPreset && !refreshed.some((preset) => preset.id === selectedPreset.id)) setPresetId(null)
+        setSubmitError(teamPresetErrorMessage(code, errorMessage(error)))
+      } else {
+        setSubmitError(errorMessage(error))
+      }
     } finally {
       submittingRef.current = false
       setSubmitting(false)
@@ -315,6 +417,10 @@ export function NewConversationDialog({
               {attentionMessage && <p className="compact-inline-note" role="status">{attentionMessage}</p>}
               {recovery && !busy && <p className="compact-inline-note" role="status">上次创建结果尚未确认。<button type="button" className="mission-source-link" onClick={() => { setName(recovery.title); setDescription(recovery.description); setTags(recovery.tags); setAttachments(recoveryAttachments.map(({id, file, kindHint}) => ({kind:'local', id, file, kindHint}))); setWorkspace(recovery.projectBindingKind === 'directory' ? {name:projects.find(p=>p.projectPath===recovery.projectPath)?.name ?? recovery.projectPath,projectPath:recovery.projectPath} : null); setSelectedMemberIds(recovery.memberAgentIds); setLeadId(recovery.defaultLeadAgentId); setSubmitError(null) }}>恢复上次内容以重试</button></p>}
               {isMission && <MissionWritingPlane ref={missionEditorRef} titleInputRef={nameInputRef} title={name} description={description} attachments={attachments} disabled={busy} attachmentsDisabled={!client.missionAttachments} titleError={!normalizedName ? undefined : nameLength > 200 ? '使命名称最多 200 个字符。' : undefined} descriptionError={Array.from(description).length > 12000 ? '使命描述最多 12,000 个字符。' : undefined} onTitleChange={setName} onDescriptionChange={setDescription} onAttachmentsChange={setAttachments} onNotify={setSubmitError}/>}
+              {!isMission && <div className="new-camp-mode" role="radiogroup" aria-label="队伍来源">
+                <button type="button" role="radio" aria-checked={teamMode === 'custom'} className={teamMode === 'custom' ? 'active' : ''} disabled={busy} onClick={() => { setTeamMode('custom'); setSubmitError(null) }}>自定义队伍</button>
+                <button type="button" role="radio" aria-checked={teamMode === 'preset'} className={teamMode === 'preset' ? 'active' : ''} disabled={busy} onClick={() => { setTeamMode('preset'); setMemberError(null); setSubmitError(null) }}>选择已有队伍</button>
+              </div>}
               {!isMission && <><div className="compact-row">
                 <span id="new-camp-workspace-label">工作目录</span>
                 <NewConversationPicker mobile={mobile} open={projectMenuOpen} onOpenChange={setProjectMenuOpen} busy={busy} title="选择工作目录"
@@ -351,7 +457,49 @@ export function NewConversationDialog({
               </div>}
               {!isMission && <>{workspace && <div className="compact-row-detail"><span title={projectDetail}>{projectDetail}</span>{gitPresentation.kind === 'metadata' && <span className="compact-git">{gitPresentation.label}</span>}{gitPresentation.kind === 'loading' && <span role="status">{gitPresentation.label}</span>}</div>}
               {gitPresentation.kind === 'warning' && <div className="new-camp-workspace-warning" role="alert"><div><strong>{gitPresentation.label}</strong><span>{gitPresentation.detail}</span></div></div>}
-              <div className="compact-row">
+              {presetMode && (
+                <div className="new-camp-preset">
+                  <div className="compact-row">
+                    <span id="new-camp-preset-label">队伍</span>
+                    <NewConversationPicker mobile={mobile} open={presetMenuOpen} onOpenChange={setPresetMenuOpen} busy={busy} title="选择队伍"
+                      trigger={<button className="compact-picker" type="button" aria-labelledby="new-camp-preset-label new-camp-preset-value" aria-invalid={!selectedPreset} aria-describedby={!selectedPreset ? 'new-camp-preset-hint' : undefined} disabled={busy || presetsLoading}>
+                          <NavigationIcon name="blocks" />
+                          <span id="new-camp-preset-value">{selectedPreset ? selectedPreset.name : presetsLoading ? '正在读取队伍…' : presets.length ? '选择队伍' : '暂无已保存队伍'}</span><DialogControlIcon name="chevron" />
+                        </button>}
+                      menu={<DropdownMenu.Content onCloseAutoFocus={(event) => event.preventDefault()} className="compact-menu roster-menu" align="end" sideOffset={6} collisionPadding={12} aria-label="选择队伍" loop>
+                          <DropdownMenu.RadioGroup value={presetId ?? ''} onValueChange={(value) => { setPresetId(value); setPresetMenuOpen(false); setSubmitError(null) }}>
+                            {presets.map((preset) => {
+                              const members = teamPresetMemberViews(preset, agents)
+                              const unavailable = teamPresetHasUnavailableMembers(members)
+                              return <DropdownMenu.RadioItem className="compact-option" value={preset.id} key={preset.id} disabled={busy}>
+                                <span>{preset.name}<small>{preset.memberAgentIds.length} 位队员 · 队长 {profileById.get(preset.leadAgentId)?.displayName ?? preset.leadAgentId}{unavailable ? ' · 含不可用队员' : ''}</small>{preset.description && <small className="new-camp-preset-option-description">{preset.description}</small>}</span>
+                                <DropdownMenu.ItemIndicator><DialogControlIcon name="check" /></DropdownMenu.ItemIndicator>
+                              </DropdownMenu.RadioItem>
+                            })}
+                          </DropdownMenu.RadioGroup>
+                        </DropdownMenu.Content>}>
+                      {presets.map((preset) => {
+                        const members = teamPresetMemberViews(preset, agents)
+                        const unavailable = teamPresetHasUnavailableMembers(members)
+                        return <button type="button" className="compact-option" key={preset.id} aria-pressed={presetId === preset.id} disabled={busy} onClick={() => { setPresetId(preset.id); setPresetMenuOpen(false); setSubmitError(null) }}>
+                          <span>{preset.name}<small>{preset.memberAgentIds.length} 位队员 · 队长 {profileById.get(preset.leadAgentId)?.displayName ?? preset.leadAgentId}{unavailable ? ' · 含不可用队员' : ''}</small>{preset.description && <small className="new-camp-preset-option-description">{preset.description}</small>}</span>{presetId === preset.id && <DialogControlIcon name="check" />}
+                        </button>
+                      })}
+                    </NewConversationPicker>
+                  </div>
+                  {presetsError && <p className="compact-inline-error" role="alert">{presetsError}</p>}
+                  {!selectedPreset && <p id="new-camp-preset-hint" className={presets.length === 0 ? 'new-camp-empty-note' : 'compact-inline-note'}>{presetsLoading ? '正在读取队伍…' : presets.length === 0 ? '还没有保存的队伍，请先到「队伍」页新建。' : '请选择一支队伍。'}</p>}
+                  {selectedPreset && (
+                    <TeamPresetMemberSummary
+                      preset={selectedPreset}
+                      description={selectedPreset.description}
+                      members={presetMemberViews}
+                      unavailable={selectedPresetUnavailable}
+                    />
+                  )}
+                </div>
+              )}
+              {!presetMode && <div className="compact-row">
                 <span id="new-camp-members-label">队员</span>
                 <NewConversationPicker mobile={mobile} open={memberMenuOpen} onOpenChange={setMemberMenuOpen} busy={busy} title="选择队员" multiple
                   trigger={<button ref={memberTriggerRef} className="compact-picker member-trigger" aria-invalid={Boolean(memberError)} aria-describedby={memberError ? 'new-camp-members-error' : undefined} type="button" aria-labelledby="new-camp-members-label new-camp-members-value" disabled={busy || !preflight.presentMembers.length}>
@@ -380,7 +528,7 @@ export function NewConversationDialog({
                     </label>
                   })}
                 </NewConversationPicker>
-              </div>
+              </div>}
               </>}
               {isMission && <>
                 {gitPresentation.kind === 'warning' && <p className="compact-inline-error" role="alert">{gitPresentation.label}：{gitPresentation.detail}</p>}
@@ -388,7 +536,7 @@ export function NewConversationDialog({
                 {availableMembers.length === 0 && <p className="new-camp-empty-note">暂无可用队员，请先在「队员」中配置 Agent 运行时。</p>}
                 {hasUnavailableSelection && <p className="compact-inline-error" role="alert">所选队员已不可用，请重新选择。</p>}
               </>}
-              {!isMission && <>
+              {!isMission && !presetMode && <>
                 {memberError && <p id="new-camp-members-error" role="alert" className="compact-inline-error new-camp-members-error">{memberError}</p>}
                 {availableMembers.length === 0 && <p className="new-camp-empty-note">暂无可用队员，请先在「队员」中配置 Agent 运行时。</p>}
                 {hasUnavailableSelection && <p className="compact-inline-error" role="alert">所选队员已不可用，请重新选择。</p>}
@@ -428,7 +576,7 @@ export function NewConversationDialog({
                 </div>}
               </div>
               }
-              {!isMission && <div className="new-camp-quick-setting">
+              {!isMission && !presetMode && <div className="new-camp-quick-setting">
                 <div className="new-camp-quick-row">
                   <label className="new-camp-quick-label">
                     <input type="checkbox" checked={enableOneClick} disabled={busy} onChange={(event) => setEnableOneClick(event.target.checked)} />

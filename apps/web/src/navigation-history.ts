@@ -97,7 +97,7 @@ function isTarget(value: unknown): value is NavigationTarget {
   if (!value || typeof value !== 'object') return false
   const target = value as Record<string, unknown>
   switch (target.kind) {
-    case 'quick_chat': case 'automations': case 'missions': return true
+    case 'quick_chat': case 'automations': case 'missions': case 'teams': return true
     case 'camp': return typeof target.campId === 'string'
     case 'members': return (target.agentId === null || typeof target.agentId === 'string') && ['identity', 'runtime', 'skills', 'mcp'].includes(String(target.tab))
     case 'memory': return target.memoryId === null || typeof target.memoryId === 'string'

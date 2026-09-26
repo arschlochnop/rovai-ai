@@ -434,6 +434,7 @@ impl MissionService {
                 project_binding_kind: input.project_binding_kind, project_path: input.project_path.clone(),
                 member_agent_ids: input.member_agent_ids.clone(), default_lead_agent_id: input.default_lead_agent_id.clone(),
                 collaboration_mode: CampCollaborationMode::Peer, activation_state: CampActivationState::Active,
+                team_preset_selection: None,
             }, &camp_id)?;
             if created.status == CommandResultStatus::Rejected { return Ok(created); }
             let now = chrono::Utc::now().to_rfc3339();

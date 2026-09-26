@@ -49,6 +49,7 @@ Architecture 解释组件如何组成，Version 概览记录交付范围；它�
 | [Host Web v3（历史）](host-web-v3.md) | 继承 v2；Task v4 版本化输入/投影与旧 payload reconciliation clean break |
 | [Host Web v2（历史）](host-web-v2.md) | 同一 Core 的受控 Camp 写入、独立编辑归属、原命令核对、source 上传、授权资源及共享生产页面；Task reconciliation 由 v3 替代 |
 | [Host Web v1（历史）](host-web-v1.md) | 同一 Core 的初始只读网络入口；新会话由 v2 替代 |
+| [Team Presets v1（本地草案）](team-presets-v1.md) | 具名队伍预设的独立存储与请求、明确队长、与自定义队伍互斥的创建输入；未与上游对齐 |
 | [Current User Profile v1（当前）](current-user-profile-v1.md) | Desktop 本地名称/头像、原子保存、历史作者与结构化提及投影；不改变 Core identity、正文或模型上下文 |
 | [Domain Command Result v1（当前）](domain-command-result-v1.md) | Domain Command 结果的事务、幂等回放、专用列唯一正文、内部 marker、新旧事件双读与 schema 95 回退边界 |
 | [Scheduled Automation v3（当前）](scheduled-automation-v3.md) | occurrence 只分 started/skipped(overlap)，首消息进入普通 Delivery→claim→AgentRun 主链 |

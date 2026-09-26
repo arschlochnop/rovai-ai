@@ -259,10 +259,11 @@ pub(super) fn reconcile(
                         name: params.name,
                         project_binding_kind,
                         project_path: path.to_string_lossy().into_owned(),
-                        member_agent_ids: params.member_agent_ids,
-                        default_lead_agent_id: params.default_lead_agent_id,
+                        member_agent_ids: params.member_agent_ids.unwrap_or_default(),
+                        default_lead_agent_id: params.default_lead_agent_id.unwrap_or_default(),
                         collaboration_mode: params.collaboration_mode,
                         activation_state: params.activation_state,
+                        team_preset_selection: params.team_preset_selection,
                     },
                 ),
             )

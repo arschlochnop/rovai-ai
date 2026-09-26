@@ -453,6 +453,10 @@
 .general-lead-option.is-active,.general-lead-option:hover {
   background: var(--neutral-hover);
 }
+.general-lead-option:not([aria-disabled="true"]) { cursor: pointer; }
+.general-lead-option:not([aria-disabled="true"]):active {
+  background: var(--surface-selected);
+}
 .general-lead-option[aria-disabled="true"] {
   opacity: .45;
   cursor: default;

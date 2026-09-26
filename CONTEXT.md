@@ -602,6 +602,10 @@ _Avoid_: active assignee, Runtime-ready assignee, Current CampMember
 The non-empty, user-selected set of present AgentProfiles that become CampMembers when a New Conversation Draft's creation is accepted. An unselected Member is outside that Camp rather than merely omitted from its first execution. The creation UI prevents removing the final selected Member and explains that at least one Member must remain, preserving a valid Default Lead candidate. Later Camp-scoped additions and removals use the independent Dynamic Camp Membership commands and do not rewrite this creation fact.
 _Avoid_: First-message recipients, all present Members, Project team, current roster snapshot
 
+**Team Preset**:
+A named, instance-wide creation input made of an Initial Camp Membership candidate set and its explicit Initial Default Lead. It is resolved by Core only when a New Conversation Draft explicitly selects it for creation; the created Camp does not record its source preset, later Camp Membership changes never update it, and it has no relationship with the shared default creation team or one-click creation.
+_Avoid_: Project team, Camp roster, group, persistent team membership
+
 **Camp Collaboration Mode**:
 The durable Camp policy persisted as the closed value `peer | lead_coordinated`, distinct from per-message explicit addressing. Current Camp creation exposes no collaboration-mode UI and always submits `peer`; Core still rejects `lead_coordinated` as unsupported and retains the field only for stable domain/storage compatibility. There is no current mode-change surface.
 _Avoid_: current creation choice, Renderer preference, first-message routing option, AgentRun mode

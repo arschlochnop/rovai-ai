@@ -37,4 +37,17 @@ describe('Runtime Renderer Core method allowlist', () => {
     expect(mainSource.slice(allowlistStart, allowlistEnd))
       .toContain("'singleChat.pendingInputs.edit'")
   })
+
+  it('admits the three Team Preset preferences requests for the Renderer', () => {
+    const allowlistStart = mainSource.indexOf('const allowedMethods = new Set<CoreMethod>([')
+    const allowlistEnd = mainSource.indexOf('\n])', allowlistStart)
+    const allowlist = mainSource.slice(allowlistStart, allowlistEnd)
+    for (const method of [
+      'preferences.teamPresets.list',
+      'preferences.teamPresets.save',
+      'preferences.teamPresets.delete'
+    ]) {
+      expect(allowlist).toContain(`'${method}'`)
+    }
+  })
 })

@@ -45,6 +45,13 @@ pub enum Operation {
     #[serde(rename = "preferences.newConversation.invalidate")]
     NewConversationInvalidate,
 
+    #[serde(rename = "preferences.teamPresets.list")]
+    TeamPresetsList,
+    #[serde(rename = "preferences.teamPresets.save")]
+    TeamPresetsSave,
+    #[serde(rename = "preferences.teamPresets.delete")]
+    TeamPresetsDelete,
+
     #[serde(rename = "camps.rename")]
     CampRename,
     #[serde(rename = "camps.delete")]
@@ -385,6 +392,9 @@ impl Operation {
             Self::NewConversationSetDefaults => "preferences.newConversation.setDefaults",
             Self::NewConversationSetOneClick => "preferences.newConversation.setOneClick",
             Self::NewConversationInvalidate => "preferences.newConversation.invalidate",
+            Self::TeamPresetsList => "preferences.teamPresets.list",
+            Self::TeamPresetsSave => "preferences.teamPresets.save",
+            Self::TeamPresetsDelete => "preferences.teamPresets.delete",
             Self::MissionWorkspaceCleanup => "missions.workspace.cleanup",
             Self::MissionCleanupList => "missions.cleanup.list",
             Self::MissionCleanupRetry => "missions.cleanup.retry",
@@ -655,5 +665,22 @@ mod tests {
         let withdraw = serde_json::from_value::<Operation>(json!("camp.messages.withdraw"))
             .expect("User message withdrawal should be admitted by the Web Host");
         assert_eq!(withdraw.method(), "camp.messages.withdraw");
+    }
+
+    #[test]
+    fn team_preset_operations_are_individually_admitted() {
+        for name in [
+            "preferences.teamPresets.list",
+            "preferences.teamPresets.save",
+            "preferences.teamPresets.delete",
+        ] {
+            let operation = serde_json::from_value::<Operation>(json!(name))
+                .expect("Team Preset operation should be admitted by the Web Host");
+            assert_eq!(operation.method(), name);
+        }
+        assert!(
+            serde_json::from_value::<Operation>(json!("preferences.teamPresets.setDefault"))
+                .is_err()
+        );
     }
 }

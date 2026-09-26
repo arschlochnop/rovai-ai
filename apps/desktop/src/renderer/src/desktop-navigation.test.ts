@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { createDesktopNavigation, type NavigationTarget, type NavigationTransaction } from './desktop-navigation'
+import { createDesktopNavigation, sameNavigationDestination, type NavigationTarget, type NavigationTransaction } from './desktop-navigation'
 
 const camp = (campId: string): NavigationTarget => ({ kind: 'camp', campId })
 const create = () => createDesktopNavigation(async (_target, transaction) => { transaction.commit() })
@@ -249,5 +249,26 @@ describe('uncommitted destinations and entry-owned corrections', () => {
     const other = navigation.beginIntent()
     navigation.reset(camp('A'))
     expect(other.isCurrent()).toBe(false)
+  })
+})
+
+describe('Team Presets navigation entry', () => {
+  it('enters window forward/back history without a resource parameter', async () => {
+    const navigation = create()
+    navigation.reset({ kind: 'members', agentId: null, tab: 'identity' })
+    await navigation.push({ kind: 'teams' })
+    await navigation.push({ kind: 'memory', memoryId: null })
+    expect(navigation.getSnapshot().entries).toEqual([
+      { kind: 'members', agentId: null, tab: 'identity' },
+      { kind: 'teams' },
+      { kind: 'memory', memoryId: null }
+    ])
+    await navigation.back()
+    expect(navigation.getSnapshot().entries[navigation.getSnapshot().index]).toEqual({ kind: 'teams' })
+  })
+
+  it('treats two teams entries as the same destination', () => {
+    expect(sameNavigationDestination({ kind: 'teams' }, { kind: 'teams' })).toBe(true)
+    expect(sameNavigationDestination({ kind: 'teams' }, { kind: 'members', agentId: null, tab: 'identity' })).toBe(false)
   })
 })
