@@ -51,6 +51,26 @@ use crate::{
 #[cfg(test)]
 use crate::camp_content::{composer_document_from_content, serialize_composer_document};
 
+/// Reference to a named Team Preset chosen at Camp creation time. It is part of
+/// the command's serialized request identity so that a retry of the same
+/// `commandId` replays the recorded result instead of re-resolving the preset.
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
+pub struct TeamPresetSelection {
+    pub id: String,
+    pub expected_revision: u64,
+}
+
+/// Members and Lead resolved from a Team Preset after the idempotency replay
+/// check. It is deliberately not serialized into the command: the command's
+/// request identity stays the unresolved selection, so replay never depends on
+/// the preset still existing or still matching.
+#[derive(Debug, Clone)]
+pub struct ResolvedCampTeam {
+    pub member_agent_ids: Vec<String>,
+    pub default_lead_agent_id: String,
+}
+
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct CreateThreadCommand {
@@ -62,6 +82,11 @@ pub struct CreateThreadCommand {
     pub collaboration_mode: ThreadCollaborationMode,
     #[serde(default)]
     pub activation_state: ThreadActivationState,
+    /// Present only on the "choose an existing team" creation branch. Omitted
+    /// from serialization when absent so the custom branch keeps its historical
+    /// request digest.
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub team_preset_selection: Option<TeamPresetSelection>,
 }
 
 #[cfg(test)]
@@ -83,6 +108,7 @@ impl CreateThreadCommand {
             default_lead_agent_id: default_lead.to_string(),
             collaboration_mode: ThreadCollaborationMode::Peer,
             activation_state: ThreadActivationState::Active,
+            team_preset_selection: None,
         }
     }
 }
@@ -985,6 +1011,7 @@ impl CollaborationService {
                     default_lead_agent_id,
                     collaboration_mode: ThreadCollaborationMode::Peer,
                     activation_state: ThreadActivationState::Active,
+                    team_preset_selection: None,
                 },
             },
         )?;
@@ -1030,14 +1057,45 @@ impl CollaborationService {
         database: &mut Database,
         envelope: &CommandEnvelope<CreateThreadCommand>,
     ) -> Result<CommandExecution> {
+        self.execute_camp_creation(database, envelope, || envelope.payload.clone())
+    }
+
+    /// Executes a Team Preset creation after the caller has already replayed any
+    /// recorded result and resolved the preset. `resolved` never enters the
+    /// command's request digest; it only supplies the Initial Camp Membership
+    /// and Initial Default Lead to the same creation transaction.
+    pub fn create_camp_with_team(
+        &self,
+        database: &mut Database,
+        envelope: &CommandEnvelope<CreateThreadCommand>,
+        resolved: ResolvedCampTeam,
+    ) -> Result<CommandExecution> {
+        self.execute_camp_creation(database, envelope, || {
+            let mut command = envelope.payload.clone();
+            command.member_agent_ids = resolved.member_agent_ids.clone();
+            command.default_lead_agent_id = resolved.default_lead_agent_id.clone();
+            command
+        })
+    }
+
+    /// Shared Camp creation transaction skeleton. `command_of` supplies the
+    /// command actually handed to `create_camp_in_tx`; it never changes the
+    /// envelope used for the request digest and idempotency replay.
+    fn execute_camp_creation(
+        &self,
+        database: &mut Database,
+        envelope: &CommandEnvelope<CreateThreadCommand>,
+        command_of: impl FnOnce() -> CreateThreadCommand,
+    ) -> Result<CommandExecution> {
         validate_project_path(&envelope.payload.project_path)?;
         let camp_id = ThreadId::new();
         self.gateway.execute(database, envelope, |transaction| {
+            let command = command_of();
             create_camp_in_tx(
                 transaction,
                 &envelope.actor,
                 envelope.execution_epoch,
-                &envelope.payload,
+                &command,
                 &camp_id,
             )
         })
@@ -7218,6 +7276,7 @@ mod slow_tests {
             default_lead_agent_id: "agent_1".to_string(),
             collaboration_mode: ThreadCollaborationMode::Peer,
             activation_state: ThreadActivationState::Active,
+            team_preset_selection: None,
         };
         let created = service
             .create_camp(
@@ -7293,6 +7352,7 @@ mod slow_tests {
                     default_lead_agent_id: lead.to_string(),
                     collaboration_mode: mode,
                     activation_state: ThreadActivationState::Active,
+                    team_preset_selection: None,
                 },
             )
         };

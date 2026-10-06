@@ -841,15 +841,43 @@ export interface PendingExecutionIntentView {
 export type ThreadCollaborationMode = 'peer' | 'lead_coordinated'
 export type ThreadActivationState = 'pending' | 'active'
 
-export interface CreateThreadRequest {
+/**
+ * The two Thread-creation branches are strict alternatives: an editable custom
+ * team, or a saved Team Preset selected by id and revision. Exactly one branch
+ * may be present; the unused branch's fields must be omitted.
+ */
+export type CreateThreadTeamInput =
+  | {
+      memberAgentIds: string[]
+      defaultLeadAgentId: string
+      teamPresetSelection?: never
+    }
+  | {
+      memberAgentIds?: never
+      defaultLeadAgentId?: never
+      teamPresetSelection: { id: string; expectedRevision: number }
+    }
+
+export interface CreateThreadRequestBase {
   commandId: string
   name: string | null
   workspace: { projectPath: string } | null
-  memberAgentIds: string[]
-  defaultLeadAgentId: string
   collaborationMode: ThreadCollaborationMode
   activationState: ThreadActivationState
 }
+
+export type CreateThreadRequest = CreateThreadRequestBase & CreateThreadTeamInput
+
+/** Narrows the strict creation union at runtime without matching field values. */
+export function isCustomThreadTeamInput(
+  input: CreateThreadTeamInput
+): input is Extract<CreateThreadTeamInput, { memberAgentIds: string[] }> {
+  return 'memberAgentIds' in input
+}
+
+/** A Renderer draft before Core assigns the command identity and activation state. */
+export type CreateThreadDraft = Omit<CreateThreadRequestBase, 'commandId' | 'activationState'>
+  & CreateThreadTeamInput
 
 export interface ThreadCreationPreflight {
   admissible: boolean
@@ -3206,6 +3234,31 @@ export interface NewConversationDefaults {
 
 export type InterfaceLanguage = 'zh-CN' | 'en'
 
+/** A named, reusable Camp-creation input. It is not a Camp roster or a project. */
+export interface TeamPreset {
+  id: string
+  name: string
+  /** Optional introduction; always present in a snapshot, empty when unset. */
+  description: string
+  memberAgentIds: string[]
+  leadAgentId: string
+  revision: number
+}
+
+export interface TeamPresetsSnapshot {
+  presets: TeamPreset[]
+}
+
+/** `id` is `null` for a new preset; `expectedRevision` must then be `null`. */
+export interface TeamPresetSaveInput {
+  id: string | null
+  name: string
+  /** Omitted or empty both mean no introduction. */
+  description?: string
+  memberAgentIds: string[]
+  leadAgentId: string
+}
+
 export interface GeneralPreferencesSnapshot {
   schemaVersion: 5
   interfaceLanguage: InterfaceLanguage
@@ -4014,6 +4067,9 @@ export type CoreMethod =
   | 'preferences.newConversation.setOneClick'
   | 'preferences.newConversation.invalidate'
   | 'preferences.newConversation.initialize'
+  | 'preferences.teamPresets.list'
+  | 'preferences.teamPresets.save'
+  | 'preferences.teamPresets.delete'
 
   | 'health.check'
   | 'diagnostics.check'

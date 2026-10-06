@@ -138,6 +138,7 @@ export function ThreadNavigation({
   updateSnapshot = null,
   onNewConversation,
   onMembers,
+  onTeams = () => undefined,
   onAutomations = () => undefined,
   onMissions = () => undefined,
   unreadMissionCount = 0,
@@ -163,7 +164,7 @@ export function ThreadNavigation({
   navigationId?: string
   settingsNavigation?: React.ReactNode
   footer?: React.ReactNode
-  view: 'compose' | 'camp' | 'members' | 'automations' | 'missions' | 'memory' | 'settings'
+  view: 'compose' | 'camp' | 'members' | 'teams' | 'automations' | 'missions' | 'memory' | 'settings'
   state: 'loading' | 'ready' | 'error'
   disabled?: boolean
   navigation: NavigationSnapshot | null
@@ -186,6 +187,7 @@ export function ThreadNavigation({
   updateSnapshot?: AppUpdateSnapshot | null
   onNewConversation(): void
   onMembers(): void
+  onTeams?(): void
   onAutomations?(): void
   onMissions?(): void
   unreadMissionCount?: number
@@ -412,6 +414,9 @@ export function ThreadNavigation({
                   <button className={`rail-button ${view === 'members' ? 'active' : ''}`} type="button" aria-current={view === 'members' ? 'page' : undefined} aria-label={uiAttribute("队员")} title={uiAttribute("队员")} onClick={onMembers}>
                     <span className="rail-glyph" aria-hidden="true"><NavigationIcon name="users" /></span><span className="rail-label"><UiText zh={"队员"} /></span>
                   </button>
+                  {!mobile && <button className={`rail-button ${view === 'teams' ? 'active' : ''}`} type="button" aria-current={view === 'teams' ? 'page' : undefined} aria-label={uiAttribute("队伍")} title={uiAttribute("队伍")} onClick={onTeams}>
+                    <span className="rail-glyph" aria-hidden="true"><NavigationIcon name="blocks" /></span><span className="rail-label"><UiText zh={"队伍"} /></span>
+                  </button>}
                   <button
                     className={`rail-button ${view === 'memory' ? 'active' : ''}`}
                     type="button"

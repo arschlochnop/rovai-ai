@@ -8,7 +8,10 @@ mkdirSync(userData, { recursive: true })
 app.setPath('userData', userData)
 app.setPath('sessionData', join(userData, 'session'))
 app.whenReady().then(async () => {
-  const window = new BrowserWindow({ show: process.platform === 'linux', width: 1040, height: 700, useContentSize: true, webPreferences: { contextIsolation: true, sandbox: true, nodeIntegration: false, backgroundThrottling: false } })
+  // The primary sidebar now also exposes the Team Presets entry, so the fixed
+  // thread list sits one row lower. A taller window keeps the bottom-of-list
+  // context-menu geometry assertions below the collision-flip threshold.
+  const window = new BrowserWindow({ show: process.platform === 'linux', width: 1040, height: 760, useContentSize: true, webPreferences: { contextIsolation: true, sandbox: true, nodeIntegration: false, backgroundThrottling: false } })
   const run = code => window.webContents.executeJavaScript(code, true)
   const settle = () => run('window.navigationTest.settle()')
   const width = () => run('document.querySelector(".unified-sidebar").getBoundingClientRect().width')
@@ -119,7 +122,7 @@ app.whenReady().then(async () => {
     assert.equal(await run('window.navigationTest.actions.length'),opensBefore,'Right click never opens a Thread')
     const popup=await run('(()=>{const r=document.querySelector(".sidebar-action-menu").getBoundingClientRect();return {x:r.x,y:r.y,right:r.right,bottom:r.bottom}})()')
     assert.ok(Math.abs(popup.x-p.x)<2&&Math.abs(popup.y-p.y)<2,'Context menu follows the pointer')
-    assert.ok(popup.right<=1032&&popup.bottom<=692,'Menu fits inside window bounds')
+    assert.ok(popup.right<=1032&&popup.bottom<=752,'Menu fits inside window bounds')
     await capture('sidecar-v3-thread-menu')
     await selectItem('标记已读');await moveAway()
     assert.equal((await status(runningSelector)).status,'loading','Mark read preserves running')

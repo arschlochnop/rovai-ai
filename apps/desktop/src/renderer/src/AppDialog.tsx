@@ -1,4 +1,4 @@
-import type { ComponentPropsWithoutRef, ReactNode } from 'react'
+import { forwardRef, type ComponentPropsWithoutRef, type ReactNode } from 'react'
 import * as Dialog from '@radix-ui/react-dialog'
 
 export type AppDialogTone = 'brand' | 'danger' | 'attention' | 'info' | 'neutral'
@@ -25,16 +25,17 @@ type AppDialogContentProps = ComponentPropsWithoutRef<typeof Dialog.Content> & {
   width?: 'compact' | 'wide' | 'large'
 }
 
-export function AppDialogContent({
+export const AppDialogContent = forwardRef<HTMLDivElement, AppDialogContentProps>(function AppDialogContent({
   className = '',
   tone = 'brand',
   width = 'compact',
   onOpenAutoFocus,
   onCloseAutoFocus,
   ...props
-}: AppDialogContentProps): React.JSX.Element {
+}, ref): React.JSX.Element {
   return (
     <Dialog.Content
+      ref={ref}
       className={[
         'dialog-content',
         'app-dialog',
@@ -57,7 +58,7 @@ export function AppDialogContent({
       {...props}
     />
   )
-}
+})
 
 export function AppDialogHeader({
   title,

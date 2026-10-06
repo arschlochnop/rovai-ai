@@ -12,7 +12,7 @@ import { readErrorMessage } from './error-message'
 import { CoreSubsystemNotice } from './CoreSubsystemNotice'
 import { Activity, useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import * as Dialog from '@radix-ui/react-dialog'
-import { THREAD_SNAPSHOT_SCHEMA_VERSION } from '@contracts'
+import { THREAD_SNAPSHOT_SCHEMA_VERSION, isCustomThreadTeamInput } from '@contracts'
 import type {
   AdapterInstallation,
   AdapterKind,
@@ -32,7 +32,7 @@ import type {
   ThreadMemberRemovalPreview,
   ThreadOpenProjection,
   ThreadSnapshot,
-  CreateThreadRequest,
+  CreateThreadDraft,
   CoreEvent,
   DesktopStartupSnapshot,
   EventBatch,
@@ -124,6 +124,7 @@ import { SettingsPageHeader } from './SettingsPageHeader'
 import { GeneralSettings } from './GeneralSettings'
 import { HostWebSettings } from './HostWebSettings'
 import { MemoryLibrary } from './MemoryLibrary'
+import { TeamPresetsWorkspace } from './TeamPresetsWorkspace'
 import {
   AutomationWorkspace,
   type AutomationLeaveGuard
@@ -282,7 +283,7 @@ type LoadState = 'loading' | 'ready' | 'error'
 export type StartupStatus = 'loading' | 'waiting' | 'resolved'
 export const STARTUP_FEEDBACK_DELAY_MS = 400
 export const SHUTDOWN_FEEDBACK_DELAY_MS = 400
-export type View = 'compose' | 'camp' | 'members' | 'automations' | 'missions' | 'memory' | 'settings'
+export type View = 'compose' | 'camp' | 'members' | 'teams' | 'automations' | 'missions' | 'memory' | 'settings'
 type ActivateThreadOptions = {
   memberPrepared?: boolean
   reconcileDefaultLead?: boolean
@@ -339,11 +340,12 @@ export async function prepareActiveAutomationForAppQuit(
 }
 
 export type SettingsSection = NavigationSettingsSection
-export type WindowDragStripPage = Extract<View, 'compose' | 'members' | 'automations' | 'missions' | 'memory' | 'settings'>
+export type WindowDragStripPage = Extract<View, 'compose' | 'members' | 'teams' | 'automations' | 'missions' | 'memory' | 'settings'>
 
 export function windowDragStripPage(view: View): WindowDragStripPage | null {
   return view === 'compose'
     || view === 'members'
+    || view === 'teams'
     || view === 'automations'
     || view === 'missions'
     || view === 'memory'
@@ -2341,6 +2343,7 @@ export function BusinessApp({
     const target: NavigationTarget = view === 'camp' && activeThreadId
       ? { kind: 'camp', threadId: activeThreadId }
       : view === 'members' ? { kind: 'members', agentId: restoredMemberId(selectedMemberId, agents), tab: memberTab }
+      : view === 'teams' ? { kind: 'teams' }
       : view === 'memory' ? memoryTarget
       : { kind: 'quick_chat' }
     desktopNavigation.reset(target)
@@ -2892,6 +2895,7 @@ export function BusinessApp({
     }
     const target: NavigationTarget = nextView === 'members'
       ? { kind: 'members', agentId: selectedMemberId, tab: memberTab }
+      : nextView === 'teams' ? { kind: 'teams' }
       : nextView === 'memory' ? { kind: 'memory', memoryId: null }
       : nextView === 'automations' ? { kind: 'automations' }
       : nextView === 'missions' ? { kind: 'missions' }
@@ -2973,6 +2977,7 @@ export function BusinessApp({
           setSelectedMemberId(target.agentId); setMemberTab(target.tab); setView('members'); break
         case 'memory': setMemoryTarget(target); setView('memory'); break
         case 'automations': setView('automations'); break
+        case 'teams': setView('teams'); break
         case 'missions': setView('missions'); break
         case 'quick_chat': setView('compose'); break
       }
@@ -3667,7 +3672,7 @@ export function BusinessApp({
   }
 
   async function createThread(
-    draft: Omit<CreateThreadRequest, 'commandId'>,
+    draft: CreateThreadDraft & { activationState: ThreadActivationState },
     enableOneClick = false,
     intent: NavigationIntent = desktopNavigation.beginIntent(),
     memberCreation = false
@@ -3682,7 +3687,13 @@ export function BusinessApp({
         commandId: newCommandId(),
         ...draft
       })
-      if (result.status === 'rejected') throw new Error(commandFailureMessage(result))
+      if (result.status === 'rejected') {
+        // Preserve the typed Core code so callers can branch on it (for example
+        // team_preset_revision_conflict) instead of matching the message.
+        const rejection = new Error(commandFailureMessage(result)) as Error & { code: string }
+        rejection.code = result.code
+        throw rejection
+      }
       const threadId = stringField(result.payload, 'threadId')
       if (!threadId) throw new Error(uiAttribute('会话已创建，但暂时无法打开。请刷新会话列表后重试。'))
       if (memberCreation) setMemberCreationDrafts((current) => new Map(current).set(threadId, {
@@ -3694,7 +3705,7 @@ export function BusinessApp({
       }))
       setNewConversationOpen(false)
       let preferencesSaveFailed = false
-      if (enableOneClick) {
+      if (enableOneClick && isCustomThreadTeamInput(draft)) {
         try {
           const saved = await uiPreferences.generalPreferences.setNewConversationDefaults({
             memberAgentIds: draft.memberAgentIds,
@@ -4075,8 +4086,9 @@ export function BusinessApp({
   const missionSource = (messageId: string): void => {
     setNotificationFocus({ requestId: ++notificationFocusSequence.current, kind: 'camp_message', threadTurnId: null, messageId, active: true })
   }
-  async function createMission(draft: Omit<CreateThreadRequest, 'commandId' | 'activationState'>, saveTeam: boolean, definition?: {description: string; start: boolean; tags: string[]; attachments: MissionAttachmentDraft[]}): Promise<void> {
+  async function createMission(draft: CreateThreadDraft, saveTeam: boolean, definition?: {description: string; start: boolean; tags: string[]; attachments: MissionAttachmentDraft[]}): Promise<void> {
     if (!definition) throw new Error(uiAttribute('缺少使命定义'))
+    if (!isCustomThreadTeamInput(draft)) throw new Error(uiAttribute('使命创建只支持自定义队伍'))
     const command: MissionCreate = { title: draft.name ?? '', description: definition.description, memberAgentIds: draft.memberAgentIds, defaultLeadAgentId: draft.defaultLeadAgentId, projectBindingKind: draft.workspace ? 'directory' : 'quick_chat', projectPath: draft.workspace?.projectPath ?? '', tags: definition.tags }
     const attachmentSignature = JSON.stringify(definition.attachments.map(({ id, file, kindHint }) => [id, file.name, file.size, file.lastModified, file.type, kindHint]))
     // Unknown transport outcomes retry the exact command. A different draft cannot
@@ -4131,6 +4143,7 @@ export function BusinessApp({
     compose: 'task-content compose-content',
     'camp': 'task-content camp-content',
     members: 'members-content',
+    teams: 'teams-content',
     automations: 'automation-content',
     missions: 'mission-board-content',
     memory: 'memory-content',
@@ -4284,6 +4297,7 @@ export function BusinessApp({
     updateSnapshot={appUpdates.snapshot}
     onNewConversation={() => { setMobileConversationDrawerOpen(false); beginNewConversation() }}
     onMembers={() => { setMobileConversationDrawerOpen(false); chooseView('members') }}
+    onTeams={() => { setMobileConversationDrawerOpen(false); chooseView('teams') }}
     onAutomations={() => { setMobileConversationDrawerOpen(false); chooseView('automations') }}
     onMissions={() => { setMobileConversationDrawerOpen(false); chooseView('missions') }}
     unreadMissionCount={unreadMissionCount(missionList.missions)}
@@ -4356,7 +4370,7 @@ export function BusinessApp({
             onExportDiagnostics={desktop ? () => desktop.exportDiagnostics() : undefined}
           />
         )}
-        {!startupGateVisible && view !== 'members' && view !== 'automations' && view !== 'memory' && inlineNotices}
+        {!startupGateVisible && view !== 'members' && view !== 'teams' && view !== 'automations' && view !== 'memory' && inlineNotices}
         {!startupGateVisible && !shuttingDown && toast && (
           <AppToast toast={toast} onClose={() => setToast(null)} />
         )}
@@ -4530,6 +4544,21 @@ export function BusinessApp({
             onAppearanceChange={changeAppearancePreferences}
           />
           </MobileSettingsLayout>
+        )}
+
+        {!startupGateVisible && mobile && (view === 'members' || view === 'teams') && (
+          <nav className="mobile-workspace-switch" aria-label={uiAttribute('队员与队伍')}>
+            <button type="button" className={view === 'members' ? 'active' : ''} aria-current={view === 'members' ? 'page' : undefined} onClick={() => chooseView('members')}><UiText zh={'队员'} /></button>
+            <button type="button" className={view === 'teams' ? 'active' : ''} aria-current={view === 'teams' ? 'page' : undefined} onClick={() => chooseView('teams')}><UiText zh={'队伍'} /></button>
+          </nav>
+        )}
+
+        {!startupGateVisible && view === 'teams' && (
+          <TeamPresetsWorkspace
+            agents={agents}
+            topNotices={inlineNotices}
+            onNotify={notify}
+          />
         )}
 
         {!startupGateVisible && view === 'members' && (

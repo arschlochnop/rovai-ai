@@ -13,6 +13,9 @@ export type NavigationTarget = Exclude<RestorableLocation, { kind: 'memory' }>
   | { kind: 'settings'; section: SettingsSection; overview?: true }
   | { kind: 'automations' }
   | { kind: 'missions' }
+  // Team Presets enter window forward/back history but are deliberately not a
+  // RestorableLocation: the workspace never becomes the persisted startup page.
+  | { kind: 'teams' }
 
 export type NavigationState = { entries: readonly NavigationTarget[]; index: number }
 /** Platform history stores page locators only; the shared coordinator owns leave guards. */

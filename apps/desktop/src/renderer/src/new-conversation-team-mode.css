@@ -1,0 +1,69 @@
+/* Mutually exclusive Camp-creation team modes inside the New Conversation Dialog. */
+
+.new-camp-mode {
+  display: flex;
+  gap: 4px;
+  margin-bottom: 12px;
+  padding: 3px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--surface-muted);
+}
+.new-camp-mode button {
+  flex: 1 1 0;
+  padding: 7px 10px;
+  border: 0;
+  border-radius: 7px;
+  color: var(--faint);
+  background: transparent;
+  font-size: 12px;
+  font-weight: 550;
+}
+.new-camp-mode button:hover:not(:disabled) { color: var(--ink); }
+.new-camp-mode button.active { color: var(--ink); background: var(--surface-raised); box-shadow: inset 0 0 0 1px var(--line); }
+.new-camp-mode button:disabled { opacity: 0.6; }
+
+.new-camp-preset { display: grid; gap: 10px; }
+/* Plain full-width container: the read-only member tiles own the visual, not a
+   gray block. No horizontal padding/margin so the grid's outer edges match the
+   form content column. */
+.new-camp-preset-summary { display: grid; width: 100%; min-width: 0; gap: 8px; }
+.new-camp-preset-description { margin: 0; color: var(--faint); font-size: 12px; line-height: 1.55; white-space: pre-wrap; overflow-wrap: anywhere; }
+/* Settings "默认队员" tile grid, fixed at 2 columns inside the ~520px Dialog.
+   The grid fills its whole column; `scrollbar-gutter` is deliberately omitted so
+   a scrollbar can only consume internal space and never shrink the outer edges.
+   Four full rows (8 members) are visible; the 9th scrolls inside this grid. */
+.new-camp-preset-members {
+  display: grid;
+  width: 100%;
+  min-width: 0;
+  max-width: none;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+  max-height: 272px;
+  margin: 0;
+  padding: 0;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  list-style: none;
+}
+.new-camp-preset-member {
+  display: flex;
+  min-width: 0;
+  min-height: 62px;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 12px;
+  border: 1px solid var(--settings-choice-line);
+  border-radius: 8px;
+  background: var(--home-surface);
+}
+.new-camp-preset-member.is-unavailable { border-color: var(--attention); background: var(--attention-soft); color: var(--attention); }
+.new-camp-preset-member-copy { display: grid; min-width: 0; flex: 1 1 auto; gap: 1px; }
+.new-camp-preset-member-copy strong { overflow: hidden; color: var(--ink); font-size: 12px; font-weight: 550; text-overflow: ellipsis; white-space: nowrap; }
+.new-camp-preset-member-copy small { overflow: hidden; color: var(--muted); font-size: 10.5px; text-overflow: ellipsis; white-space: nowrap; }
+.new-camp-preset-member.is-unavailable .new-camp-preset-member-copy small { color: var(--attention); }
+.new-camp-preset-lead-badge { flex: 0 0 auto; padding: 1px 6px; border-radius: 999px; color: var(--conversation-action, var(--brand)); background: var(--surface-selected); font-size: 10px; font-weight: 600; white-space: nowrap; }
+.new-camp-preset-summary .compact-inline-error { margin: 0; padding-top: 0; }
+.new-camp-preset-summary .compact-inline-note { margin: 0; }
+.new-camp-preset-option-description { overflow: hidden; max-width: 100%; text-overflow: ellipsis; white-space: nowrap; }
