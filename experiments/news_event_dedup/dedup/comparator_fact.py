@@ -27,7 +27,7 @@ from .facts import (
     units_compatible, claim_units, GENERIC_LATIN, ALIASES, CJK,
 )
 
-VERSION = "fact-4.1.0"
+VERSION = "fact-4.1.1"
 
 DEFAULT_CONFIG = {
     "name": "fact_enhanced",
@@ -314,17 +314,17 @@ def align_quantities(A: Prepared, B: Prepared) -> dict:
 def _addresses(A: Prepared, B: Prepared) -> tuple[list, list]:
     sup, con = [], []
     fa, fb = A.facts, B.facts
-    for x in fa.addresses_full & fb.addresses_full:
+    for x in sorted(fa.addresses_full & fb.addresses_full):
         sup.append({"type": "address_full", "value": x, "weight": 1.0})
-    for x in fa.tx_full & fb.tx_full:
+    for x in sorted(fa.tx_full & fb.tx_full):
         sup.append({"type": "tx_full", "value": x, "weight": 1.0})
     if fa.addresses_full and fb.addresses_full and not (fa.addresses_full & fb.addresses_full):
         if len(fa.addresses_full) == 1 and len(fb.addresses_full) == 1:
             con.append({"type": "address", "severity": "hard", "detail": "两篇各有一个完整地址且不同",
-                        "left": next(iter(fa.addresses_full)), "right": next(iter(fb.addresses_full))})
+                        "left": min(fa.addresses_full), "right": min(fb.addresses_full)})
     # 截写/前缀：只能证明“相容”，不能证明“相同”
-    pa = list(fa.addresses_partial) + [(x[2:], "") for x in fa.addresses_full if x.startswith("0x")]
-    pb = list(fb.addresses_partial) + [(x[2:], "") for x in fb.addresses_full if x.startswith("0x")]
+    pa = list(fa.addresses_partial) + [(x[2:], "") for x in sorted(fa.addresses_full) if x.startswith("0x")]
+    pb = list(fb.addresses_partial) + [(x[2:], "") for x in sorted(fb.addresses_full) if x.startswith("0x")]
     if fa.addresses_partial or fb.addresses_partial:
         compat = []
         for (p1, s1) in pa:
@@ -462,8 +462,8 @@ def compare_prepared(A: Prepared, B: Prepared, config: dict | None = None) -> di
     title_rare = sorted(A.title_cjk_rare & B.title_cjk_rare) if A.title_cjk_rare and B.title_cjk_rare else []
     # 允许包含关系：一方的稀有片段是另一方片段的子串
     if not title_rare:
-        for x in A.title_cjk_rare:
-            for y in B.title_cjk_rare:
+        for x in sorted(A.title_cjk_rare):
+            for y in sorted(B.title_cjk_rare):
                 if x in y or y in x:
                     title_rare.append(min(x, y, key=len))
     title_rare_sup = [{"type": "rare_title_term", "value": t, "weight": 0.3} for t in title_rare[:2]]

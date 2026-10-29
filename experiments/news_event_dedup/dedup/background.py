@@ -60,9 +60,12 @@ class Background:
         return h.hexdigest()
 
     def save(self, path: str) -> None:
-        with gzip.open(path, "wt", encoding="utf-8") as f:
-            json.dump({"n_docs": self.n_docs, "source": self.source_desc, "ngram_df": self.ngram_df,
-                       "latin_df": self.latin_df}, f, ensure_ascii=False, sort_keys=True)
+        # mtime=0、不写文件名：同一内容每次生成字节一致（可复现）
+        payload = json.dumps({"n_docs": self.n_docs, "source": self.source_desc, "ngram_df": self.ngram_df,
+                              "latin_df": self.latin_df}, ensure_ascii=False, sort_keys=True).encode("utf-8")
+        with open(path, "wb") as raw:
+            with gzip.GzipFile(filename="", mode="wb", fileobj=raw, mtime=0) as f:
+                f.write(payload)
 
 
 def build_background(views: list[dict], source_desc: dict) -> Background:
