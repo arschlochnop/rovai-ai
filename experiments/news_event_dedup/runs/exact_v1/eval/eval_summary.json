@@ -1,0 +1,1283 @@
+{
+ "run": "runs/exact_v1",
+ "evaluated_utc": "2026-10-29T06:24:54+00:00",
+ "comparator": "exact-1.0.0",
+ "label_files": {
+  "public_pairs": {
+   "path": "/root/.claude/uploads/ebbb30f4-339c-5eb8-8b28-c0460cd544c5/2a9d2854-______115_.json",
+   "sha256": "d147a34e2c04e8d3807894cb80816859f9cf1faa8ce6a975618c22df8ee9249e"
+  },
+  "dev_labels": {
+   "path": "labels/dev_labels_v1.jsonl",
+   "sha256": "84b81f9d3540b1ad91f39296f376d35a63c387b2ba06149175ca265b18fa247a"
+  },
+  "dev_split": {
+   "path": "labels/dev_split_v1.json",
+   "sha256": "268d46c2ba204a4d34a370501b05c358c615e6cc4d2f09747736e3afef57d356"
+  },
+  "topics": {
+   "path": "/root/.claude/uploads/ebbb30f4-339c-5eb8-8b28-c0460cd544c5/bb64632e-1-______.json",
+   "sha256": "123ed651a6c94960211d813081dc6faec13926d8168f8a8f561332558fc80fdc"
+  }
+ },
+ "honesty_notes": [
+  "公开 115 对与 4 类主题是用户提供的已公开开发参考，不是盲测；",
+  "model_read_* 由实现者阅读原文给出（模型辅助开发核读），selfheld 只是按事件家族自留、实现者同样读过原文，不是未见验证；",
+  "小样本分层结果不能外推全天准确率；本批未出现误合并不代表全量为零。"
+ ],
+ "results": {
+  "public_115": {
+   "name": "公开参考标签（用户提供，已披露，非盲测）",
+   "n_labels": 115,
+   "gold_counts": {
+    "same_event": 89,
+    "different_event": 24,
+    "uncertain": 2
+   },
+   "pair_level_replay": {
+    "compared": 99,
+    "not_compared": {
+     "not_replayed": 16
+    },
+    "positives": {
+     "n": 82,
+     "hit_same": 14,
+     "explicit_reject_different": 0,
+     "abstain_uncertain": 68,
+     "hit_rate": 0.1707,
+     "abstain_rate": 0.8293,
+     "explicit_reject_rate": 0.0
+    },
+    "negatives": {
+     "n": 16,
+     "false_same": 0,
+     "explicit_different": 0,
+     "abstain_uncertain": 16,
+     "false_same_rate": 0.0,
+     "abstain_rate": 1.0
+    },
+    "gold_uncertain": {
+     "n": 1,
+     "pred_same_event": 0,
+     "pred_different_event": 0,
+     "pred_uncertain": 1
+    },
+    "precision_of_same_on_determinate": 1.0
+   },
+   "pair_level_direct_call_for_not_compared": {
+    "positives": {
+     "n": 7,
+     "hit_same": 2,
+     "explicit_reject_different": 0,
+     "abstain_uncertain": 5,
+     "hit_rate": 0.2857,
+     "abstain_rate": 0.7143,
+     "explicit_reject_rate": 0.0
+    },
+    "negatives": {
+     "n": 8,
+     "false_same": 0,
+     "explicit_different": 0,
+     "abstain_uncertain": 8,
+     "false_same_rate": 0.0,
+     "abstain_rate": 1.0
+    },
+    "gold_uncertain": {
+     "n": 1,
+     "pred_same_event": 0,
+     "pred_different_event": 0,
+     "pred_uncertain": 1
+    },
+    "precision_of_same_on_determinate": 1.0
+   },
+   "group_level": {
+    "positives": {
+     "same_group": 14,
+     "split": 68,
+     "not_fully_replayed": 7
+    },
+    "negatives": {
+     "together_contamination": 0,
+     "apart": 16,
+     "not_fully_replayed": 8
+    },
+    "gold_uncertain": {
+     "same_group": 0,
+     "split": 1,
+     "not_fully_replayed": 1
+    },
+    "positive_split_causes": {
+     "comparator_uncertain": 68
+    }
+   },
+   "by_category_pair_level": {
+    "Allium安全事件与恢复": {
+     "positives": {
+      "n": 15,
+      "hit_same": 2,
+      "explicit_reject_different": 0,
+      "abstain_uncertain": 13,
+      "hit_rate": 0.1333,
+      "abstain_rate": 0.8667,
+      "explicit_reject_rate": 0.0
+     },
+     "negatives": {
+      "n": 0,
+      "false_same": 0,
+      "explicit_different": 0,
+      "abstain_uncertain": 0,
+      "false_same_rate": null,
+      "abstain_rate": null
+     },
+     "gold_uncertain": {
+      "n": 0,
+      "pred_same_event": 0,
+      "pred_different_event": 0,
+      "pred_uncertain": 0
+     },
+     "precision_of_same_on_determinate": 1.0
+    },
+    "ETH旧钱包转账": {
+     "positives": {
+      "n": 3,
+      "hit_same": 0,
+      "explicit_reject_different": 0,
+      "abstain_uncertain": 3,
+      "hit_rate": 0.0,
+      "abstain_rate": 1.0,
+      "explicit_reject_rate": 0.0
+     },
+     "negatives": {
+      "n": 0,
+      "false_same": 0,
+      "explicit_different": 0,
+      "abstain_uncertain": 0,
+      "false_same_rate": null,
+      "abstain_rate": null
+     },
+     "gold_uncertain": {
+      "n": 0,
+      "pred_same_event": 0,
+      "pred_different_event": 0,
+      "pred_uncertain": 0
+     },
+     "precision_of_same_on_determinate": null
+    },
+    "L1_同资产不同快照": {
+     "positives": {
+      "n": 3,
+      "hit_same": 0,
+      "explicit_reject_different": 0,
+      "abstain_uncertain": 3,
+      "hit_rate": 0.0,
+      "abstain_rate": 1.0,
+      "explicit_reject_rate": 0.0
+     },
+     "negatives": {
+      "n": 0,
+      "false_same": 0,
+      "explicit_different": 0,
+      "abstain_uncertain": 0,
+      "false_same_rate": null,
+      "abstain_rate": null
+     },
+     "gold_uncertain": {
+      "n": 0,
+      "pred_same_event": 0,
+      "pred_different_event": 0,
+      "pred_uncertain": 0
+     },
+     "precision_of_same_on_determinate": null
+    },
+    "L2_同标题数字实质不同": {
+     "positives": {
+      "n": 10,
+      "hit_same": 0,
+      "explicit_reject_different": 0,
+      "abstain_uncertain": 10,
+      "hit_rate": 0.0,
+      "abstain_rate": 1.0,
+      "explicit_reject_rate": 0.0
+     },
+     "negatives": {
+      "n": 0,
+      "false_same": 0,
+      "explicit_different": 0,
+      "abstain_uncertain": 0,
+      "false_same_rate": null,
+      "abstain_rate": null
+     },
+     "gold_uncertain": {
+      "n": 0,
+      "pred_same_event": 0,
+      "pred_different_event": 0,
+      "pred_uncertain": 0
+     },
+     "precision_of_same_on_determinate": null
+    },
+    "L5_信息增量": {
+     "positives": {
+      "n": 22,
+      "hit_same": 0,
+      "explicit_reject_different": 0,
+      "abstain_uncertain": 22,
+      "hit_rate": 0.0,
+      "abstain_rate": 1.0,
+      "explicit_reject_rate": 0.0
+     },
+     "negatives": {
+      "n": 0,
+      "false_same": 0,
+      "explicit_different": 0,
+      "abstain_uncertain": 0,
+      "false_same_rate": null,
+      "abstain_rate": null
+     },
+     "gold_uncertain": {
+      "n": 0,
+      "pred_same_event": 0,
+      "pred_different_event": 0,
+      "pred_uncertain": 0
+     },
+     "precision_of_same_on_determinate": null
+    },
+    "L6_普通改写": {
+     "positives": {
+      "n": 21,
+      "hit_same": 7,
+      "explicit_reject_different": 0,
+      "abstain_uncertain": 14,
+      "hit_rate": 0.3333,
+      "abstain_rate": 0.6667,
+      "explicit_reject_rate": 0.0
+     },
+     "negatives": {
+      "n": 0,
+      "false_same": 0,
+      "explicit_different": 0,
+      "abstain_uncertain": 0,
+      "false_same_rate": null,
+      "abstain_rate": null
+     },
+     "gold_uncertain": {
+      "n": 0,
+      "pred_same_event": 0,
+      "pred_different_event": 0,
+      "pred_uncertain": 0
+     },
+     "precision_of_same_on_determinate": 1.0
+    },
+    "L7_易负例": {
+     "positives": {
+      "n": 0,
+      "hit_same": 0,
+      "explicit_reject_different": 0,
+      "abstain_uncertain": 0,
+      "hit_rate": null,
+      "abstain_rate": null,
+      "explicit_reject_rate": null
+     },
+     "negatives": {
+      "n": 16,
+      "false_same": 0,
+      "explicit_different": 0,
+      "abstain_uncertain": 16,
+      "false_same_rate": 0.0,
+      "abstain_rate": 1.0
+     },
+     "gold_uncertain": {
+      "n": 0,
+      "pred_same_event": 0,
+      "pred_different_event": 0,
+      "pred_uncertain": 0
+     },
+     "precision_of_same_on_determinate": null
+    },
+    "Prabang被黑": {
+     "positives": {
+      "n": 3,
+      "hit_same": 3,
+      "explicit_reject_different": 0,
+      "abstain_uncertain": 0,
+      "hit_rate": 1.0,
+      "abstain_rate": 0.0,
+      "explicit_reject_rate": 0.0
+     },
+     "negatives": {
+      "n": 0,
+      "false_same": 0,
+      "explicit_different": 0,
+      "abstain_uncertain": 0,
+      "false_same_rate": null,
+      "abstain_rate": null
+     },
+     "gold_uncertain": {
+      "n": 0,
+      "pred_same_event": 0,
+      "pred_different_event": 0,
+      "pred_uncertain": 0
+     },
+     "precision_of_same_on_determinate": 1.0
+    },
+    "同事件候选": {
+     "positives": {
+      "n": 6,
+      "hit_same": 1,
+      "explicit_reject_different": 0,
+      "abstain_uncertain": 5,
+      "hit_rate": 0.1667,
+      "abstain_rate": 0.8333,
+      "explicit_reject_rate": 0.0
+     },
+     "negatives": {
+      "n": 0,
+      "false_same": 0,
+      "explicit_different": 0,
+      "abstain_uncertain": 0,
+      "false_same_rate": null,
+      "abstain_rate": null
+     },
+     "gold_uncertain": {
+      "n": 0,
+      "pred_same_event": 0,
+      "pred_different_event": 0,
+      "pred_uncertain": 0
+     },
+     "precision_of_same_on_determinate": 1.0
+    },
+    "部分内容重叠": {
+     "positives": {
+      "n": 0,
+      "hit_same": 0,
+      "explicit_reject_different": 0,
+      "abstain_uncertain": 0,
+      "hit_rate": null,
+      "abstain_rate": null,
+      "explicit_reject_rate": null
+     },
+     "negatives": {
+      "n": 0,
+      "false_same": 0,
+      "explicit_different": 0,
+      "abstain_uncertain": 0,
+      "false_same_rate": null,
+      "abstain_rate": null
+     },
+     "gold_uncertain": {
+      "n": 1,
+      "pred_same_event": 0,
+      "pred_different_event": 0,
+      "pred_uncertain": 1
+     },
+     "precision_of_same_on_determinate": null
+    },
+    "韩股同一行情快报": {
+     "positives": {
+      "n": 1,
+      "hit_same": 1,
+      "explicit_reject_different": 0,
+      "abstain_uncertain": 0,
+      "hit_rate": 1.0,
+      "abstain_rate": 0.0,
+      "explicit_reject_rate": 0.0
+     },
+     "negatives": {
+      "n": 0,
+      "false_same": 0,
+      "explicit_different": 0,
+      "abstain_uncertain": 0,
+      "false_same_rate": null,
+      "abstain_rate": null
+     },
+     "gold_uncertain": {
+      "n": 0,
+      "pred_same_event": 0,
+      "pred_different_event": 0,
+      "pred_uncertain": 0
+     },
+     "precision_of_same_on_determinate": 1.0
+    }
+   },
+   "conservation_checks": {
+    "pair_rows_total": true,
+    "compared_plus_not_compared": true,
+    "group_rows_total": true,
+    "positive_split_causes_conserve": true,
+    "category_counts_are_overlapping": "一对可属多个类别，类别计数不可相加"
+   }
+  },
+  "model_read_dev": {
+   "name": "模型辅助开发核读标签·dev（实现者已读原文，非独立人工金标）",
+   "n_labels": 117,
+   "gold_counts": {
+    "same_event": 45,
+    "different_event": 65,
+    "uncertain": 7
+   },
+   "pair_level_replay": {
+    "compared": 117,
+    "not_compared": {},
+    "positives": {
+     "n": 45,
+     "hit_same": 10,
+     "explicit_reject_different": 0,
+     "abstain_uncertain": 35,
+     "hit_rate": 0.2222,
+     "abstain_rate": 0.7778,
+     "explicit_reject_rate": 0.0
+    },
+    "negatives": {
+     "n": 65,
+     "false_same": 0,
+     "explicit_different": 0,
+     "abstain_uncertain": 65,
+     "false_same_rate": 0.0,
+     "abstain_rate": 1.0
+    },
+    "gold_uncertain": {
+     "n": 7,
+     "pred_same_event": 0,
+     "pred_different_event": 0,
+     "pred_uncertain": 7
+    },
+    "precision_of_same_on_determinate": 1.0
+   },
+   "pair_level_direct_call_for_not_compared": null,
+   "group_level": {
+    "positives": {
+     "same_group": 10,
+     "split": 35,
+     "not_fully_replayed": 0
+    },
+    "negatives": {
+     "together_contamination": 0,
+     "apart": 65,
+     "not_fully_replayed": 0
+    },
+    "gold_uncertain": {
+     "same_group": 0,
+     "split": 7,
+     "not_fully_replayed": 0
+    },
+    "positive_split_causes": {
+     "comparator_uncertain": 35
+    }
+   },
+   "by_category_pair_level": {
+    "不同主体同模板": {
+     "positives": {
+      "n": 0,
+      "hit_same": 0,
+      "explicit_reject_different": 0,
+      "abstain_uncertain": 0,
+      "hit_rate": null,
+      "abstain_rate": null,
+      "explicit_reject_rate": null
+     },
+     "negatives": {
+      "n": 7,
+      "false_same": 0,
+      "explicit_different": 0,
+      "abstain_uncertain": 7,
+      "false_same_rate": 0.0,
+      "abstain_rate": 1.0
+     },
+     "gold_uncertain": {
+      "n": 0,
+      "pred_same_event": 0,
+      "pred_different_event": 0,
+      "pred_uncertain": 0
+     },
+     "precision_of_same_on_determinate": null
+    },
+    "删节/信息增量": {
+     "positives": {
+      "n": 10,
+      "hit_same": 0,
+      "explicit_reject_different": 0,
+      "abstain_uncertain": 10,
+      "hit_rate": 0.0,
+      "abstain_rate": 1.0,
+      "explicit_reject_rate": 0.0
+     },
+     "negatives": {
+      "n": 0,
+      "false_same": 0,
+      "explicit_different": 0,
+      "abstain_uncertain": 0,
+      "false_same_rate": null,
+      "abstain_rate": null
+     },
+     "gold_uncertain": {
+      "n": 0,
+      "pred_same_event": 0,
+      "pred_different_event": 0,
+      "pred_uncertain": 0
+     },
+     "precision_of_same_on_determinate": null
+    },
+    "同主体不同快照/不同事实": {
+     "positives": {
+      "n": 0,
+      "hit_same": 0,
+      "explicit_reject_different": 0,
+      "abstain_uncertain": 0,
+      "hit_rate": null,
+      "abstain_rate": null,
+      "explicit_reject_rate": null
+     },
+     "negatives": {
+      "n": 18,
+      "false_same": 0,
+      "explicit_different": 0,
+      "abstain_uncertain": 18,
+      "false_same_rate": 0.0,
+      "abstain_rate": 1.0
+     },
+     "gold_uncertain": {
+      "n": 1,
+      "pred_same_event": 0,
+      "pred_different_event": 0,
+      "pred_uncertain": 1
+     },
+     "precision_of_same_on_determinate": null
+    },
+    "数值/时间/方向差异": {
+     "positives": {
+      "n": 6,
+      "hit_same": 0,
+      "explicit_reject_different": 0,
+      "abstain_uncertain": 6,
+      "hit_rate": 0.0,
+      "abstain_rate": 1.0,
+      "explicit_reject_rate": 0.0
+     },
+     "negatives": {
+      "n": 0,
+      "false_same": 0,
+      "explicit_different": 0,
+      "abstain_uncertain": 0,
+      "false_same_rate": null,
+      "abstain_rate": null
+     },
+     "gold_uncertain": {
+      "n": 0,
+      "pred_same_event": 0,
+      "pred_different_event": 0,
+      "pred_uncertain": 0
+     },
+     "precision_of_same_on_determinate": null
+    },
+    "易负例": {
+     "positives": {
+      "n": 0,
+      "hit_same": 0,
+      "explicit_reject_different": 0,
+      "abstain_uncertain": 0,
+      "hit_rate": null,
+      "abstain_rate": null,
+      "explicit_reject_rate": null
+     },
+     "negatives": {
+      "n": 35,
+      "false_same": 0,
+      "explicit_different": 0,
+      "abstain_uncertain": 35,
+      "false_same_rate": 0.0,
+      "abstain_rate": 1.0
+     },
+     "gold_uncertain": {
+      "n": 0,
+      "pred_same_event": 0,
+      "pred_different_event": 0,
+      "pred_uncertain": 0
+     },
+     "precision_of_same_on_determinate": null
+    },
+    "普通改写": {
+     "positives": {
+      "n": 27,
+      "hit_same": 5,
+      "explicit_reject_different": 0,
+      "abstain_uncertain": 22,
+      "hit_rate": 0.1852,
+      "abstain_rate": 0.8148,
+      "explicit_reject_rate": 0.0
+     },
+     "negatives": {
+      "n": 0,
+      "false_same": 0,
+      "explicit_different": 0,
+      "abstain_uncertain": 0,
+      "false_same_rate": null,
+      "abstain_rate": null
+     },
+     "gold_uncertain": {
+      "n": 0,
+      "pred_same_event": 0,
+      "pred_different_event": 0,
+      "pred_uncertain": 0
+     },
+     "precision_of_same_on_determinate": 1.0
+    },
+    "综述桥接风险": {
+     "positives": {
+      "n": 3,
+      "hit_same": 1,
+      "explicit_reject_different": 0,
+      "abstain_uncertain": 2,
+      "hit_rate": 0.3333,
+      "abstain_rate": 0.6667,
+      "explicit_reject_rate": 0.0
+     },
+     "negatives": {
+      "n": 7,
+      "false_same": 0,
+      "explicit_different": 0,
+      "abstain_uncertain": 7,
+      "false_same_rate": 0.0,
+      "abstain_rate": 1.0
+     },
+     "gold_uncertain": {
+      "n": 7,
+      "pred_same_event": 0,
+      "pred_different_event": 0,
+      "pred_uncertain": 7
+     },
+     "precision_of_same_on_determinate": 1.0
+    },
+    "转载/完全重复": {
+     "positives": {
+      "n": 9,
+      "hit_same": 5,
+      "explicit_reject_different": 0,
+      "abstain_uncertain": 4,
+      "hit_rate": 0.5556,
+      "abstain_rate": 0.4444,
+      "explicit_reject_rate": 0.0
+     },
+     "negatives": {
+      "n": 0,
+      "false_same": 0,
+      "explicit_different": 0,
+      "abstain_uncertain": 0,
+      "false_same_rate": null,
+      "abstain_rate": null
+     },
+     "gold_uncertain": {
+      "n": 0,
+      "pred_same_event": 0,
+      "pred_different_event": 0,
+      "pred_uncertain": 0
+     },
+     "precision_of_same_on_determinate": 1.0
+    }
+   },
+   "conservation_checks": {
+    "pair_rows_total": true,
+    "compared_plus_not_compared": true,
+    "group_rows_total": true,
+    "positive_split_causes_conserve": true,
+    "category_counts_are_overlapping": "一对可属多个类别，类别计数不可相加"
+   }
+  },
+  "model_read_selfheld": {
+   "name": "模型辅助开发核读标签·selfheld（实现者已读原文，非独立人工金标）",
+   "n_labels": 79,
+   "gold_counts": {
+    "same_event": 33,
+    "different_event": 46
+   },
+   "pair_level_replay": {
+    "compared": 79,
+    "not_compared": {},
+    "positives": {
+     "n": 33,
+     "hit_same": 11,
+     "explicit_reject_different": 0,
+     "abstain_uncertain": 22,
+     "hit_rate": 0.3333,
+     "abstain_rate": 0.6667,
+     "explicit_reject_rate": 0.0
+    },
+    "negatives": {
+     "n": 46,
+     "false_same": 0,
+     "explicit_different": 0,
+     "abstain_uncertain": 46,
+     "false_same_rate": 0.0,
+     "abstain_rate": 1.0
+    },
+    "gold_uncertain": {
+     "n": 0,
+     "pred_same_event": 0,
+     "pred_different_event": 0,
+     "pred_uncertain": 0
+    },
+    "precision_of_same_on_determinate": 1.0
+   },
+   "pair_level_direct_call_for_not_compared": null,
+   "group_level": {
+    "positives": {
+     "same_group": 11,
+     "split": 22,
+     "not_fully_replayed": 0
+    },
+    "negatives": {
+     "together_contamination": 0,
+     "apart": 46,
+     "not_fully_replayed": 0
+    },
+    "gold_uncertain": {
+     "same_group": 0,
+     "split": 0,
+     "not_fully_replayed": 0
+    },
+    "positive_split_causes": {
+     "comparator_uncertain": 22
+    }
+   },
+   "by_category_pair_level": {
+    "不同主体同模板": {
+     "positives": {
+      "n": 0,
+      "hit_same": 0,
+      "explicit_reject_different": 0,
+      "abstain_uncertain": 0,
+      "hit_rate": null,
+      "abstain_rate": null,
+      "explicit_reject_rate": null
+     },
+     "negatives": {
+      "n": 26,
+      "false_same": 0,
+      "explicit_different": 0,
+      "abstain_uncertain": 26,
+      "false_same_rate": 0.0,
+      "abstain_rate": 1.0
+     },
+     "gold_uncertain": {
+      "n": 0,
+      "pred_same_event": 0,
+      "pred_different_event": 0,
+      "pred_uncertain": 0
+     },
+     "precision_of_same_on_determinate": null
+    },
+    "删节/信息增量": {
+     "positives": {
+      "n": 9,
+      "hit_same": 0,
+      "explicit_reject_different": 0,
+      "abstain_uncertain": 9,
+      "hit_rate": 0.0,
+      "abstain_rate": 1.0,
+      "explicit_reject_rate": 0.0
+     },
+     "negatives": {
+      "n": 0,
+      "false_same": 0,
+      "explicit_different": 0,
+      "abstain_uncertain": 0,
+      "false_same_rate": null,
+      "abstain_rate": null
+     },
+     "gold_uncertain": {
+      "n": 0,
+      "pred_same_event": 0,
+      "pred_different_event": 0,
+      "pred_uncertain": 0
+     },
+     "precision_of_same_on_determinate": null
+    },
+    "同主体不同快照/不同事实": {
+     "positives": {
+      "n": 0,
+      "hit_same": 0,
+      "explicit_reject_different": 0,
+      "abstain_uncertain": 0,
+      "hit_rate": null,
+      "abstain_rate": null,
+      "explicit_reject_rate": null
+     },
+     "negatives": {
+      "n": 1,
+      "false_same": 0,
+      "explicit_different": 0,
+      "abstain_uncertain": 1,
+      "false_same_rate": 0.0,
+      "abstain_rate": 1.0
+     },
+     "gold_uncertain": {
+      "n": 0,
+      "pred_same_event": 0,
+      "pred_different_event": 0,
+      "pred_uncertain": 0
+     },
+     "precision_of_same_on_determinate": null
+    },
+    "数值/时间/方向差异": {
+     "positives": {
+      "n": 6,
+      "hit_same": 0,
+      "explicit_reject_different": 0,
+      "abstain_uncertain": 6,
+      "hit_rate": 0.0,
+      "abstain_rate": 1.0,
+      "explicit_reject_rate": 0.0
+     },
+     "negatives": {
+      "n": 4,
+      "false_same": 0,
+      "explicit_different": 0,
+      "abstain_uncertain": 4,
+      "false_same_rate": 0.0,
+      "abstain_rate": 1.0
+     },
+     "gold_uncertain": {
+      "n": 0,
+      "pred_same_event": 0,
+      "pred_different_event": 0,
+      "pred_uncertain": 0
+     },
+     "precision_of_same_on_determinate": null
+    },
+    "易负例": {
+     "positives": {
+      "n": 0,
+      "hit_same": 0,
+      "explicit_reject_different": 0,
+      "abstain_uncertain": 0,
+      "hit_rate": null,
+      "abstain_rate": null,
+      "explicit_reject_rate": null
+     },
+     "negatives": {
+      "n": 18,
+      "false_same": 0,
+      "explicit_different": 0,
+      "abstain_uncertain": 18,
+      "false_same_rate": 0.0,
+      "abstain_rate": 1.0
+     },
+     "gold_uncertain": {
+      "n": 0,
+      "pred_same_event": 0,
+      "pred_different_event": 0,
+      "pred_uncertain": 0
+     },
+     "precision_of_same_on_determinate": null
+    },
+    "普通改写": {
+     "positives": {
+      "n": 21,
+      "hit_same": 5,
+      "explicit_reject_different": 0,
+      "abstain_uncertain": 16,
+      "hit_rate": 0.2381,
+      "abstain_rate": 0.7619,
+      "explicit_reject_rate": 0.0
+     },
+     "negatives": {
+      "n": 0,
+      "false_same": 0,
+      "explicit_different": 0,
+      "abstain_uncertain": 0,
+      "false_same_rate": null,
+      "abstain_rate": null
+     },
+     "gold_uncertain": {
+      "n": 0,
+      "pred_same_event": 0,
+      "pred_different_event": 0,
+      "pred_uncertain": 0
+     },
+     "precision_of_same_on_determinate": 1.0
+    },
+    "综述桥接风险": {
+     "positives": {
+      "n": 0,
+      "hit_same": 0,
+      "explicit_reject_different": 0,
+      "abstain_uncertain": 0,
+      "hit_rate": null,
+      "abstain_rate": null,
+      "explicit_reject_rate": null
+     },
+     "negatives": {
+      "n": 4,
+      "false_same": 0,
+      "explicit_different": 0,
+      "abstain_uncertain": 4,
+      "false_same_rate": 0.0,
+      "abstain_rate": 1.0
+     },
+     "gold_uncertain": {
+      "n": 0,
+      "pred_same_event": 0,
+      "pred_different_event": 0,
+      "pred_uncertain": 0
+     },
+     "precision_of_same_on_determinate": null
+    },
+    "转载/完全重复": {
+     "positives": {
+      "n": 6,
+      "hit_same": 6,
+      "explicit_reject_different": 0,
+      "abstain_uncertain": 0,
+      "hit_rate": 1.0,
+      "abstain_rate": 0.0,
+      "explicit_reject_rate": 0.0
+     },
+     "negatives": {
+      "n": 0,
+      "false_same": 0,
+      "explicit_different": 0,
+      "abstain_uncertain": 0,
+      "false_same_rate": null,
+      "abstain_rate": null
+     },
+     "gold_uncertain": {
+      "n": 0,
+      "pred_same_event": 0,
+      "pred_different_event": 0,
+      "pred_uncertain": 0
+     },
+     "precision_of_same_on_determinate": 1.0
+    }
+   },
+   "conservation_checks": {
+    "pair_rows_total": true,
+    "compared_plus_not_compared": true,
+    "group_rows_total": true,
+    "positive_split_causes_conserve": true,
+    "category_counts_are_overlapping": "一对可属多个类别，类别计数不可相加"
+   }
+  },
+  "model_read_all": {
+   "name": "模型辅助开发核读标签·全部",
+   "n_labels": 196,
+   "gold_counts": {
+    "same_event": 78,
+    "different_event": 111,
+    "uncertain": 7
+   },
+   "pair_level_replay": {
+    "compared": 196,
+    "not_compared": {},
+    "positives": {
+     "n": 78,
+     "hit_same": 21,
+     "explicit_reject_different": 0,
+     "abstain_uncertain": 57,
+     "hit_rate": 0.2692,
+     "abstain_rate": 0.7308,
+     "explicit_reject_rate": 0.0
+    },
+    "negatives": {
+     "n": 111,
+     "false_same": 0,
+     "explicit_different": 0,
+     "abstain_uncertain": 111,
+     "false_same_rate": 0.0,
+     "abstain_rate": 1.0
+    },
+    "gold_uncertain": {
+     "n": 7,
+     "pred_same_event": 0,
+     "pred_different_event": 0,
+     "pred_uncertain": 7
+    },
+    "precision_of_same_on_determinate": 1.0
+   },
+   "pair_level_direct_call_for_not_compared": null,
+   "group_level": {
+    "positives": {
+     "same_group": 21,
+     "split": 57,
+     "not_fully_replayed": 0
+    },
+    "negatives": {
+     "together_contamination": 0,
+     "apart": 111,
+     "not_fully_replayed": 0
+    },
+    "gold_uncertain": {
+     "same_group": 0,
+     "split": 7,
+     "not_fully_replayed": 0
+    },
+    "positive_split_causes": {
+     "comparator_uncertain": 57
+    }
+   },
+   "by_category_pair_level": {
+    "不同主体同模板": {
+     "positives": {
+      "n": 0,
+      "hit_same": 0,
+      "explicit_reject_different": 0,
+      "abstain_uncertain": 0,
+      "hit_rate": null,
+      "abstain_rate": null,
+      "explicit_reject_rate": null
+     },
+     "negatives": {
+      "n": 33,
+      "false_same": 0,
+      "explicit_different": 0,
+      "abstain_uncertain": 33,
+      "false_same_rate": 0.0,
+      "abstain_rate": 1.0
+     },
+     "gold_uncertain": {
+      "n": 0,
+      "pred_same_event": 0,
+      "pred_different_event": 0,
+      "pred_uncertain": 0
+     },
+     "precision_of_same_on_determinate": null
+    },
+    "删节/信息增量": {
+     "positives": {
+      "n": 19,
+      "hit_same": 0,
+      "explicit_reject_different": 0,
+      "abstain_uncertain": 19,
+      "hit_rate": 0.0,
+      "abstain_rate": 1.0,
+      "explicit_reject_rate": 0.0
+     },
+     "negatives": {
+      "n": 0,
+      "false_same": 0,
+      "explicit_different": 0,
+      "abstain_uncertain": 0,
+      "false_same_rate": null,
+      "abstain_rate": null
+     },
+     "gold_uncertain": {
+      "n": 0,
+      "pred_same_event": 0,
+      "pred_different_event": 0,
+      "pred_uncertain": 0
+     },
+     "precision_of_same_on_determinate": null
+    },
+    "同主体不同快照/不同事实": {
+     "positives": {
+      "n": 0,
+      "hit_same": 0,
+      "explicit_reject_different": 0,
+      "abstain_uncertain": 0,
+      "hit_rate": null,
+      "abstain_rate": null,
+      "explicit_reject_rate": null
+     },
+     "negatives": {
+      "n": 19,
+      "false_same": 0,
+      "explicit_different": 0,
+      "abstain_uncertain": 19,
+      "false_same_rate": 0.0,
+      "abstain_rate": 1.0
+     },
+     "gold_uncertain": {
+      "n": 1,
+      "pred_same_event": 0,
+      "pred_different_event": 0,
+      "pred_uncertain": 1
+     },
+     "precision_of_same_on_determinate": null
+    },
+    "数值/时间/方向差异": {
+     "positives": {
+      "n": 12,
+      "hit_same": 0,
+      "explicit_reject_different": 0,
+      "abstain_uncertain": 12,
+      "hit_rate": 0.0,
+      "abstain_rate": 1.0,
+      "explicit_reject_rate": 0.0
+     },
+     "negatives": {
+      "n": 4,
+      "false_same": 0,
+      "explicit_different": 0,
+      "abstain_uncertain": 4,
+      "false_same_rate": 0.0,
+      "abstain_rate": 1.0
+     },
+     "gold_uncertain": {
+      "n": 0,
+      "pred_same_event": 0,
+      "pred_different_event": 0,
+      "pred_uncertain": 0
+     },
+     "precision_of_same_on_determinate": null
+    },
+    "易负例": {
+     "positives": {
+      "n": 0,
+      "hit_same": 0,
+      "explicit_reject_different": 0,
+      "abstain_uncertain": 0,
+      "hit_rate": null,
+      "abstain_rate": null,
+      "explicit_reject_rate": null
+     },
+     "negatives": {
+      "n": 53,
+      "false_same": 0,
+      "explicit_different": 0,
+      "abstain_uncertain": 53,
+      "false_same_rate": 0.0,
+      "abstain_rate": 1.0
+     },
+     "gold_uncertain": {
+      "n": 0,
+      "pred_same_event": 0,
+      "pred_different_event": 0,
+      "pred_uncertain": 0
+     },
+     "precision_of_same_on_determinate": null
+    },
+    "普通改写": {
+     "positives": {
+      "n": 48,
+      "hit_same": 10,
+      "explicit_reject_different": 0,
+      "abstain_uncertain": 38,
+      "hit_rate": 0.2083,
+      "abstain_rate": 0.7917,
+      "explicit_reject_rate": 0.0
+     },
+     "negatives": {
+      "n": 0,
+      "false_same": 0,
+      "explicit_different": 0,
+      "abstain_uncertain": 0,
+      "false_same_rate": null,
+      "abstain_rate": null
+     },
+     "gold_uncertain": {
+      "n": 0,
+      "pred_same_event": 0,
+      "pred_different_event": 0,
+      "pred_uncertain": 0
+     },
+     "precision_of_same_on_determinate": 1.0
+    },
+    "综述桥接风险": {
+     "positives": {
+      "n": 3,
+      "hit_same": 1,
+      "explicit_reject_different": 0,
+      "abstain_uncertain": 2,
+      "hit_rate": 0.3333,
+      "abstain_rate": 0.6667,
+      "explicit_reject_rate": 0.0
+     },
+     "negatives": {
+      "n": 11,
+      "false_same": 0,
+      "explicit_different": 0,
+      "abstain_uncertain": 11,
+      "false_same_rate": 0.0,
+      "abstain_rate": 1.0
+     },
+     "gold_uncertain": {
+      "n": 7,
+      "pred_same_event": 0,
+      "pred_different_event": 0,
+      "pred_uncertain": 7
+     },
+     "precision_of_same_on_determinate": 1.0
+    },
+    "转载/完全重复": {
+     "positives": {
+      "n": 15,
+      "hit_same": 11,
+      "explicit_reject_different": 0,
+      "abstain_uncertain": 4,
+      "hit_rate": 0.7333,
+      "abstain_rate": 0.2667,
+      "explicit_reject_rate": 0.0
+     },
+     "negatives": {
+      "n": 0,
+      "false_same": 0,
+      "explicit_different": 0,
+      "abstain_uncertain": 0,
+      "false_same_rate": null,
+      "abstain_rate": null
+     },
+     "gold_uncertain": {
+      "n": 0,
+      "pred_same_event": 0,
+      "pred_different_event": 0,
+      "pred_uncertain": 0
+     },
+     "precision_of_same_on_determinate": 1.0
+    }
+   },
+   "conservation_checks": {
+    "pair_rows_total": true,
+    "compared_plus_not_compared": true,
+    "group_rows_total": true,
+    "positive_split_causes_conserve": true,
+    "category_counts_are_overlapping": "一对可属多个类别，类别计数不可相加"
+   }
+  }
+ },
+ "topic_groups": [
+  {
+   "topic": "ETH旧钱包转账",
+   "articles": 3,
+   "predicted_groups": 3,
+   "group_membership": {
+    "01a18561-e088-7416-b9fa-3334752b252d": "G001114",
+    "01a18561-f9a6-749f-82b9-23983c0f5e7e": "G001116",
+    "01a18562-e150-7732-8245-609307912ccc": "G001119"
+   },
+   "user_reported_status_quo_events": 3
+  },
+  {
+   "topic": "Prabang被黑",
+   "articles": 3,
+   "predicted_groups": 1,
+   "group_membership": {
+    "01a1855b-8dda-735d-b50e-9f50c86b3ed6": "G001106",
+    "01a1855c-7c68-77e5-8bfa-d26f16a1c350": "G001106",
+    "01a18561-eefd-7765-a272-8fd471bbc6cf": "G001106"
+   },
+   "user_reported_status_quo_events": 2
+  },
+  {
+   "topic": "Allium安全事件与恢复",
+   "articles": 6,
+   "predicted_groups": 4,
+   "group_membership": {
+    "01a18551-62f3-746f-8a9c-4c7b028bedee": "G001087",
+    "01a18552-6054-7361-8357-4b17fe6de5dd": "G001089",
+    "01a18553-5143-76c3-9504-dff897781835": "G001092",
+    "01a18554-34bf-7716-823e-016a3e11e683": "G001087",
+    "01a18558-c58b-73d2-a35f-bebc8e04f5b8": "G001092",
+    "01a1855c-78a9-7499-b44a-a73bbb0c2a41": "G001107"
+   },
+   "user_reported_status_quo_events": 3
+  },
+  {
+   "topic": "韩股同一行情快报",
+   "articles": 2,
+   "predicted_groups": 1,
+   "group_membership": {
+    "01a1855e-4fb8-772f-b780-484bae0a281e": "G001111",
+    "01a18561-0270-774e-94ae-7411c9c8e972": "G001111"
+   },
+   "user_reported_status_quo_events": 2
+  }
+ ],
+ "contaminated_groups": []
+}

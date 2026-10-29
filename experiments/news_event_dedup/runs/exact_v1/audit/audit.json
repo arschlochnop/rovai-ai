@@ -1,0 +1,32 @@
+{
+ "checks": {
+  "input_sha256_matches_manifest": true,
+  "ids_unique": true,
+  "time_parse_failures": 0,
+  "sorted_strictly_increasing": true,
+  "main_count": 1492,
+  "replay_sequence_hash_matches_manifest": true,
+  "every_article_compared_exactly_previous_window": true,
+  "main_pairs": 74600,
+  "main_pairs_equals_74600": true,
+  "assignments_count_equals_replayed": true,
+  "grouping_rules_respected": true,
+  "story_id_not_in_comparator_fields": true,
+  "story_id_not_referenced_in_compare_group_replay_code": true,
+  "comparator_config_has_no_story_id": true,
+  "no_violations": true
+ },
+ "counts": {
+  "warmup_pairs": 1225,
+  "same_source_pairs_in_windows": 28222,
+  "identical_content_pairs_in_windows": 226,
+  "replayed_articles": 1542,
+  "actions_all_replayed": {
+   "new": 1120,
+   "join": 422
+  }
+ },
+ "violations": [],
+ "story_id_offending_files": [],
+ "violation_count": 0
+}

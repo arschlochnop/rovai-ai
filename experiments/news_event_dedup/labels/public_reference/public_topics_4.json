@@ -1,0 +1,232 @@
+[
+  {
+    "主题": "ETH旧钱包转账",
+    "判断": "人工核读为同一事件报道，仍分属不同事件",
+    "依据": "钱包0x6D30、沉寂三年、2119枚ETH、499万美元、Coinbase与7小时前一致。标题语序、三/3、地址截写、数字分隔及正文附加判断不同。",
+    "文章数": 3,
+    "事件数": 3,
+    "原始文章": [
+      {
+        "id": "01a18561-e088-7416-b9fa-3334752b252d",
+        "title": "一沉寂3年的以太坊OG钱包向Coinbase存入2119枚ETH",
+        "content": "PANews 10月29日消息，据Lookonchain监测，一个沉寂3年的以太坊OG钱包0x6D30在7小时前将全部2119枚ETH（499万美元）存入Coinbase。",
+        "collected": "2026-10-29T01:59:06.632075",
+        "updated": "2026-10-29T01:59:06.637525",
+        "published": "2026-10-29T01:58:33",
+        "story_id": "01a18561-e089-71bf-b252-666ac9cef989",
+        "osint_source_id": "01a17c1a-011e-77ae-b8c3-35b4a53cab4a",
+        "source_name": "PANews",
+        "link": "https://www.panewslab.com/zh/articles/01a18561-5e80-74a9-b284-48811b503d99"
+      },
+      {
+        "id": "01a18561-f9a6-749f-82b9-23983c0f5e7e",
+        "title": "沉寂3年后，某以太坊OG钱包向Coinbase存入全部2119枚ETH",
+        "content": "Odaily星球日报讯 据 Lookonchain 监测，Ethereum OG 钱包 (0x6D3...79E2) 在沉寂 3 年后，于 7 小时前向 Coinbase 存入全部 2119 枚 ETH，价值 499 万美元。",
+        "collected": "2026-10-29T01:59:13.062286",
+        "updated": "2026-10-29T02:00:13.348405",
+        "published": "2026-10-29T01:58:17",
+        "story_id": "01a18561-f9a7-7031-bbaf-acff78436f70",
+        "osint_source_id": "01a17cc5-aefd-7286-92f1-93c7a82139ea",
+        "source_name": "odaily采集",
+        "link": "https://www.odaily.news/zh-CN/newsflash/528529"
+      },
+      {
+        "id": "01a18562-e150-7732-8245-609307912ccc",
+        "title": "沉寂三年的以太坊早期钱包向 Coinbase 存入 2,119 枚 ETH",
+        "content": "据链上分析平台 Lookonchain（@lookonchain）监测，沉寂三年的以太坊早期钱包 0x6D30 于 7 小时前将全部 2,119 枚 ETH（约 499 万美元）存入 Coinbase，不排除有卖出意图。",
+        "collected": "2026-10-29T02:00:12.368593",
+        "updated": "2026-10-29T02:00:12.373752",
+        "published": "2026-10-29T01:59:25.458",
+        "story_id": "01a18562-e151-74bf-b6eb-71fae8bd54a0",
+        "osint_source_id": "01a17cc4-4471-72b4-b852-7507f1599391",
+        "source_name": "TechFlow采集",
+        "link": "https://www.techflowpost.com/newsletter/141806"
+      }
+    ],
+    "快照行号": [
+      2598,
+      2601,
+      2604
+    ],
+    "最早文章到最晚文章的组内篇数间隔": 6
+  },
+  {
+    "主题": "Prabang被黑",
+    "判断": "人工核读为同一事件报道，仍分属不同事件",
+    "依据": "同一交易所，10月24日发现异常、26日通报、约1亿韩元损失、停服及补偿承诺一致。标题调序，正文多了“据韩联社报道”和末尾“（韩联社）”；现有固定头清理不覆盖这些。",
+    "文章数": 3,
+    "事件数": 2,
+    "原始文章": [
+      {
+        "id": "01a1855b-8dda-735d-b50e-9f50c86b3ed6",
+        "title": "韩国加密交易所 Prabang 遭黑客攻击损失约 1 亿韩元，已暂停服务",
+        "content": "据韩联社报道，韩国加密资产交易所 Prabang 于 10 月 26 日通报发生外部未授权访问的入侵事件，并已向有关机构报案。该交易所于 10 月 24 日发现热钱包出现异常提现，启动应急响应后排查出安全漏洞，初步估计损失约 1 亿韩元（约合 7 万美元）。为保护客户资产，Prabang 已暂停服务，并承诺在核实损失后以公司资产全额补偿。",
+        "collected": "2026-10-29T01:52:12.250225",
+        "updated": "2026-10-29T01:52:12.255788",
+        "published": "2026-10-29T01:51:16.735",
+        "story_id": "01a1855b-8ddb-74c8-8a5a-579207fecac0",
+        "osint_source_id": "01a17cc4-4471-72b4-b852-7507f1599391",
+        "source_name": "TechFlow采集",
+        "link": "https://www.techflowpost.com/newsletter/141803"
+      },
+      {
+        "id": "01a1855c-7c68-77e5-8bfa-d26f16a1c350",
+        "title": "韩国加密交易所Prabang遭黑客攻击已暂停服务，损失约1亿韩元",
+        "content": "Odaily星球日报讯 韩国加密资产交易所 Prabang 于 10 月 26 日通报发生外部未授权访问的入侵事件，并已向有关机构报案。该交易所于 10 月 24 日发现热钱包出现异常提现，启动应急响应后排查出安全漏洞，初步估计损失约 1 亿韩元（约合 7 万美元）。为保护客户资产，Prabang 已暂停服务，并承诺在核实损失后以公司资产全额补偿。（韩联社）",
+        "collected": "2026-10-29T01:53:13.320557",
+        "updated": "2026-10-29T01:53:13.327112",
+        "published": "2026-10-29T01:52:50",
+        "story_id": "01a1855c-7c69-709f-9c13-116a0ef38fb9",
+        "osint_source_id": "01a17cc5-aefd-7286-92f1-93c7a82139ea",
+        "source_name": "odaily采集",
+        "link": "https://www.odaily.news/zh-CN/newsflash/528526"
+      },
+      {
+        "id": "01a18561-eefd-7765-a272-8fd471bbc6cf",
+        "title": "韩国加密交易所Prabang遭黑客攻击已暂停服务，损失约1亿韩元",
+        "content": "Odaily星球日报讯 韩国加密资产交易所 Prabang 于 10 月 26 日通报发生外部未授权访问的入侵事件，并已向有关机构报案。该交易所于 10 月 24 日发现热钱包出现异常提现，启动应急响应后排查出安全漏洞，初步估计损失约 1 亿韩元（约合 7 万美元）。为保护客户资产，Prabang 已暂停服务，并承诺在核实损失后以公司资产全额补偿。（韩联社）",
+        "collected": "2026-10-29T01:59:10.333776",
+        "updated": "2026-10-29T01:59:10.341103",
+        "published": "2026-10-29T01:52:00",
+        "story_id": "01a1855c-7c69-709f-9c13-116a0ef38fb9",
+        "osint_source_id": "01a17cc3-ef2f-755a-b553-4ab29858618c",
+        "source_name": "followin采集",
+        "link": "https://followin.io/zh-Hans/feed/28353762"
+      }
+    ],
+    "快照行号": [
+      2588,
+      2590,
+      2600
+    ],
+    "最早文章到最晚文章的组内篇数间隔": 12
+  },
+  {
+    "主题": "Allium安全事件与恢复",
+    "判断": "人工核读为同一事件报道，仍分属不同事件",
+    "依据": "同一公司的未经授权访问事件与核心平台恢复公告。标题调序、未/未经、正文缩写和删段不同；保留各篇补充细节，但应聚合到同一事件。",
+    "文章数": 6,
+    "事件数": 3,
+    "原始文章": [
+      {
+        "id": "01a18551-62f3-746f-8a9c-4c7b028bedee",
+        "title": "Allium披露近期遭未经授权访问，核心平台已恢复上线",
+        "content": "PANews 10月29日消息，Allium CEO兼联合创始人Ethan Chan发文称，Allium于10月25日发现一起安全事件，涉及未经授权访问其部分系统。Allium立即采取措施限制访问并保护系统，已直接通知受影响客户，并继续提供更新和支持。\nAllium已聘请独立网络安全公司协助响应和调查，重点加强认证和监控等安全控制。调查完成后，其计划分享调查结果摘要和应对措施。Allium称，其核心平台，包括Allium App、Explorer和Explorer APIs已恢复上线，部分功能在恢复期间仍暂时不可用，最新可用性和更新发布在状态页面。Ethan Chan表示，对事件造成的中断感到抱歉，并称维护客户信任需要清晰沟通和持续跟进。",
+        "collected": "2026-10-29T01:41:05.907742",
+        "updated": "2026-10-29T01:41:05.914443",
+        "published": "2026-10-29T01:40:26",
+        "story_id": "01a18551-62f5-7492-bc1f-e530ca71e852",
+        "osint_source_id": "01a17c1a-011e-77ae-b8c3-35b4a53cab4a",
+        "source_name": "PANews",
+        "link": "https://www.panewslab.com/zh/articles/01a18550-c776-7176-8276-bb24988f1bb0"
+      },
+      {
+        "id": "01a18552-6054-7361-8357-4b17fe6de5dd",
+        "title": "Allium披露近期遭未经授权访问，核心平台已恢复上线",
+        "content": "PANews 10月29日消息，Allium CEO兼联合创始人Ethan Chan发文称，Allium于10月25日发现一起安全事件，涉及未经授权访问其部分系统。Allium立即采取措施限制访问并保护系统，已直接通知受影响客户，并继续提供更新和支持。 Allium已聘请独立网络安全公司协助响应和调查，重点加强认证和监控等安全控制。调查完成后，其计划分享调查结果摘要和应对措施。Allium称，其核心平台，包括Allium App、Explorer和Explorer APIs已恢复上线，部分功能在恢复期间仍暂时不可用，最新可用性和更新发布在状态页面。",
+        "collected": "2026-10-29T01:42:10.772024",
+        "updated": "2026-10-29T01:42:10.780709",
+        "published": "2026-10-29T01:40:00",
+        "story_id": "01a18551-62f5-7492-bc1f-e530ca71e852",
+        "osint_source_id": "01a17cc3-ef2f-755a-b553-4ab29858618c",
+        "source_name": "followin采集",
+        "link": "https://followin.io/zh-Hans/feed/28353528"
+      },
+      {
+        "id": "01a18553-5143-76c3-9504-dff897781835",
+        "title": "核心平台恢复上线，Allium披露遭未经授权访问",
+        "content": "Odaily星球日报讯 Allium CEO 兼联合创始人 Ethan Chan 发文称，Allium 于 10 月 25 日发现一起涉及部分系统遭未经授权访问的安全事件。Allium 随即采取措施限制访问并保护系统，已直接通知受影响客户，并将继续提供更新和支持。Allium 已聘请独立网络安全公司协助响应和调查，并重点加强认证、监控等安全控制。调查完成后，Allium 计划分享调查结果摘要和应对措施。Allium 称，其核心平台 Allium App、Explorer 和 Explorer APIs 已恢复上线，部分功能在恢复期间仍暂时不可用。",
+        "collected": "2026-10-29T01:43:12.451763",
+        "updated": "2026-10-29T01:43:12.458338",
+        "published": "2026-10-29T01:42:36",
+        "story_id": "01a18553-5144-7424-b89e-a2eb65ff271a",
+        "osint_source_id": "01a17cc5-aefd-7286-92f1-93c7a82139ea",
+        "source_name": "odaily采集",
+        "link": "https://www.odaily.news/zh-CN/newsflash/528522"
+      },
+      {
+        "id": "01a18554-34bf-7716-823e-016a3e11e683",
+        "title": "Allium：披露近期遭未经授权访问，核心平台已恢复上线",
+        "content": "火星财经消息，Allium CEO 兼联合创始人 Ethan Chan 发文称，Allium 于 10 月 25 日发现一起安全事件，涉及未经授权访问其部分系统。Allium 立即采取措施限制访问并保护系统，已直接通知受影响客户，并继续提供更新和支持。Allium 已聘请独立网络安全公司协助响应和调查，重点加强认证和监控等安全控制。调查完成后，其计划分享调查结果摘要和应对措施。Allium 称，其核心平台，包括 Allium App、Explorer 和 Explorer APIs 已恢复上线，部分功能在恢复期间仍暂时不可用，最新可用性和更新发布在状态页面。Ethan Chan 表示，对事件造成的中断感到抱歉，并称维护客户信任需要清晰沟通和持续跟进。",
+        "collected": "2026-10-29T01:44:10.687362",
+        "updated": "2026-10-29T01:44:10.695821",
+        "published": "2026-10-29T01:41:00",
+        "story_id": "01a18551-62f5-7492-bc1f-e530ca71e852",
+        "osint_source_id": "01a17cc3-ef2f-755a-b553-4ab29858618c",
+        "source_name": "followin采集",
+        "link": "https://followin.io/zh-Hans/feed/28353535"
+      },
+      {
+        "id": "01a18558-c58b-73d2-a35f-bebc8e04f5b8",
+        "title": "核心平台恢复上线，Allium披露遭未经授权访问",
+        "content": "Odaily星球日报讯 Allium CEO 兼联合创始人 Ethan Chan 发文称，Allium 于 10 月 25 日发现一起涉及部分系统遭未经授权访问的安全事件。Allium 随即采取措施限制访问并保护系统，已直接通知受影响客户，并将继续提供更新和支持。Allium 已聘请独立网络安全公司协助响应和调查，并重点加强认证、监控等安全控制。调查完成后，Allium 计划分享调查结果摘要和应对措施。Allium 称，其核心平台 Allium App、Explorer 和 Explorer APIs 已恢复上线，部分功能在恢复期间仍暂时不可用。",
+        "collected": "2026-10-29T01:49:09.899944",
+        "updated": "2026-10-29T01:49:09.909071",
+        "published": "2026-10-29T01:42:00",
+        "story_id": "01a18553-5144-7424-b89e-a2eb65ff271a",
+        "osint_source_id": "01a17cc3-ef2f-755a-b553-4ab29858618c",
+        "source_name": "followin采集",
+        "link": "https://followin.io/zh-Hans/feed/28353561"
+      },
+      {
+        "id": "01a1855c-78a9-7499-b44a-a73bbb0c2a41",
+        "title": "Allium 披露遭未授权访问，核心平台已恢复上线",
+        "content": "目前 Allium App、Explorer 及 Explorer API 等核心平台已恢复上线，部分功能仍在恢复中，最新情况可查看官方状态页面。Allium 表示，调查完成后将公布调查结果及应对措施摘要。",
+        "collected": "2026-10-29T01:53:12.361718",
+        "updated": "2026-10-29T01:53:12.36782",
+        "published": "2026-10-29T01:52:35.963",
+        "story_id": "01a1855c-78aa-717d-b8c0-cba2f9165ede",
+        "osint_source_id": "01a17cc4-4471-72b4-b852-7507f1599391",
+        "source_name": "TechFlow采集",
+        "link": "https://www.techflowpost.com/newsletter/141804"
+      }
+    ],
+    "快照行号": [
+      2564,
+      2567,
+      2571,
+      2575,
+      2580,
+      2589
+    ],
+    "最早文章到最晚文章的组内篇数间隔": 25
+  },
+  {
+    "主题": "韩股同一行情快报",
+    "判断": "人工核读为同一事件报道，仍分属不同事件",
+    "依据": "KOSPI同报5831.67点、日内跌3.00%、三星近6%、SK海力士0.4%。标题韩股/KOSPI差异，正文额外保留日期与“据行情数据显示”。不是更早跌1.8%的另一条行情。",
+    "文章数": 2,
+    "事件数": 2,
+    "原始文章": [
+      {
+        "id": "01a1855e-4fb8-772f-b780-484bae0a281e",
+        "title": "韩股日内跌 3%，三星电子跌近 6%",
+        "content": "韩国 KOSPI 指数日内大跌 3.00%，现报 5831.67 点。三星电子跌近 6%，SK 海力士跌 0.4%。",
+        "collected": "2026-10-29T01:55:12.952173",
+        "updated": "2026-10-29T01:55:12.957799",
+        "published": "2026-10-29T01:54:47.373",
+        "story_id": "01a1855e-4fb9-765e-b48b-17160e5f0865",
+        "osint_source_id": "01a17cc4-4471-72b4-b852-7507f1599391",
+        "source_name": "TechFlow采集",
+        "link": "https://www.techflowpost.com/newsletter/141805"
+      },
+      {
+        "id": "01a18561-0270-774e-94ae-7411c9c8e972",
+        "title": "韩国KOSPI指数转跌3%，三星跌近6%",
+        "content": "火星财经消息，10 月 29 日，据 行情数据显示，韩国 KOSPI 指数日内大跌 3.00%，现报 5831.67 点。三星电子跌近 6%，SK 海力士跌 0.4%。",
+        "collected": "2026-10-29T01:58:09.776325",
+        "updated": "2026-10-29T01:58:09.781699",
+        "published": "2026-10-29T01:55:00",
+        "story_id": "01a18561-0271-7389-b55f-5df1bc8fa2ef",
+        "osint_source_id": "01a17cc3-ef2f-755a-b553-4ab29858618c",
+        "source_name": "followin采集",
+        "link": "https://followin.io/zh-Hans/feed/28353735"
+      }
+    ],
+    "快照行号": [
+      2594,
+      2596
+    ],
+    "最早文章到最晚文章的组内篇数间隔": 2
+  }
+]

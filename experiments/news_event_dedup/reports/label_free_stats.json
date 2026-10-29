@@ -1,0 +1,839 @@
+{
+ "identical_core_pairs": {
+  "within_window": 474,
+  "within_window_final_split": 15,
+  "beyond_window_never_compared": 24,
+  "beyond_examples": [
+   {
+    "distance": 1074,
+    "title": "香港投委会提示二级市场买卖代币化基金风险",
+    "collected": [
+     "2026-10-28T01:27:21.341629",
+     "2026-10-28T16:16:10.675794"
+    ]
+   },
+   {
+    "distance": 1075,
+    "title": "香港投委会提示二级市场买卖代币化基金风险",
+    "collected": [
+     "2026-10-28T01:27:21.341629",
+     "2026-10-28T16:18:15.560331"
+    ]
+   },
+   {
+    "distance": 427,
+    "title": "香港金融科技项目执行统筹小组第六次会议：金融科技周2026将于11月2至6日举行",
+    "collected": [
+     "2026-10-28T11:30:20.95864",
+     "2026-10-28T16:25:09.304352"
+    ]
+   },
+   {
+    "distance": 430,
+    "title": "香港金融科技项目执行统筹小组第六次会议：金融科技周2026将于11月2至6日举行",
+    "collected": [
+     "2026-10-28T11:30:20.95864",
+     "2026-10-28T16:26:15.453259"
+    ]
+   },
+   {
+    "distance": 425,
+    "title": "香港金融科技项目执行统筹小组第六次会议：金融科技周2026将于11月2至6日举行",
+    "collected": [
+     "2026-10-28T11:32:12.25768",
+     "2026-10-28T16:25:09.304352"
+    ]
+   },
+   {
+    "distance": 428,
+    "title": "香港金融科技项目执行统筹小组第六次会议：金融科技周2026将于11月2至6日举行",
+    "collected": [
+     "2026-10-28T11:32:12.25768",
+     "2026-10-28T16:26:15.453259"
+    ]
+   },
+   {
+    "distance": 389,
+    "title": "分析：比特币冲击10万美元受阻，投资者逢高抛售形成上方压力",
+    "collected": [
+     "2026-10-28T11:51:15.242676",
+     "2026-10-28T16:25:09.357064"
+    ]
+   },
+   {
+    "distance": 393,
+    "title": "分析：比特币冲击10万美元受阻，投资者逢高抛售形成上方压力",
+    "collected": [
+     "2026-10-28T11:51:15.242676",
+     "2026-10-28T16:29:14.25342"
+    ]
+   },
+   {
+    "distance": 387,
+    "title": "分析：比特币冲击10万美元受阻，投资者逢高抛售形成上方压力",
+    "collected": [
+     "2026-10-28T11:54:11.375504",
+     "2026-10-28T16:25:09.357064"
+    ]
+   },
+   {
+    "distance": 391,
+    "title": "分析：比特币冲击10万美元受阻，投资者逢高抛售形成上方压力",
+    "collected": [
+     "2026-10-28T11:54:11.375504",
+     "2026-10-28T16:29:14.25342"
+    ]
+   }
+  ]
+ },
+ "roundup": {
+  "roundup_articles_replayed": 17,
+  "roundup_in_main": 15,
+  "groups_mixing_roundup_with_non_roundup": 1,
+  "details": [
+   {
+    "group_id": "G000063",
+    "roundup": "昨夜今晨重要资讯（10月27日-10月28日）",
+    "non_roundup_members": [
+     "昨夜今晨重要资讯（10月27日-10月28日）"
+    ]
+   }
+  ]
+ },
+ "entity_subject_rejections_by_similarity": {
+  "exclusive_entity_mismatch|0.3-0.5": 46,
+  "exclusive_entity_mismatch|<0.3": 36073,
+  "exclusive_entity_mismatch|>=0.5": 2,
+  "subject_mismatch|0.3-0.5": 5,
+  "subject_mismatch|<0.3": 27114
+ },
+ "entity_subject_rejections_cos_ge_0_3": [
+  {
+   "cos": 0.5871,
+   "code": "exclusive_entity_mismatch",
+   "left": "SOL跌破100 USDT，24H跌幅1.71%",
+   "right": "BTC跌破80000 USDT，24H跌幅1.17%",
+   "exclusive": [
+    [
+     "sol"
+    ],
+    [
+     "btc"
+    ]
+   ]
+  },
+  {
+   "cos": 0.5871,
+   "code": "exclusive_entity_mismatch",
+   "left": "SOL跌破100 USDT，24H跌幅1.71%",
+   "right": "BTC跌破80000 USDT，24H跌幅1.17%",
+   "exclusive": [
+    [
+     "sol"
+    ],
+    [
+     "btc"
+    ]
+   ]
+  },
+  {
+   "cos": 0.4778,
+   "code": "exclusive_entity_mismatch",
+   "left": "以太坊现货 ETF 昨日总净流出 6021.78 万美元，仅贝莱德 ETHA 净流出",
+   "right": "比特币现货 ETF 昨日总净流入 1.76 亿美元，贝莱德 IBIT 净流入 1.51 亿美元居首",
+   "exclusive": [
+    [
+     "etha"
+    ],
+    [
+     "ibit"
+    ]
+   ]
+  },
+  {
+   "cos": 0.4778,
+   "code": "exclusive_entity_mismatch",
+   "left": "以太坊现货ETF昨日总净流出6021.78万美元，仅贝莱德ETHA净流出",
+   "right": "比特币现货 ETF 昨日总净流入 1.76 亿美元，贝莱德 IBIT 净流入 1.51 亿美元居首",
+   "exclusive": [
+    [
+     "etha"
+    ],
+    [
+     "ibit"
+    ]
+   ]
+  },
+  {
+   "cos": 0.4778,
+   "code": "exclusive_entity_mismatch",
+   "left": "比特币现货 ETF 昨日总净流入 1.76 亿美元，贝莱德 IBIT 净流入 1.51 亿美元居首",
+   "right": "以太坊现货 ETF 昨日总净流出 6021.78 万美元，仅贝莱德 ETHA 净流出",
+   "exclusive": [
+    [
+     "ibit"
+    ],
+    [
+     "etha"
+    ]
+   ]
+  },
+  {
+   "cos": 0.4769,
+   "code": "exclusive_entity_mismatch",
+   "left": "SOL 跌破 100 美元，24 小时跌幅 1.56%",
+   "right": "BTC 跌破 80,000 美元，24 小时跌幅 1.17%",
+   "exclusive": [
+    [
+     "sol"
+    ],
+    [
+     "btc"
+    ]
+   ]
+  },
+  {
+   "cos": 0.4568,
+   "code": "exclusive_entity_mismatch",
+   "left": "以太坊现货 ETF 昨日总净流出 6021.78 万美元，仅贝莱德 ETHA 净流出",
+   "right": "比特币现货 ETF 昨日总净流入 1.76 亿美元，贝莱德 IBIT 净流入 1.51 亿美元居首",
+   "exclusive": [
+    [
+     "etha"
+    ],
+    [
+     "ibit"
+    ]
+   ]
+  },
+  {
+   "cos": 0.4293,
+   "code": "exclusive_entity_mismatch",
+   "left": "美国 ZEC 现货 ETF 单日总净流入 207.35 万美元",
+   "right": "数据：美国 SOL 现货 ETF 单日总净流出 565.76 万美元",
+   "exclusive": [
+    [
+     "zec"
+    ],
+    [
+     "sol"
+    ]
+   ]
+  },
+  {
+   "cos": 0.4293,
+   "code": "exclusive_entity_mismatch",
+   "left": "美国ZEC现货ETF单日总净流入207.35万美元",
+   "right": "数据：美国 SOL 现货 ETF 单日总净流出 565.76 万美元",
+   "exclusive": [
+    [
+     "zec"
+    ],
+    [
+     "sol"
+    ]
+   ]
+  },
+  {
+   "cos": 0.4293,
+   "code": "exclusive_entity_mismatch",
+   "left": "美国 ZEC 现货 ETF 单日总净流入 207.35 万美元",
+   "right": "数据：美国 SOL 现货 ETF 单日总净流出 565.76 万美元",
+   "exclusive": [
+    [
+     "zec"
+    ],
+    [
+     "sol"
+    ]
+   ]
+  },
+  {
+   "cos": 0.4293,
+   "code": "exclusive_entity_mismatch",
+   "left": "美国ZEC现货ETF单日总净流入207.35万美元",
+   "right": "数据：美国 SOL 现货 ETF 单日总净流出 565.76 万美元",
+   "exclusive": [
+    [
+     "zec"
+    ],
+    [
+     "sol"
+    ]
+   ]
+  },
+  {
+   "cos": 0.4293,
+   "code": "exclusive_entity_mismatch",
+   "left": "数据：美国 SOL 现货 ETF 单日总净流出 565.76 万美元",
+   "right": "数据：美国 ZEC 现货 ETF 单日总净流入 207.35 万美元",
+   "exclusive": [
+    [
+     "sol"
+    ],
+    [
+     "zec"
+    ]
+   ]
+  },
+  {
+   "cos": 0.4278,
+   "code": "exclusive_entity_mismatch",
+   "left": "美国 ZEC 现货 ETF 单日总净流入 207.35 万美元",
+   "right": "美国 SOL 现货 ETF 单日总净流出 565.76 万美元",
+   "exclusive": [
+    [
+     "zec"
+    ],
+    [
+     "sol"
+    ]
+   ]
+  },
+  {
+   "cos": 0.4278,
+   "code": "exclusive_entity_mismatch",
+   "left": "美国 ZEC 现货 ETF 单日总净流入 207.35 万美元",
+   "right": "美国SOL现货ETF单日总净流出565.76万美元",
+   "exclusive": [
+    [
+     "zec"
+    ],
+    [
+     "sol"
+    ]
+   ]
+  },
+  {
+   "cos": 0.4278,
+   "code": "exclusive_entity_mismatch",
+   "left": "美国 SOL 现货 ETF 单日总净流出 565.76 万美元",
+   "right": "美国ZEC现货ETF单日总净流入207.35万美元",
+   "exclusive": [
+    [
+     "sol"
+    ],
+    [
+     "zec"
+    ]
+   ]
+  },
+  {
+   "cos": 0.4278,
+   "code": "exclusive_entity_mismatch",
+   "left": "美国SOL现货ETF单日总净流出565.76万美元",
+   "right": "美国ZEC现货ETF单日总净流入207.35万美元",
+   "exclusive": [
+    [
+     "sol"
+    ],
+    [
+     "zec"
+    ]
+   ]
+  },
+  {
+   "cos": 0.4278,
+   "code": "exclusive_entity_mismatch",
+   "left": "美国 SOL 现货 ETF 单日总净流出 565.76 万美元",
+   "right": "美国 ZEC 现货 ETF 单日总净流入 207.35 万美元",
+   "exclusive": [
+    [
+     "sol"
+    ],
+    [
+     "zec"
+    ]
+   ]
+  },
+  {
+   "cos": 0.4278,
+   "code": "exclusive_entity_mismatch",
+   "left": "美国SOL现货ETF单日总净流出565.76万美元",
+   "right": "美国 ZEC 现货 ETF 单日总净流入 207.35 万美元",
+   "exclusive": [
+    [
+     "sol"
+    ],
+    [
+     "zec"
+    ]
+   ]
+  },
+  {
+   "cos": 0.4278,
+   "code": "exclusive_entity_mismatch",
+   "left": "美国 ZEC 现货 ETF 单日总净流入 207.35 万美元",
+   "right": "美国SOL现货ETF单日总净流出565.76万美元",
+   "exclusive": [
+    [
+     "zec"
+    ],
+    [
+     "sol"
+    ]
+   ]
+  },
+  {
+   "cos": 0.4278,
+   "code": "exclusive_entity_mismatch",
+   "left": "美国ZEC现货ETF单日总净流入207.35万美元",
+   "right": "美国SOL现货ETF单日总净流出565.76万美元",
+   "exclusive": [
+    [
+     "zec"
+    ],
+    [
+     "sol"
+    ]
+   ]
+  },
+  {
+   "cos": 0.4278,
+   "code": "exclusive_entity_mismatch",
+   "left": "美国 ZEC 现货 ETF 单日总净流入 207.35 万美元",
+   "right": "美国SOL现货ETF单日总净流出565.76万美元",
+   "exclusive": [
+    [
+     "zec"
+    ],
+    [
+     "sol"
+    ]
+   ]
+  },
+  {
+   "cos": 0.4278,
+   "code": "exclusive_entity_mismatch",
+   "left": "美国 SOL 现货 ETF 单日总净流出 565.76 万美元",
+   "right": "美国ZEC现货ETF单日总净流入207.35万美元",
+   "exclusive": [
+    [
+     "sol"
+    ],
+    [
+     "zec"
+    ]
+   ]
+  },
+  {
+   "cos": 0.4278,
+   "code": "exclusive_entity_mismatch",
+   "left": "美国SOL现货ETF单日总净流出565.76万美元",
+   "right": "美国ZEC现货ETF单日总净流入207.35万美元",
+   "exclusive": [
+    [
+     "sol"
+    ],
+    [
+     "zec"
+    ]
+   ]
+  },
+  {
+   "cos": 0.4278,
+   "code": "exclusive_entity_mismatch",
+   "left": "美国SOL现货ETF单日总净流出565.76万美元",
+   "right": "美国ZEC现货ETF单日总净流入207.35万美元",
+   "exclusive": [
+    [
+     "sol"
+    ],
+    [
+     "zec"
+    ]
+   ]
+  },
+  {
+   "cos": 0.4278,
+   "code": "exclusive_entity_mismatch",
+   "left": "美国 SOL 现货 ETF 单日总净流出 565.76 万美元",
+   "right": "数据：美国 ZEC 现货 ETF 单日总净流入 207.35 万美元",
+   "exclusive": [
+    [
+     "sol"
+    ],
+    [
+     "zec"
+    ]
+   ]
+  },
+  {
+   "cos": 0.4278,
+   "code": "exclusive_entity_mismatch",
+   "left": "美国SOL现货ETF单日总净流出565.76万美元",
+   "right": "数据：美国 ZEC 现货 ETF 单日总净流入 207.35 万美元",
+   "exclusive": [
+    [
+     "sol"
+    ],
+    [
+     "zec"
+    ]
+   ]
+  },
+  {
+   "cos": 0.4278,
+   "code": "exclusive_entity_mismatch",
+   "left": "美国SOL现货ETF单日总净流出565.76万美元",
+   "right": "数据：美国 ZEC 现货 ETF 单日总净流入 207.35 万美元",
+   "exclusive": [
+    [
+     "sol"
+    ],
+    [
+     "zec"
+    ]
+   ]
+  },
+  {
+   "cos": 0.4217,
+   "code": "exclusive_entity_mismatch",
+   "left": "美股开盘，SK 海力士 (SKHY.O) 涨 8.6%",
+   "right": "美股平稳开盘静待FOMC，存储、光通信股多数上涨",
+   "exclusive": [
+    [
+     "skhy.o"
+    ],
+    [
+     "fomc"
+    ]
+   ]
+  },
+  {
+   "cos": 0.4176,
+   "code": "exclusive_entity_mismatch",
+   "left": "比特币现货ETF昨日总净流入1.76亿美元，贝莱德IBIT净流入1.51亿美元居首",
+   "right": "以太坊现货 ETF 昨日总净流出 6021.78 万美元，仅贝莱德 ETHA 净流出",
+   "exclusive": [
+    [
+     "ibit"
+    ],
+    [
+     "etha"
+    ]
+   ]
+  },
+  {
+   "cos": 0.4176,
+   "code": "exclusive_entity_mismatch",
+   "left": "比特币现货 ETF 昨日总净流入 1.76 亿美元，贝莱德 IBIT 净流入 1.51 亿美元居首",
+   "right": "以太坊现货 ETF 昨日总净流出 6021.78 万美元，仅贝莱德 ETHA 净流出",
+   "exclusive": [
+    [
+     "ibit"
+    ],
+    [
+     "etha"
+    ]
+   ]
+  },
+  {
+   "cos": 0.4176,
+   "code": "exclusive_entity_mismatch",
+   "left": "以太坊现货 ETF 昨日总净流出 6021.78 万美元，仅贝莱德 ETHA 净流出",
+   "right": "数据：比特币现货 ETF 昨日总净流入 1.76 亿美元，贝莱德 IBIT 净流入 1.51 亿美元",
+   "exclusive": [
+    [
+     "etha"
+    ],
+    [
+     "ibit"
+    ]
+   ]
+  },
+  {
+   "cos": 0.4089,
+   "code": "exclusive_entity_mismatch",
+   "left": "SKHYNIX 24小时上涨10.1%",
+   "right": "SKHY 24小时上涨12.0%",
+   "exclusive": [
+    [
+     "skhynix"
+    ],
+    [
+     "skhy"
+    ]
+   ]
+  },
+  {
+   "cos": 0.4089,
+   "code": "exclusive_entity_mismatch",
+   "left": "SKHYNIX 24小时上涨10.1%",
+   "right": "SKHY 24小时上涨12.0%",
+   "exclusive": [
+    [
+     "skhynix"
+    ],
+    [
+     "skhy"
+    ]
+   ]
+  },
+  {
+   "cos": 0.4089,
+   "code": "exclusive_entity_mismatch",
+   "left": "SKHYNIX 24小时上涨10.1%",
+   "right": "SKHY 24小时上涨12.0%",
+   "exclusive": [
+    [
+     "skhynix"
+    ],
+    [
+     "skhy"
+    ]
+   ]
+  },
+  {
+   "cos": 0.4089,
+   "code": "exclusive_entity_mismatch",
+   "left": "SKHYNIX 24小时上涨10.1%",
+   "right": "SKHY 24小时上涨12.0%",
+   "exclusive": [
+    [
+     "skhynix"
+    ],
+    [
+     "skhy"
+    ]
+   ]
+  },
+  {
+   "cos": 0.3777,
+   "code": "exclusive_entity_mismatch",
+   "left": "Vertiv（VRT）股票盘中涨幅达15.80%，现报241.66美元",
+   "right": "SKHY股票盘中涨幅达10.15%，现报159.88美元",
+   "exclusive": [
+    [
+     "vertiv",
+     "vrt"
+    ],
+    [
+     "skhy"
+    ]
+   ]
+  },
+  {
+   "cos": 0.3777,
+   "code": "exclusive_entity_mismatch",
+   "left": "Vertiv（VRT）股票盘中涨幅达15.80%，现报241.66美元",
+   "right": "SKHY股票盘中涨幅达10.15%，现报159.88美元",
+   "exclusive": [
+    [
+     "vertiv",
+     "vrt"
+    ],
+    [
+     "skhy"
+    ]
+   ]
+  },
+  {
+   "cos": 0.3641,
+   "code": "exclusive_entity_mismatch",
+   "left": "CVNA 1小时上涨11.0%",
+   "right": "LITE 24小时上涨15.5%",
+   "exclusive": [
+    [
+     "cvna"
+    ],
+    [
+     "lite"
+    ]
+   ]
+  },
+  {
+   "cos": 0.3641,
+   "code": "exclusive_entity_mismatch",
+   "left": "CVNA 1小时上涨11.0%",
+   "right": "LITE 24小时上涨15.5%",
+   "exclusive": [
+    [
+     "cvna"
+    ],
+    [
+     "lite"
+    ]
+   ]
+  },
+  {
+   "cos": 0.3641,
+   "code": "exclusive_entity_mismatch",
+   "left": "CVNA 1小时上涨11.0%",
+   "right": "LITE 24小时上涨15.5%",
+   "exclusive": [
+    [
+     "cvna"
+    ],
+    [
+     "lite"
+    ]
+   ]
+  },
+  {
+   "cos": 0.3641,
+   "code": "exclusive_entity_mismatch",
+   "left": "CVNA 1小时上涨11.0%",
+   "right": "LITE 24小时上涨15.5%",
+   "exclusive": [
+    [
+     "cvna"
+    ],
+    [
+     "lite"
+    ]
+   ]
+  },
+  {
+   "cos": 0.3498,
+   "code": "exclusive_entity_mismatch",
+   "left": "OKX 与 ICE 拟代币化股票再遭 7 家公司反对，反对总数升至 33 家",
+   "right": "摩根大通等 7 家公司反对 OKXICE 代币化其股票，反对总数升至 33 家",
+   "exclusive": [
+    [
+     "ice",
+     "okx"
+    ],
+    [
+     "okxice"
+    ]
+   ]
+  },
+  {
+   "cos": 0.3498,
+   "code": "exclusive_entity_mismatch",
+   "left": "OKX 与 ICE 拟代币化股票再遭 7 家公司反对，反对总数升至 33 家",
+   "right": "摩根大通等 7 家公司反对 OKXICE 代币化其股票，反对总数升至 33 家",
+   "exclusive": [
+    [
+     "ice",
+     "okx"
+    ],
+    [
+     "okxice"
+    ]
+   ]
+  },
+  {
+   "cos": 0.3396,
+   "code": "subject_mismatch",
+   "left": "摩尔线程：前三季度营收32.89亿元，同比增319.15%",
+   "right": "宇树科技：2026年第三季度净利润1.13亿元 同比下降17.37%",
+   "exclusive": [
+    [],
+    []
+   ]
+  },
+  {
+   "cos": 0.3396,
+   "code": "subject_mismatch",
+   "left": "摩尔线程：前三季度营收32.89亿元，同比增319.15%",
+   "right": "宇树科技：2026年第三季度净利润1.13亿元 同比下降17.37%",
+   "exclusive": [
+    [],
+    []
+   ]
+  },
+  {
+   "cos": 0.3307,
+   "code": "subject_mismatch",
+   "left": "宇树科技：2026 年第三季度净利润 1.13 亿元，同比下降 17.37%",
+   "right": "摩尔线程：前三季营收 32.89 亿元，同比增 319.15%",
+   "exclusive": [
+    [],
+    []
+   ]
+  },
+  {
+   "cos": 0.3289,
+   "code": "subject_mismatch",
+   "left": "宇树科技第三季度净利润 1.13 亿元，同比下降 17.37%",
+   "right": "摩尔线程：前三季营收 32.89 亿元，同比增 319.15%",
+   "exclusive": [
+    [],
+    []
+   ]
+  },
+  {
+   "cos": 0.3289,
+   "code": "subject_mismatch",
+   "left": "宇树科技第三季度净利润 1.13 亿元，同比下降 17.37%",
+   "right": "摩尔线程：前三季营收 32.89 亿元，同比增 319.15%",
+   "exclusive": [
+    [],
+    []
+   ]
+  },
+  {
+   "cos": 0.31,
+   "code": "exclusive_entity_mismatch",
+   "left": "HUAWEI Pura 90 Plus正式发布",
+   "right": "华为董事、终端BG CEO何刚揭秘Mate 90系列十大黑科技",
+   "exclusive": [
+    [
+     "pura"
+    ],
+    [
+     "bg",
+     "mate"
+    ]
+   ]
+  },
+  {
+   "cos": 0.3026,
+   "code": "exclusive_entity_mismatch",
+   "left": "LITE 24小时上涨15.5%",
+   "right": "SKHYNIX 24小时上涨10.4%",
+   "exclusive": [
+    [
+     "lite"
+    ],
+    [
+     "skhynix"
+    ]
+   ]
+  },
+  {
+   "cos": 0.3026,
+   "code": "exclusive_entity_mismatch",
+   "left": "LITE 24小时上涨15.5%",
+   "right": "SKHYNIX 24小时上涨10.4%",
+   "exclusive": [
+    [
+     "lite"
+    ],
+    [
+     "skhynix"
+    ]
+   ]
+  },
+  {
+   "cos": 0.3026,
+   "code": "exclusive_entity_mismatch",
+   "left": "LITE 24小时上涨15.5%",
+   "right": "SKHYNIX 24小时上涨10.4%",
+   "exclusive": [
+    [
+     "lite"
+    ],
+    [
+     "skhynix"
+    ]
+   ]
+  },
+  {
+   "cos": 0.3026,
+   "code": "exclusive_entity_mismatch",
+   "left": "LITE 24小时上涨15.5%",
+   "right": "SKHYNIX 24小时上涨10.4%",
+   "exclusive": [
+    [
+     "lite"
+    ],
+    [
+     "skhynix"
+    ]
+   ]
+  }
+ ]
+}

@@ -1,3 +1,4 @@
 __pycache__/
 *.pyc
+# 原始逐对证据体积大（>70MB），只提交确定性压缩版 pairs.jsonl.gz / pairs_labels.tsv.gz
 runs/*/pairs.jsonl

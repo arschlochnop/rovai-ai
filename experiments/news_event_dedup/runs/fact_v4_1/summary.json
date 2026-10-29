@@ -1,0 +1,108 @@
+{
+ "articles": {
+  "warmup": 50,
+  "main": 1492,
+  "pre": 0
+ },
+ "pairs": {
+  "warmup": 1225,
+  "main": 74600
+ },
+ "main_label_counts": {
+  "different_event": 71425,
+  "same_event": 1266,
+  "uncertain": 1909
+ },
+ "main_reason_codes": {
+  "exclusive_entity_mismatch": 36121,
+  "subject_mismatch": 27119,
+  "disjoint": 6434,
+  "roundup_disjoint": 1347,
+  "statement_divergence": 897,
+  "insufficient": 802,
+  "exact_core": 472,
+  "multi_anchor": 415,
+  "hard_conflict": 404,
+  "near_duplicate": 245,
+  "roundup_partial": 179,
+  "text_and_anchor": 78,
+  "title_near_duplicate": 43,
+  "roundup_duplicate": 13,
+  "conflict_with_strong_support": 11,
+  "compound_partial": 11,
+  "stance_mismatch": 6,
+  "exclusive_entity_with_support": 3
+ },
+ "main_same_pair_grouping_outcome": {
+  "n/a": 73334,
+  "split_other_members_insufficient": 44,
+  "joined_same_group": 1113,
+  "split_ambiguous_multiple_groups": 109
+ },
+ "main_same_source_pairs": {
+  "异源|different_event": 44628,
+  "异源|same_event": 1055,
+  "异源|uncertain": 1155,
+  "同源|different_event": 26797,
+  "同源|same_event": 211,
+  "同源|uncertain": 754
+ },
+ "main_actions": {
+  "new": 796,
+  "join": 669,
+  "ambiguous_new": 27
+ },
+ "warmup_actions": {
+  "join": 22,
+  "new": 28,
+  "ambiguous_new": 0
+ },
+ "groups_touching_main": 824,
+ "multi_member_groups_touching_main": 393,
+ "articles_in_multi_member_groups": 1062,
+ "group_size_histogram": {
+  "1": 431,
+  "2": 237,
+  "3": 77,
+  "4": 46,
+  "5": 26,
+  "6": 6,
+  "7": 1
+ },
+ "conservation_checks": {
+  "main_pairs_equals_expected_74600": true,
+  "main_pairs_equals_sum_min50": true,
+  "label_counts_conserve": true,
+  "same_outcomes_conserve": true,
+  "actions_conserve": true,
+  "distance_max": 50
+ },
+ "notes": [
+  "joined/multi-member 数量只描述聚合程度，不是正确率",
+  "预热段从空窗口开始，预热文章的成本与标签不计入主评测分母"
+ ],
+ "status_quo_story_comparison": {
+  "note": "story_id 是现状归组字段：仅在预测完成后统计一致程度；“不同 story”不等于不同事件，“相同 story”也不等于正确，不能当质量真值",
+  "main_pairs_label_vs_story": {
+   "different_event|异story": 71425,
+   "same_event|同story": 483,
+   "same_event|异story": 783,
+   "uncertain|同story": 3,
+   "uncertain|异story": 1906
+  },
+  "main_pairs_final_group_vs_story": {
+   "预测不同组|同story": 20,
+   "预测不同组|异story": 73467,
+   "预测同组|同story": 466,
+   "预测同组|异story": 647
+  }
+ },
+ "comparator": {
+  "name": "fact_enhanced",
+  "version": "fact-4.1.0"
+ },
+ "semantic": {
+  "ran": false,
+  "reason": "运行环境无本地 embedding 模型；huggingface.co 被环境网络策略拒绝（403）"
+ }
+}

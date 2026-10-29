@@ -1,0 +1,20 @@
+{
+ "seed": 20261030,
+ "pair_items": {
+  "A_开发核读标签复核": 196,
+  "B_未标注候选·B3_算法判different但文本较相似": 30,
+  "B_未标注候选·B2_算法判uncertain": 40,
+  "B_未标注候选·B1_算法判same": 80
+ },
+ "candidate_pool_sizes": {
+  "B1_算法判same": 1126,
+  "B2_算法判uncertain": 1862,
+  "B3_算法判different但文本较相似": 71
+ },
+ "files": [
+  "pair_review_blind.csv（交给复核人，不含任何模型/算法标签）",
+  "pair_review_key.csv（复核完成后再打开，计算一致性）",
+  "group_review.csv（最终版多成员组纯度复核）"
+ ],
+ "note": "B 部分是从算法输出分层随机抽取的候选，在人工给出标签前不是正负例；A 部分的模型核读标签不是独立金标。"
+}

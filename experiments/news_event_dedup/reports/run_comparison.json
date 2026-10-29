@@ -1,0 +1,2071 @@
+[
+ {
+  "run": "exact_v1",
+  "comparator_version": "exact-1.0.0",
+  "code_check": {
+   "commit": "a904537",
+   "files_match": 17,
+   "files_mismatch": [],
+   "files_missing_in_commit": [],
+   "core_code_matches_commit": true
+  },
+  "main_label_counts": {
+   "uncertain": 74125,
+   "same_event": 475
+  },
+  "main_same_pair_grouping_outcome": {
+   "n/a": 74125,
+   "joined_same_group": 475
+  },
+  "main_actions": {
+   "join": 412,
+   "new": 1080
+  },
+  "multi_member_groups_touching_main": 361,
+  "articles_in_multi_member_groups": 773,
+  "group_size_histogram": {
+   "1": 720,
+   "2": 319,
+   "3": 36,
+   "4": 3,
+   "5": 3
+  },
+  "conservation_checks": {
+   "main_pairs_equals_expected_74600": true,
+   "main_pairs_equals_sum_min50": true,
+   "label_counts_conserve": true,
+   "same_outcomes_conserve": true,
+   "actions_conserve": true,
+   "distance_max": 50
+  },
+  "timings_seconds": {
+   "snapshot_load_and_parse": 0.0581,
+   "background_build": 0.0,
+   "article_prepare_by_phase": {
+    "warmup": 0.0,
+    "main": 0.0004,
+    "pre": 0.0
+   },
+   "pair_compare_by_phase": {
+    "warmup": 0.1675,
+    "main": 9.8713,
+    "pre": 0.0
+   },
+   "grouping_by_phase": {
+    "warmup": 0.0011,
+    "main": 0.0545,
+    "pre": 0.0
+   },
+   "output_write": 1.0686,
+   "summary": 1.2297,
+   "note": "主评测耗时分母只用 main 段；预热段（warmup）成本单列；无模型初始化/向量编码成本（语义未运行）"
+  },
+  "audit_no_violations": true,
+  "audit_checks": {
+   "input_sha256_matches_manifest": true,
+   "ids_unique": true,
+   "time_parse_failures": 0,
+   "sorted_strictly_increasing": true,
+   "main_count": 1492,
+   "replay_sequence_hash_matches_manifest": true,
+   "every_article_compared_exactly_previous_window": true,
+   "main_pairs": 74600,
+   "main_pairs_equals_74600": true,
+   "assignments_count_equals_replayed": true,
+   "grouping_rules_respected": true,
+   "story_id_not_in_comparator_fields": true,
+   "story_id_not_referenced_in_compare_group_replay_code": true,
+   "comparator_config_has_no_story_id": true,
+   "no_violations": true
+  },
+  "eval": {
+   "public_115": {
+    "pair": {
+     "pos_n": 82,
+     "pos_hit": 14,
+     "pos_reject": 0,
+     "pos_abstain": 68,
+     "neg_n": 16,
+     "neg_false_same": 0,
+     "neg_different": 0,
+     "neg_abstain": 16,
+     "gold_unc": {
+      "n": 1,
+      "pred_same_event": 0,
+      "pred_different_event": 0,
+      "pred_uncertain": 1
+     }
+    },
+    "group": {
+     "positives": {
+      "same_group": 14,
+      "split": 68,
+      "not_fully_replayed": 7
+     },
+     "negatives": {
+      "together_contamination": 0,
+      "apart": 16,
+      "not_fully_replayed": 8
+     },
+     "gold_uncertain": {
+      "same_group": 0,
+      "split": 1,
+      "not_fully_replayed": 1
+     },
+     "positive_split_causes": {
+      "comparator_uncertain": 68
+     }
+    },
+    "direct": {
+     "pos_n": 7,
+     "pos_hit": 2,
+     "pos_reject": 0,
+     "pos_abstain": 5,
+     "neg_n": 8,
+     "neg_false_same": 0,
+     "neg_different": 0,
+     "neg_abstain": 8,
+     "gold_unc": {
+      "n": 1,
+      "pred_same_event": 0,
+      "pred_different_event": 0,
+      "pred_uncertain": 1
+     }
+    }
+   },
+   "model_read_dev": {
+    "pair": {
+     "pos_n": 45,
+     "pos_hit": 10,
+     "pos_reject": 0,
+     "pos_abstain": 35,
+     "neg_n": 65,
+     "neg_false_same": 0,
+     "neg_different": 0,
+     "neg_abstain": 65,
+     "gold_unc": {
+      "n": 7,
+      "pred_same_event": 0,
+      "pred_different_event": 0,
+      "pred_uncertain": 7
+     }
+    },
+    "group": {
+     "positives": {
+      "same_group": 10,
+      "split": 35,
+      "not_fully_replayed": 0
+     },
+     "negatives": {
+      "together_contamination": 0,
+      "apart": 65,
+      "not_fully_replayed": 0
+     },
+     "gold_uncertain": {
+      "same_group": 0,
+      "split": 7,
+      "not_fully_replayed": 0
+     },
+     "positive_split_causes": {
+      "comparator_uncertain": 35
+     }
+    },
+    "direct": null
+   },
+   "model_read_selfheld": {
+    "pair": {
+     "pos_n": 33,
+     "pos_hit": 11,
+     "pos_reject": 0,
+     "pos_abstain": 22,
+     "neg_n": 46,
+     "neg_false_same": 0,
+     "neg_different": 0,
+     "neg_abstain": 46,
+     "gold_unc": {
+      "n": 0,
+      "pred_same_event": 0,
+      "pred_different_event": 0,
+      "pred_uncertain": 0
+     }
+    },
+    "group": {
+     "positives": {
+      "same_group": 11,
+      "split": 22,
+      "not_fully_replayed": 0
+     },
+     "negatives": {
+      "together_contamination": 0,
+      "apart": 46,
+      "not_fully_replayed": 0
+     },
+     "gold_uncertain": {
+      "same_group": 0,
+      "split": 0,
+      "not_fully_replayed": 0
+     },
+     "positive_split_causes": {
+      "comparator_uncertain": 22
+     }
+    },
+    "direct": null
+   },
+   "model_read_all": {
+    "pair": {
+     "pos_n": 78,
+     "pos_hit": 21,
+     "pos_reject": 0,
+     "pos_abstain": 57,
+     "neg_n": 111,
+     "neg_false_same": 0,
+     "neg_different": 0,
+     "neg_abstain": 111,
+     "gold_unc": {
+      "n": 7,
+      "pred_same_event": 0,
+      "pred_different_event": 0,
+      "pred_uncertain": 7
+     }
+    },
+    "group": {
+     "positives": {
+      "same_group": 21,
+      "split": 57,
+      "not_fully_replayed": 0
+     },
+     "negatives": {
+      "together_contamination": 0,
+      "apart": 111,
+      "not_fully_replayed": 0
+     },
+     "gold_uncertain": {
+      "same_group": 0,
+      "split": 7,
+      "not_fully_replayed": 0
+     },
+     "positive_split_causes": {
+      "comparator_uncertain": 57
+     }
+    },
+    "direct": null
+   }
+  },
+  "contaminated_groups": [],
+  "topic_groups": [
+   {
+    "topic": "ETH旧钱包转账",
+    "articles": 3,
+    "predicted_groups": 3,
+    "user_reported_status_quo_events": 3
+   },
+   {
+    "topic": "Prabang被黑",
+    "articles": 3,
+    "predicted_groups": 1,
+    "user_reported_status_quo_events": 2
+   },
+   {
+    "topic": "Allium安全事件与恢复",
+    "articles": 6,
+    "predicted_groups": 4,
+    "user_reported_status_quo_events": 3
+   },
+   {
+    "topic": "韩股同一行情快报",
+    "articles": 2,
+    "predicted_groups": 1,
+    "user_reported_status_quo_events": 2
+   }
+  ]
+ },
+ {
+  "run": "fact_v1",
+  "comparator_version": "fact-1.0.0",
+  "code_check": {
+   "commit": "a904537",
+   "files_match": 17,
+   "files_mismatch": [],
+   "files_missing_in_commit": [],
+   "core_code_matches_commit": true
+  },
+  "main_label_counts": {
+   "different_event": 71766,
+   "same_event": 1250,
+   "uncertain": 1584
+  },
+  "main_same_pair_grouping_outcome": {
+   "n/a": 73350,
+   "split_other_members_insufficient": 44,
+   "joined_same_group": 1099,
+   "split_ambiguous_multiple_groups": 107
+  },
+  "main_actions": {
+   "new": 797,
+   "join": 668,
+   "ambiguous_new": 27
+  },
+  "multi_member_groups_touching_main": 398,
+  "articles_in_multi_member_groups": 1066,
+  "group_size_histogram": {
+   "1": 427,
+   "2": 243,
+   "3": 79,
+   "4": 45,
+   "5": 24,
+   "6": 6,
+   "7": 1
+  },
+  "conservation_checks": {
+   "main_pairs_equals_expected_74600": true,
+   "main_pairs_equals_sum_min50": true,
+   "label_counts_conserve": true,
+   "same_outcomes_conserve": true,
+   "actions_conserve": true,
+   "distance_max": 50
+  },
+  "timings_seconds": {
+   "snapshot_load_and_parse": 0.0424,
+   "background_build": 0.9075,
+   "article_prepare_by_phase": {
+    "warmup": 0.0611,
+    "main": 1.9512,
+    "pre": 0.0
+   },
+   "pair_compare_by_phase": {
+    "warmup": 0.4609,
+    "main": 20.0206,
+    "pre": 0.0
+   },
+   "grouping_by_phase": {
+    "warmup": 0.0014,
+    "main": 0.105,
+    "pre": 0.0
+   },
+   "output_write": 2.293,
+   "summary": 1.816,
+   "note": "主评测耗时分母只用 main 段；预热段（warmup）成本单列；无模型初始化/向量编码成本（语义未运行）"
+  },
+  "audit_no_violations": true,
+  "audit_checks": {
+   "input_sha256_matches_manifest": true,
+   "ids_unique": true,
+   "time_parse_failures": 0,
+   "sorted_strictly_increasing": true,
+   "main_count": 1492,
+   "replay_sequence_hash_matches_manifest": true,
+   "every_article_compared_exactly_previous_window": true,
+   "main_pairs": 74600,
+   "main_pairs_equals_74600": true,
+   "assignments_count_equals_replayed": true,
+   "grouping_rules_respected": true,
+   "story_id_not_in_comparator_fields": true,
+   "story_id_not_referenced_in_compare_group_replay_code": true,
+   "comparator_config_has_no_story_id": true,
+   "no_violations": true
+  },
+  "eval": {
+   "public_115": {
+    "pair": {
+     "pos_n": 82,
+     "pos_hit": 70,
+     "pos_reject": 0,
+     "pos_abstain": 12,
+     "neg_n": 16,
+     "neg_false_same": 0,
+     "neg_different": 16,
+     "neg_abstain": 0,
+     "gold_unc": {
+      "n": 1,
+      "pred_same_event": 0,
+      "pred_different_event": 0,
+      "pred_uncertain": 1
+     }
+    },
+    "group": {
+     "positives": {
+      "same_group": 62,
+      "split": 20,
+      "not_fully_replayed": 7
+     },
+     "negatives": {
+      "together_contamination": 0,
+      "apart": 16,
+      "not_fully_replayed": 8
+     },
+     "gold_uncertain": {
+      "same_group": 0,
+      "split": 1,
+      "not_fully_replayed": 1
+     },
+     "positive_split_causes": {
+      "comparator_uncertain": 12,
+      "split_ambiguous_multiple_groups": 8
+     }
+    },
+    "direct": {
+     "pos_n": 7,
+     "pos_hit": 4,
+     "pos_reject": 0,
+     "pos_abstain": 3,
+     "neg_n": 8,
+     "neg_false_same": 0,
+     "neg_different": 7,
+     "neg_abstain": 1,
+     "gold_unc": {
+      "n": 1,
+      "pred_same_event": 0,
+      "pred_different_event": 1,
+      "pred_uncertain": 0
+     }
+    }
+   },
+   "model_read_dev": {
+    "pair": {
+     "pos_n": 45,
+     "pos_hit": 39,
+     "pos_reject": 1,
+     "pos_abstain": 5,
+     "neg_n": 65,
+     "neg_false_same": 4,
+     "neg_different": 50,
+     "neg_abstain": 11,
+     "gold_unc": {
+      "n": 7,
+      "pred_same_event": 0,
+      "pred_different_event": 3,
+      "pred_uncertain": 4
+     }
+    },
+    "group": {
+     "positives": {
+      "same_group": 33,
+      "split": 12,
+      "not_fully_replayed": 0
+     },
+     "negatives": {
+      "together_contamination": 4,
+      "apart": 61,
+      "not_fully_replayed": 0
+     },
+     "gold_uncertain": {
+      "same_group": 0,
+      "split": 7,
+      "not_fully_replayed": 0
+     },
+     "positive_split_causes": {
+      "split_ambiguous_multiple_groups": 6,
+      "comparator_uncertain": 5,
+      "comparator_different_event": 1
+     }
+    },
+    "direct": null
+   },
+   "model_read_selfheld": {
+    "pair": {
+     "pos_n": 33,
+     "pos_hit": 28,
+     "pos_reject": 0,
+     "pos_abstain": 5,
+     "neg_n": 46,
+     "neg_false_same": 0,
+     "neg_different": 44,
+     "neg_abstain": 2,
+     "gold_unc": {
+      "n": 0,
+      "pred_same_event": 0,
+      "pred_different_event": 0,
+      "pred_uncertain": 0
+     }
+    },
+    "group": {
+     "positives": {
+      "same_group": 23,
+      "split": 10,
+      "not_fully_replayed": 0
+     },
+     "negatives": {
+      "together_contamination": 0,
+      "apart": 46,
+      "not_fully_replayed": 0
+     },
+     "gold_uncertain": {
+      "same_group": 0,
+      "split": 0,
+      "not_fully_replayed": 0
+     },
+     "positive_split_causes": {
+      "split_other_members_insufficient": 4,
+      "comparator_uncertain": 5,
+      "split_ambiguous_multiple_groups": 1
+     }
+    },
+    "direct": null
+   },
+   "model_read_all": {
+    "pair": {
+     "pos_n": 78,
+     "pos_hit": 67,
+     "pos_reject": 1,
+     "pos_abstain": 10,
+     "neg_n": 111,
+     "neg_false_same": 4,
+     "neg_different": 94,
+     "neg_abstain": 13,
+     "gold_unc": {
+      "n": 7,
+      "pred_same_event": 0,
+      "pred_different_event": 3,
+      "pred_uncertain": 4
+     }
+    },
+    "group": {
+     "positives": {
+      "same_group": 56,
+      "split": 22,
+      "not_fully_replayed": 0
+     },
+     "negatives": {
+      "together_contamination": 4,
+      "apart": 107,
+      "not_fully_replayed": 0
+     },
+     "gold_uncertain": {
+      "same_group": 0,
+      "split": 7,
+      "not_fully_replayed": 0
+     },
+     "positive_split_causes": {
+      "split_other_members_insufficient": 4,
+      "split_ambiguous_multiple_groups": 7,
+      "comparator_uncertain": 10,
+      "comparator_different_event": 1
+     }
+    },
+    "direct": null
+   }
+  },
+  "contaminated_groups": [
+   {
+    "group_id": "G000644",
+    "labels": [
+     "dev-v1-105",
+     "dev-v1-111",
+     "dev-v1-113"
+    ],
+    "titles": [
+     "Robinhood Assets Listing: $TORCH added to Robinhood assets",
+     "Robinhood Assets Listing: $AI added to Robinhood assets",
+     "Robinhood Assets Listing: $PRIORS added to Robinhood assets"
+    ]
+   },
+   {
+    "group_id": "G000695",
+    "labels": [
+     "dev-v1-048"
+    ],
+    "titles": [
+     "皮查伊：新 AI 模型 Carbon 是谷歌最强模型",
+     "皮查伊：新 AI 模型 Carbon 正与美政府测试",
+     "皮查伊：新 AI 模型 Carbon 首推网络安全合作伙伴"
+    ]
+   }
+  ],
+  "topic_groups": [
+   {
+    "topic": "ETH旧钱包转账",
+    "articles": 3,
+    "predicted_groups": 1,
+    "user_reported_status_quo_events": 3
+   },
+   {
+    "topic": "Prabang被黑",
+    "articles": 3,
+    "predicted_groups": 1,
+    "user_reported_status_quo_events": 2
+   },
+   {
+    "topic": "Allium安全事件与恢复",
+    "articles": 6,
+    "predicted_groups": 1,
+    "user_reported_status_quo_events": 3
+   },
+   {
+    "topic": "韩股同一行情快报",
+    "articles": 2,
+    "predicted_groups": 1,
+    "user_reported_status_quo_events": 2
+   }
+  ]
+ },
+ {
+  "run": "fact_v2",
+  "comparator_version": "fact-2.0.0",
+  "code_check": {
+   "commit": "17d5110d22c3ab7c9877cc791fd96d4353ed192c",
+   "files_match": 18,
+   "files_mismatch": [],
+   "files_missing_in_commit": [],
+   "core_code_matches_commit": true
+  },
+  "main_label_counts": {
+   "different_event": 72319,
+   "same_event": 1261,
+   "uncertain": 1020
+  },
+  "main_same_pair_grouping_outcome": {
+   "n/a": 73339,
+   "split_other_members_insufficient": 46,
+   "joined_same_group": 1094,
+   "split_ambiguous_multiple_groups": 121
+  },
+  "main_actions": {
+   "new": 798,
+   "join": 665,
+   "ambiguous_new": 29
+  },
+  "multi_member_groups_touching_main": 395,
+  "articles_in_multi_member_groups": 1060,
+  "group_size_histogram": {
+   "1": 433,
+   "2": 240,
+   "3": 78,
+   "4": 46,
+   "5": 25,
+   "6": 5,
+   "7": 1
+  },
+  "conservation_checks": {
+   "main_pairs_equals_expected_74600": true,
+   "main_pairs_equals_sum_min50": true,
+   "label_counts_conserve": true,
+   "same_outcomes_conserve": true,
+   "actions_conserve": true,
+   "distance_max": 50
+  },
+  "timings_seconds": {
+   "snapshot_load_and_parse": 0.0832,
+   "background_build": 0.9438,
+   "article_prepare_by_phase": {
+    "warmup": 0.0635,
+    "main": 2.0262,
+    "pre": 0.0
+   },
+   "pair_compare_by_phase": {
+    "warmup": 0.4382,
+    "main": 20.5153,
+    "pre": 0.0
+   },
+   "grouping_by_phase": {
+    "warmup": 0.0016,
+    "main": 0.0876,
+    "pre": 0.0
+   },
+   "output_write": 2.5564,
+   "summary": 2.0737,
+   "note": "主评测耗时分母只用 main 段；预热段（warmup）成本单列；无模型初始化/向量编码成本（语义未运行）"
+  },
+  "audit_no_violations": true,
+  "audit_checks": {
+   "input_sha256_matches_manifest": true,
+   "ids_unique": true,
+   "time_parse_failures": 0,
+   "sorted_strictly_increasing": true,
+   "main_count": 1492,
+   "replay_sequence_hash_matches_manifest": true,
+   "every_article_compared_exactly_previous_window": true,
+   "main_pairs": 74600,
+   "main_pairs_equals_74600": true,
+   "assignments_count_equals_replayed": true,
+   "grouping_rules_respected": true,
+   "story_id_not_in_comparator_fields": true,
+   "story_id_not_referenced_in_compare_group_replay_code": true,
+   "comparator_config_has_no_story_id": true,
+   "no_violations": true
+  },
+  "eval": {
+   "public_115": {
+    "pair": {
+     "pos_n": 82,
+     "pos_hit": 74,
+     "pos_reject": 0,
+     "pos_abstain": 8,
+     "neg_n": 16,
+     "neg_false_same": 0,
+     "neg_different": 16,
+     "neg_abstain": 0,
+     "gold_unc": {
+      "n": 1,
+      "pred_same_event": 0,
+      "pred_different_event": 0,
+      "pred_uncertain": 1
+     }
+    },
+    "group": {
+     "positives": {
+      "same_group": 66,
+      "split": 16,
+      "not_fully_replayed": 7
+     },
+     "negatives": {
+      "together_contamination": 0,
+      "apart": 16,
+      "not_fully_replayed": 8
+     },
+     "gold_uncertain": {
+      "same_group": 0,
+      "split": 1,
+      "not_fully_replayed": 1
+     },
+     "positive_split_causes": {
+      "comparator_uncertain": 8,
+      "split_ambiguous_multiple_groups": 8
+     }
+    },
+    "direct": {
+     "pos_n": 7,
+     "pos_hit": 4,
+     "pos_reject": 0,
+     "pos_abstain": 3,
+     "neg_n": 8,
+     "neg_false_same": 0,
+     "neg_different": 8,
+     "neg_abstain": 0,
+     "gold_unc": {
+      "n": 1,
+      "pred_same_event": 0,
+      "pred_different_event": 1,
+      "pred_uncertain": 0
+     }
+    }
+   },
+   "model_read_dev": {
+    "pair": {
+     "pos_n": 45,
+     "pos_hit": 39,
+     "pos_reject": 1,
+     "pos_abstain": 5,
+     "neg_n": 65,
+     "neg_false_same": 0,
+     "neg_different": 59,
+     "neg_abstain": 6,
+     "gold_unc": {
+      "n": 7,
+      "pred_same_event": 0,
+      "pred_different_event": 4,
+      "pred_uncertain": 3
+     }
+    },
+    "group": {
+     "positives": {
+      "same_group": 33,
+      "split": 12,
+      "not_fully_replayed": 0
+     },
+     "negatives": {
+      "together_contamination": 0,
+      "apart": 65,
+      "not_fully_replayed": 0
+     },
+     "gold_uncertain": {
+      "same_group": 0,
+      "split": 7,
+      "not_fully_replayed": 0
+     },
+     "positive_split_causes": {
+      "split_ambiguous_multiple_groups": 6,
+      "comparator_uncertain": 5,
+      "comparator_different_event": 1
+     }
+    },
+    "direct": null
+   },
+   "model_read_selfheld": {
+    "pair": {
+     "pos_n": 33,
+     "pos_hit": 28,
+     "pos_reject": 0,
+     "pos_abstain": 5,
+     "neg_n": 46,
+     "neg_false_same": 0,
+     "neg_different": 45,
+     "neg_abstain": 1,
+     "gold_unc": {
+      "n": 0,
+      "pred_same_event": 0,
+      "pred_different_event": 0,
+      "pred_uncertain": 0
+     }
+    },
+    "group": {
+     "positives": {
+      "same_group": 23,
+      "split": 10,
+      "not_fully_replayed": 0
+     },
+     "negatives": {
+      "together_contamination": 0,
+      "apart": 46,
+      "not_fully_replayed": 0
+     },
+     "gold_uncertain": {
+      "same_group": 0,
+      "split": 0,
+      "not_fully_replayed": 0
+     },
+     "positive_split_causes": {
+      "split_other_members_insufficient": 4,
+      "comparator_uncertain": 5,
+      "split_ambiguous_multiple_groups": 1
+     }
+    },
+    "direct": null
+   },
+   "model_read_all": {
+    "pair": {
+     "pos_n": 78,
+     "pos_hit": 67,
+     "pos_reject": 1,
+     "pos_abstain": 10,
+     "neg_n": 111,
+     "neg_false_same": 0,
+     "neg_different": 104,
+     "neg_abstain": 7,
+     "gold_unc": {
+      "n": 7,
+      "pred_same_event": 0,
+      "pred_different_event": 4,
+      "pred_uncertain": 3
+     }
+    },
+    "group": {
+     "positives": {
+      "same_group": 56,
+      "split": 22,
+      "not_fully_replayed": 0
+     },
+     "negatives": {
+      "together_contamination": 0,
+      "apart": 111,
+      "not_fully_replayed": 0
+     },
+     "gold_uncertain": {
+      "same_group": 0,
+      "split": 7,
+      "not_fully_replayed": 0
+     },
+     "positive_split_causes": {
+      "split_other_members_insufficient": 4,
+      "split_ambiguous_multiple_groups": 7,
+      "comparator_uncertain": 10,
+      "comparator_different_event": 1
+     }
+    },
+    "direct": null
+   }
+  },
+  "contaminated_groups": [],
+  "topic_groups": [
+   {
+    "topic": "ETH旧钱包转账",
+    "articles": 3,
+    "predicted_groups": 1,
+    "user_reported_status_quo_events": 3
+   },
+   {
+    "topic": "Prabang被黑",
+    "articles": 3,
+    "predicted_groups": 1,
+    "user_reported_status_quo_events": 2
+   },
+   {
+    "topic": "Allium安全事件与恢复",
+    "articles": 6,
+    "predicted_groups": 1,
+    "user_reported_status_quo_events": 3
+   },
+   {
+    "topic": "韩股同一行情快报",
+    "articles": 2,
+    "predicted_groups": 1,
+    "user_reported_status_quo_events": 2
+   }
+  ]
+ },
+ {
+  "run": "fact_v3",
+  "comparator_version": "fact-3.0.0",
+  "code_check": {
+   "commit": "75ef95fee64bf4cee16116ac954b13bf76b82e38",
+   "files_match": 18,
+   "files_mismatch": [],
+   "files_missing_in_commit": [],
+   "core_code_matches_commit": true
+  },
+  "main_label_counts": {
+   "different_event": 72319,
+   "same_event": 1266,
+   "uncertain": 1015
+  },
+  "main_same_pair_grouping_outcome": {
+   "n/a": 73334,
+   "split_other_members_insufficient": 44,
+   "joined_same_group": 1113,
+   "split_ambiguous_multiple_groups": 109
+  },
+  "main_actions": {
+   "new": 796,
+   "join": 669,
+   "ambiguous_new": 27
+  },
+  "multi_member_groups_touching_main": 393,
+  "articles_in_multi_member_groups": 1062,
+  "group_size_histogram": {
+   "1": 431,
+   "2": 237,
+   "3": 77,
+   "4": 46,
+   "5": 26,
+   "6": 6,
+   "7": 1
+  },
+  "conservation_checks": {
+   "main_pairs_equals_expected_74600": true,
+   "main_pairs_equals_sum_min50": true,
+   "label_counts_conserve": true,
+   "same_outcomes_conserve": true,
+   "actions_conserve": true,
+   "distance_max": 50
+  },
+  "timings_seconds": {
+   "snapshot_load_and_parse": 0.0424,
+   "background_build": 0.8809,
+   "article_prepare_by_phase": {
+    "warmup": 0.0611,
+    "main": 1.8861,
+    "pre": 0.0
+   },
+   "pair_compare_by_phase": {
+    "warmup": 0.4403,
+    "main": 20.0941,
+    "pre": 0.0
+   },
+   "grouping_by_phase": {
+    "warmup": 0.0014,
+    "main": 0.0854,
+    "pre": 0.0
+   },
+   "output_write": 2.2944,
+   "summary": 2.0818,
+   "note": "主评测耗时分母只用 main 段；预热段（warmup）成本单列；无模型初始化/向量编码成本（语义未运行）"
+  },
+  "audit_no_violations": true,
+  "audit_checks": {
+   "input_sha256_matches_manifest": true,
+   "ids_unique": true,
+   "time_parse_failures": 0,
+   "sorted_strictly_increasing": true,
+   "main_count": 1492,
+   "replay_sequence_hash_matches_manifest": true,
+   "every_article_compared_exactly_previous_window": true,
+   "main_pairs": 74600,
+   "main_pairs_equals_74600": true,
+   "assignments_count_equals_replayed": true,
+   "grouping_rules_respected": true,
+   "story_id_not_in_comparator_fields": true,
+   "story_id_not_referenced_in_compare_group_replay_code": true,
+   "comparator_config_has_no_story_id": true,
+   "no_violations": true
+  },
+  "eval": {
+   "public_115": {
+    "pair": {
+     "pos_n": 82,
+     "pos_hit": 74,
+     "pos_reject": 0,
+     "pos_abstain": 8,
+     "neg_n": 16,
+     "neg_false_same": 0,
+     "neg_different": 16,
+     "neg_abstain": 0,
+     "gold_unc": {
+      "n": 1,
+      "pred_same_event": 0,
+      "pred_different_event": 0,
+      "pred_uncertain": 1
+     }
+    },
+    "group": {
+     "positives": {
+      "same_group": 66,
+      "split": 16,
+      "not_fully_replayed": 7
+     },
+     "negatives": {
+      "together_contamination": 0,
+      "apart": 16,
+      "not_fully_replayed": 8
+     },
+     "gold_uncertain": {
+      "same_group": 0,
+      "split": 1,
+      "not_fully_replayed": 1
+     },
+     "positive_split_causes": {
+      "comparator_uncertain": 8,
+      "split_ambiguous_multiple_groups": 8
+     }
+    },
+    "direct": {
+     "pos_n": 7,
+     "pos_hit": 4,
+     "pos_reject": 0,
+     "pos_abstain": 3,
+     "neg_n": 8,
+     "neg_false_same": 0,
+     "neg_different": 8,
+     "neg_abstain": 0,
+     "gold_unc": {
+      "n": 1,
+      "pred_same_event": 0,
+      "pred_different_event": 1,
+      "pred_uncertain": 0
+     }
+    }
+   },
+   "model_read_dev": {
+    "pair": {
+     "pos_n": 45,
+     "pos_hit": 39,
+     "pos_reject": 1,
+     "pos_abstain": 5,
+     "neg_n": 65,
+     "neg_false_same": 0,
+     "neg_different": 59,
+     "neg_abstain": 6,
+     "gold_unc": {
+      "n": 7,
+      "pred_same_event": 0,
+      "pred_different_event": 4,
+      "pred_uncertain": 3
+     }
+    },
+    "group": {
+     "positives": {
+      "same_group": 33,
+      "split": 12,
+      "not_fully_replayed": 0
+     },
+     "negatives": {
+      "together_contamination": 0,
+      "apart": 65,
+      "not_fully_replayed": 0
+     },
+     "gold_uncertain": {
+      "same_group": 0,
+      "split": 7,
+      "not_fully_replayed": 0
+     },
+     "positive_split_causes": {
+      "split_ambiguous_multiple_groups": 6,
+      "comparator_uncertain": 5,
+      "comparator_different_event": 1
+     }
+    },
+    "direct": null
+   },
+   "model_read_selfheld": {
+    "pair": {
+     "pos_n": 33,
+     "pos_hit": 28,
+     "pos_reject": 0,
+     "pos_abstain": 5,
+     "neg_n": 46,
+     "neg_false_same": 0,
+     "neg_different": 45,
+     "neg_abstain": 1,
+     "gold_unc": {
+      "n": 0,
+      "pred_same_event": 0,
+      "pred_different_event": 0,
+      "pred_uncertain": 0
+     }
+    },
+    "group": {
+     "positives": {
+      "same_group": 23,
+      "split": 10,
+      "not_fully_replayed": 0
+     },
+     "negatives": {
+      "together_contamination": 0,
+      "apart": 46,
+      "not_fully_replayed": 0
+     },
+     "gold_uncertain": {
+      "same_group": 0,
+      "split": 0,
+      "not_fully_replayed": 0
+     },
+     "positive_split_causes": {
+      "split_other_members_insufficient": 4,
+      "comparator_uncertain": 5,
+      "split_ambiguous_multiple_groups": 1
+     }
+    },
+    "direct": null
+   },
+   "model_read_all": {
+    "pair": {
+     "pos_n": 78,
+     "pos_hit": 67,
+     "pos_reject": 1,
+     "pos_abstain": 10,
+     "neg_n": 111,
+     "neg_false_same": 0,
+     "neg_different": 104,
+     "neg_abstain": 7,
+     "gold_unc": {
+      "n": 7,
+      "pred_same_event": 0,
+      "pred_different_event": 4,
+      "pred_uncertain": 3
+     }
+    },
+    "group": {
+     "positives": {
+      "same_group": 56,
+      "split": 22,
+      "not_fully_replayed": 0
+     },
+     "negatives": {
+      "together_contamination": 0,
+      "apart": 111,
+      "not_fully_replayed": 0
+     },
+     "gold_uncertain": {
+      "same_group": 0,
+      "split": 7,
+      "not_fully_replayed": 0
+     },
+     "positive_split_causes": {
+      "split_other_members_insufficient": 4,
+      "split_ambiguous_multiple_groups": 7,
+      "comparator_uncertain": 10,
+      "comparator_different_event": 1
+     }
+    },
+    "direct": null
+   }
+  },
+  "contaminated_groups": [],
+  "topic_groups": [
+   {
+    "topic": "ETH旧钱包转账",
+    "articles": 3,
+    "predicted_groups": 1,
+    "user_reported_status_quo_events": 3
+   },
+   {
+    "topic": "Prabang被黑",
+    "articles": 3,
+    "predicted_groups": 1,
+    "user_reported_status_quo_events": 2
+   },
+   {
+    "topic": "Allium安全事件与恢复",
+    "articles": 6,
+    "predicted_groups": 1,
+    "user_reported_status_quo_events": 3
+   },
+   {
+    "topic": "韩股同一行情快报",
+    "articles": 2,
+    "predicted_groups": 1,
+    "user_reported_status_quo_events": 2
+   }
+  ]
+ },
+ {
+  "run": "fact_v4",
+  "comparator_version": "fact-4.0.0",
+  "code_check": {
+   "commit": "70954e533f58319135cc2e840aaf4e4c9401bbc1",
+   "files_match": 18,
+   "files_mismatch": [],
+   "files_missing_in_commit": [],
+   "core_code_matches_commit": true
+  },
+  "main_label_counts": {
+   "different_event": 71422,
+   "same_event": 1266,
+   "uncertain": 1912
+  },
+  "main_same_pair_grouping_outcome": {
+   "n/a": 73334,
+   "split_other_members_insufficient": 44,
+   "joined_same_group": 1113,
+   "split_ambiguous_multiple_groups": 109
+  },
+  "main_actions": {
+   "new": 796,
+   "join": 669,
+   "ambiguous_new": 27
+  },
+  "multi_member_groups_touching_main": 393,
+  "articles_in_multi_member_groups": 1062,
+  "group_size_histogram": {
+   "1": 431,
+   "2": 237,
+   "3": 77,
+   "4": 46,
+   "5": 26,
+   "6": 6,
+   "7": 1
+  },
+  "conservation_checks": {
+   "main_pairs_equals_expected_74600": true,
+   "main_pairs_equals_sum_min50": true,
+   "label_counts_conserve": true,
+   "same_outcomes_conserve": true,
+   "actions_conserve": true,
+   "distance_max": 50
+  },
+  "timings_seconds": {
+   "snapshot_load_and_parse": 0.044,
+   "background_build": 0.8799,
+   "article_prepare_by_phase": {
+    "warmup": 0.0625,
+    "main": 1.9233,
+    "pre": 0.0
+   },
+   "pair_compare_by_phase": {
+    "warmup": 0.427,
+    "main": 20.244,
+    "pre": 0.0
+   },
+   "grouping_by_phase": {
+    "warmup": 0.0014,
+    "main": 0.0856,
+    "pre": 0.0
+   },
+   "output_write": 2.3515,
+   "summary": 2.0925,
+   "note": "主评测耗时分母只用 main 段；预热段（warmup）成本单列；无模型初始化/向量编码成本（语义未运行）"
+  },
+  "audit_no_violations": true,
+  "audit_checks": {
+   "input_sha256_matches_manifest": true,
+   "ids_unique": true,
+   "time_parse_failures": 0,
+   "sorted_strictly_increasing": true,
+   "main_count": 1492,
+   "replay_sequence_hash_matches_manifest": true,
+   "every_article_compared_exactly_previous_window": true,
+   "main_pairs": 74600,
+   "main_pairs_equals_74600": true,
+   "assignments_count_equals_replayed": true,
+   "grouping_rules_respected": true,
+   "story_id_not_in_comparator_fields": true,
+   "story_id_not_referenced_in_compare_group_replay_code": true,
+   "comparator_config_has_no_story_id": true,
+   "no_violations": true
+  },
+  "eval": {
+   "public_115": {
+    "pair": {
+     "pos_n": 82,
+     "pos_hit": 74,
+     "pos_reject": 0,
+     "pos_abstain": 8,
+     "neg_n": 16,
+     "neg_false_same": 0,
+     "neg_different": 16,
+     "neg_abstain": 0,
+     "gold_unc": {
+      "n": 1,
+      "pred_same_event": 0,
+      "pred_different_event": 0,
+      "pred_uncertain": 1
+     }
+    },
+    "group": {
+     "positives": {
+      "same_group": 66,
+      "split": 16,
+      "not_fully_replayed": 7
+     },
+     "negatives": {
+      "together_contamination": 0,
+      "apart": 16,
+      "not_fully_replayed": 8
+     },
+     "gold_uncertain": {
+      "same_group": 0,
+      "split": 1,
+      "not_fully_replayed": 1
+     },
+     "positive_split_causes": {
+      "comparator_uncertain": 8,
+      "split_ambiguous_multiple_groups": 8
+     }
+    },
+    "direct": {
+     "pos_n": 7,
+     "pos_hit": 4,
+     "pos_reject": 0,
+     "pos_abstain": 3,
+     "neg_n": 8,
+     "neg_false_same": 0,
+     "neg_different": 8,
+     "neg_abstain": 0,
+     "gold_unc": {
+      "n": 1,
+      "pred_same_event": 0,
+      "pred_different_event": 1,
+      "pred_uncertain": 0
+     }
+    }
+   },
+   "model_read_dev": {
+    "pair": {
+     "pos_n": 45,
+     "pos_hit": 39,
+     "pos_reject": 1,
+     "pos_abstain": 5,
+     "neg_n": 65,
+     "neg_false_same": 0,
+     "neg_different": 45,
+     "neg_abstain": 20,
+     "gold_unc": {
+      "n": 7,
+      "pred_same_event": 0,
+      "pred_different_event": 0,
+      "pred_uncertain": 7
+     }
+    },
+    "group": {
+     "positives": {
+      "same_group": 33,
+      "split": 12,
+      "not_fully_replayed": 0
+     },
+     "negatives": {
+      "together_contamination": 0,
+      "apart": 65,
+      "not_fully_replayed": 0
+     },
+     "gold_uncertain": {
+      "same_group": 0,
+      "split": 7,
+      "not_fully_replayed": 0
+     },
+     "positive_split_causes": {
+      "split_ambiguous_multiple_groups": 6,
+      "comparator_uncertain": 5,
+      "comparator_different_event": 1
+     }
+    },
+    "direct": null
+   },
+   "model_read_selfheld": {
+    "pair": {
+     "pos_n": 33,
+     "pos_hit": 28,
+     "pos_reject": 0,
+     "pos_abstain": 5,
+     "neg_n": 46,
+     "neg_false_same": 0,
+     "neg_different": 45,
+     "neg_abstain": 1,
+     "gold_unc": {
+      "n": 0,
+      "pred_same_event": 0,
+      "pred_different_event": 0,
+      "pred_uncertain": 0
+     }
+    },
+    "group": {
+     "positives": {
+      "same_group": 23,
+      "split": 10,
+      "not_fully_replayed": 0
+     },
+     "negatives": {
+      "together_contamination": 0,
+      "apart": 46,
+      "not_fully_replayed": 0
+     },
+     "gold_uncertain": {
+      "same_group": 0,
+      "split": 0,
+      "not_fully_replayed": 0
+     },
+     "positive_split_causes": {
+      "split_other_members_insufficient": 4,
+      "comparator_uncertain": 5,
+      "split_ambiguous_multiple_groups": 1
+     }
+    },
+    "direct": null
+   },
+   "model_read_all": {
+    "pair": {
+     "pos_n": 78,
+     "pos_hit": 67,
+     "pos_reject": 1,
+     "pos_abstain": 10,
+     "neg_n": 111,
+     "neg_false_same": 0,
+     "neg_different": 90,
+     "neg_abstain": 21,
+     "gold_unc": {
+      "n": 7,
+      "pred_same_event": 0,
+      "pred_different_event": 0,
+      "pred_uncertain": 7
+     }
+    },
+    "group": {
+     "positives": {
+      "same_group": 56,
+      "split": 22,
+      "not_fully_replayed": 0
+     },
+     "negatives": {
+      "together_contamination": 0,
+      "apart": 111,
+      "not_fully_replayed": 0
+     },
+     "gold_uncertain": {
+      "same_group": 0,
+      "split": 7,
+      "not_fully_replayed": 0
+     },
+     "positive_split_causes": {
+      "split_other_members_insufficient": 4,
+      "split_ambiguous_multiple_groups": 7,
+      "comparator_uncertain": 10,
+      "comparator_different_event": 1
+     }
+    },
+    "direct": null
+   }
+  },
+  "contaminated_groups": [],
+  "topic_groups": [
+   {
+    "topic": "ETH旧钱包转账",
+    "articles": 3,
+    "predicted_groups": 1,
+    "user_reported_status_quo_events": 3
+   },
+   {
+    "topic": "Prabang被黑",
+    "articles": 3,
+    "predicted_groups": 1,
+    "user_reported_status_quo_events": 2
+   },
+   {
+    "topic": "Allium安全事件与恢复",
+    "articles": 6,
+    "predicted_groups": 1,
+    "user_reported_status_quo_events": 3
+   },
+   {
+    "topic": "韩股同一行情快报",
+    "articles": 2,
+    "predicted_groups": 1,
+    "user_reported_status_quo_events": 2
+   }
+  ]
+ },
+ {
+  "run": "fact_v4_1",
+  "comparator_version": "fact-4.1.0",
+  "code_check": {
+   "commit": "e90aa1c104bc90adc3cf6fb9cdd8beb17e0ba091",
+   "files_match": 18,
+   "files_mismatch": [],
+   "files_missing_in_commit": [],
+   "core_code_matches_commit": true
+  },
+  "main_label_counts": {
+   "different_event": 71425,
+   "same_event": 1266,
+   "uncertain": 1909
+  },
+  "main_same_pair_grouping_outcome": {
+   "n/a": 73334,
+   "split_other_members_insufficient": 44,
+   "joined_same_group": 1113,
+   "split_ambiguous_multiple_groups": 109
+  },
+  "main_actions": {
+   "new": 796,
+   "join": 669,
+   "ambiguous_new": 27
+  },
+  "multi_member_groups_touching_main": 393,
+  "articles_in_multi_member_groups": 1062,
+  "group_size_histogram": {
+   "1": 431,
+   "2": 237,
+   "3": 77,
+   "4": 46,
+   "5": 26,
+   "6": 6,
+   "7": 1
+  },
+  "conservation_checks": {
+   "main_pairs_equals_expected_74600": true,
+   "main_pairs_equals_sum_min50": true,
+   "label_counts_conserve": true,
+   "same_outcomes_conserve": true,
+   "actions_conserve": true,
+   "distance_max": 50
+  },
+  "timings_seconds": {
+   "snapshot_load_and_parse": 0.0489,
+   "background_build": 0.9262,
+   "article_prepare_by_phase": {
+    "warmup": 0.0676,
+    "main": 1.9456,
+    "pre": 0.0
+   },
+   "pair_compare_by_phase": {
+    "warmup": 0.4918,
+    "main": 20.6157,
+    "pre": 0.0
+   },
+   "grouping_by_phase": {
+    "warmup": 0.0015,
+    "main": 0.0841,
+    "pre": 0.0
+   },
+   "output_write": 2.3901,
+   "summary": 2.1189,
+   "note": "主评测耗时分母只用 main 段；预热段（warmup）成本单列；无模型初始化/向量编码成本（语义未运行）"
+  },
+  "audit_no_violations": true,
+  "audit_checks": {
+   "input_sha256_matches_manifest": true,
+   "ids_unique": true,
+   "time_parse_failures": 0,
+   "sorted_strictly_increasing": true,
+   "main_count": 1492,
+   "replay_sequence_hash_matches_manifest": true,
+   "every_article_compared_exactly_previous_window": true,
+   "main_pairs": 74600,
+   "main_pairs_equals_74600": true,
+   "assignments_count_equals_replayed": true,
+   "grouping_rules_respected": true,
+   "story_id_not_in_comparator_fields": true,
+   "story_id_not_referenced_in_compare_group_replay_code": true,
+   "comparator_config_has_no_story_id": true,
+   "no_violations": true
+  },
+  "eval": {
+   "public_115": {
+    "pair": {
+     "pos_n": 82,
+     "pos_hit": 74,
+     "pos_reject": 0,
+     "pos_abstain": 8,
+     "neg_n": 16,
+     "neg_false_same": 0,
+     "neg_different": 16,
+     "neg_abstain": 0,
+     "gold_unc": {
+      "n": 1,
+      "pred_same_event": 0,
+      "pred_different_event": 0,
+      "pred_uncertain": 1
+     }
+    },
+    "group": {
+     "positives": {
+      "same_group": 66,
+      "split": 16,
+      "not_fully_replayed": 7
+     },
+     "negatives": {
+      "together_contamination": 0,
+      "apart": 16,
+      "not_fully_replayed": 8
+     },
+     "gold_uncertain": {
+      "same_group": 0,
+      "split": 1,
+      "not_fully_replayed": 1
+     },
+     "positive_split_causes": {
+      "comparator_uncertain": 8,
+      "split_ambiguous_multiple_groups": 8
+     }
+    },
+    "direct": {
+     "pos_n": 7,
+     "pos_hit": 4,
+     "pos_reject": 0,
+     "pos_abstain": 3,
+     "neg_n": 8,
+     "neg_false_same": 0,
+     "neg_different": 8,
+     "neg_abstain": 0,
+     "gold_unc": {
+      "n": 1,
+      "pred_same_event": 0,
+      "pred_different_event": 1,
+      "pred_uncertain": 0
+     }
+    }
+   },
+   "model_read_dev": {
+    "pair": {
+     "pos_n": 45,
+     "pos_hit": 39,
+     "pos_reject": 1,
+     "pos_abstain": 5,
+     "neg_n": 65,
+     "neg_false_same": 0,
+     "neg_different": 45,
+     "neg_abstain": 20,
+     "gold_unc": {
+      "n": 7,
+      "pred_same_event": 0,
+      "pred_different_event": 0,
+      "pred_uncertain": 7
+     }
+    },
+    "group": {
+     "positives": {
+      "same_group": 33,
+      "split": 12,
+      "not_fully_replayed": 0
+     },
+     "negatives": {
+      "together_contamination": 0,
+      "apart": 65,
+      "not_fully_replayed": 0
+     },
+     "gold_uncertain": {
+      "same_group": 0,
+      "split": 7,
+      "not_fully_replayed": 0
+     },
+     "positive_split_causes": {
+      "split_ambiguous_multiple_groups": 6,
+      "comparator_uncertain": 5,
+      "comparator_different_event": 1
+     }
+    },
+    "direct": null
+   },
+   "model_read_selfheld": {
+    "pair": {
+     "pos_n": 33,
+     "pos_hit": 28,
+     "pos_reject": 0,
+     "pos_abstain": 5,
+     "neg_n": 46,
+     "neg_false_same": 0,
+     "neg_different": 45,
+     "neg_abstain": 1,
+     "gold_unc": {
+      "n": 0,
+      "pred_same_event": 0,
+      "pred_different_event": 0,
+      "pred_uncertain": 0
+     }
+    },
+    "group": {
+     "positives": {
+      "same_group": 23,
+      "split": 10,
+      "not_fully_replayed": 0
+     },
+     "negatives": {
+      "together_contamination": 0,
+      "apart": 46,
+      "not_fully_replayed": 0
+     },
+     "gold_uncertain": {
+      "same_group": 0,
+      "split": 0,
+      "not_fully_replayed": 0
+     },
+     "positive_split_causes": {
+      "split_other_members_insufficient": 4,
+      "comparator_uncertain": 5,
+      "split_ambiguous_multiple_groups": 1
+     }
+    },
+    "direct": null
+   },
+   "model_read_all": {
+    "pair": {
+     "pos_n": 78,
+     "pos_hit": 67,
+     "pos_reject": 1,
+     "pos_abstain": 10,
+     "neg_n": 111,
+     "neg_false_same": 0,
+     "neg_different": 90,
+     "neg_abstain": 21,
+     "gold_unc": {
+      "n": 7,
+      "pred_same_event": 0,
+      "pred_different_event": 0,
+      "pred_uncertain": 7
+     }
+    },
+    "group": {
+     "positives": {
+      "same_group": 56,
+      "split": 22,
+      "not_fully_replayed": 0
+     },
+     "negatives": {
+      "together_contamination": 0,
+      "apart": 111,
+      "not_fully_replayed": 0
+     },
+     "gold_uncertain": {
+      "same_group": 0,
+      "split": 7,
+      "not_fully_replayed": 0
+     },
+     "positive_split_causes": {
+      "split_other_members_insufficient": 4,
+      "split_ambiguous_multiple_groups": 7,
+      "comparator_uncertain": 10,
+      "comparator_different_event": 1
+     }
+    },
+    "direct": null
+   }
+  },
+  "contaminated_groups": [],
+  "topic_groups": [
+   {
+    "topic": "ETH旧钱包转账",
+    "articles": 3,
+    "predicted_groups": 1,
+    "user_reported_status_quo_events": 3
+   },
+   {
+    "topic": "Prabang被黑",
+    "articles": 3,
+    "predicted_groups": 1,
+    "user_reported_status_quo_events": 2
+   },
+   {
+    "topic": "Allium安全事件与恢复",
+    "articles": 6,
+    "predicted_groups": 1,
+    "user_reported_status_quo_events": 3
+   },
+   {
+    "topic": "韩股同一行情快报",
+    "articles": 2,
+    "predicted_groups": 1,
+    "user_reported_status_quo_events": 2
+   }
+  ]
+ },
+ {
+  "run": "fact_v4_1_1",
+  "comparator_version": "fact-4.1.1",
+  "code_check": {
+   "commit": "6c22ca6f3b374d5206f90b16ee72cf6d1c76f41f",
+   "files_match": 18,
+   "files_mismatch": [],
+   "files_missing_in_commit": [],
+   "core_code_matches_commit": true
+  },
+  "main_label_counts": {
+   "different_event": 71425,
+   "same_event": 1266,
+   "uncertain": 1909
+  },
+  "main_same_pair_grouping_outcome": {
+   "n/a": 73334,
+   "split_other_members_insufficient": 44,
+   "joined_same_group": 1113,
+   "split_ambiguous_multiple_groups": 109
+  },
+  "main_actions": {
+   "new": 796,
+   "join": 669,
+   "ambiguous_new": 27
+  },
+  "multi_member_groups_touching_main": 393,
+  "articles_in_multi_member_groups": 1062,
+  "group_size_histogram": {
+   "1": 431,
+   "2": 237,
+   "3": 77,
+   "4": 46,
+   "5": 26,
+   "6": 6,
+   "7": 1
+  },
+  "conservation_checks": {
+   "main_pairs_equals_expected_74600": true,
+   "main_pairs_equals_sum_min50": true,
+   "label_counts_conserve": true,
+   "same_outcomes_conserve": true,
+   "actions_conserve": true,
+   "distance_max": 50
+  },
+  "timings_seconds": {
+   "snapshot_load_and_parse": 0.0434,
+   "background_build": 0.7916,
+   "article_prepare_by_phase": {
+    "warmup": 0.0641,
+    "main": 2.1112,
+    "pre": 0.0
+   },
+   "pair_compare_by_phase": {
+    "warmup": 0.4747,
+    "main": 20.5972,
+    "pre": 0.0
+   },
+   "grouping_by_phase": {
+    "warmup": 0.0014,
+    "main": 0.0933,
+    "pre": 0.0
+   },
+   "output_write": 2.595,
+   "summary": 1.968,
+   "note": "主评测耗时分母只用 main 段；预热段（warmup）成本单列；无模型初始化/向量编码成本（语义未运行）"
+  },
+  "audit_no_violations": true,
+  "audit_checks": {
+   "input_sha256_matches_manifest": true,
+   "ids_unique": true,
+   "time_parse_failures": 0,
+   "sorted_strictly_increasing": true,
+   "main_count": 1492,
+   "replay_sequence_hash_matches_manifest": true,
+   "every_article_compared_exactly_previous_window": true,
+   "main_pairs": 74600,
+   "main_pairs_equals_74600": true,
+   "assignments_count_equals_replayed": true,
+   "grouping_rules_respected": true,
+   "story_id_not_in_comparator_fields": true,
+   "story_id_not_referenced_in_compare_group_replay_code": true,
+   "comparator_config_has_no_story_id": true,
+   "no_violations": true
+  },
+  "eval": {
+   "public_115": {
+    "pair": {
+     "pos_n": 82,
+     "pos_hit": 74,
+     "pos_reject": 0,
+     "pos_abstain": 8,
+     "neg_n": 16,
+     "neg_false_same": 0,
+     "neg_different": 16,
+     "neg_abstain": 0,
+     "gold_unc": {
+      "n": 1,
+      "pred_same_event": 0,
+      "pred_different_event": 0,
+      "pred_uncertain": 1
+     }
+    },
+    "group": {
+     "positives": {
+      "same_group": 66,
+      "split": 16,
+      "not_fully_replayed": 7
+     },
+     "negatives": {
+      "together_contamination": 0,
+      "apart": 16,
+      "not_fully_replayed": 8
+     },
+     "gold_uncertain": {
+      "same_group": 0,
+      "split": 1,
+      "not_fully_replayed": 1
+     },
+     "positive_split_causes": {
+      "comparator_uncertain": 8,
+      "split_ambiguous_multiple_groups": 8
+     }
+    },
+    "direct": {
+     "pos_n": 7,
+     "pos_hit": 4,
+     "pos_reject": 0,
+     "pos_abstain": 3,
+     "neg_n": 8,
+     "neg_false_same": 0,
+     "neg_different": 8,
+     "neg_abstain": 0,
+     "gold_unc": {
+      "n": 1,
+      "pred_same_event": 0,
+      "pred_different_event": 1,
+      "pred_uncertain": 0
+     }
+    }
+   },
+   "model_read_dev": {
+    "pair": {
+     "pos_n": 45,
+     "pos_hit": 39,
+     "pos_reject": 1,
+     "pos_abstain": 5,
+     "neg_n": 65,
+     "neg_false_same": 0,
+     "neg_different": 45,
+     "neg_abstain": 20,
+     "gold_unc": {
+      "n": 7,
+      "pred_same_event": 0,
+      "pred_different_event": 0,
+      "pred_uncertain": 7
+     }
+    },
+    "group": {
+     "positives": {
+      "same_group": 33,
+      "split": 12,
+      "not_fully_replayed": 0
+     },
+     "negatives": {
+      "together_contamination": 0,
+      "apart": 65,
+      "not_fully_replayed": 0
+     },
+     "gold_uncertain": {
+      "same_group": 0,
+      "split": 7,
+      "not_fully_replayed": 0
+     },
+     "positive_split_causes": {
+      "split_ambiguous_multiple_groups": 6,
+      "comparator_uncertain": 5,
+      "comparator_different_event": 1
+     }
+    },
+    "direct": null
+   },
+   "model_read_selfheld": {
+    "pair": {
+     "pos_n": 33,
+     "pos_hit": 28,
+     "pos_reject": 0,
+     "pos_abstain": 5,
+     "neg_n": 46,
+     "neg_false_same": 0,
+     "neg_different": 45,
+     "neg_abstain": 1,
+     "gold_unc": {
+      "n": 0,
+      "pred_same_event": 0,
+      "pred_different_event": 0,
+      "pred_uncertain": 0
+     }
+    },
+    "group": {
+     "positives": {
+      "same_group": 23,
+      "split": 10,
+      "not_fully_replayed": 0
+     },
+     "negatives": {
+      "together_contamination": 0,
+      "apart": 46,
+      "not_fully_replayed": 0
+     },
+     "gold_uncertain": {
+      "same_group": 0,
+      "split": 0,
+      "not_fully_replayed": 0
+     },
+     "positive_split_causes": {
+      "split_other_members_insufficient": 4,
+      "comparator_uncertain": 5,
+      "split_ambiguous_multiple_groups": 1
+     }
+    },
+    "direct": null
+   },
+   "model_read_all": {
+    "pair": {
+     "pos_n": 78,
+     "pos_hit": 67,
+     "pos_reject": 1,
+     "pos_abstain": 10,
+     "neg_n": 111,
+     "neg_false_same": 0,
+     "neg_different": 90,
+     "neg_abstain": 21,
+     "gold_unc": {
+      "n": 7,
+      "pred_same_event": 0,
+      "pred_different_event": 0,
+      "pred_uncertain": 7
+     }
+    },
+    "group": {
+     "positives": {
+      "same_group": 56,
+      "split": 22,
+      "not_fully_replayed": 0
+     },
+     "negatives": {
+      "together_contamination": 0,
+      "apart": 111,
+      "not_fully_replayed": 0
+     },
+     "gold_uncertain": {
+      "same_group": 0,
+      "split": 7,
+      "not_fully_replayed": 0
+     },
+     "positive_split_causes": {
+      "split_other_members_insufficient": 4,
+      "split_ambiguous_multiple_groups": 7,
+      "comparator_uncertain": 10,
+      "comparator_different_event": 1
+     }
+    },
+    "direct": null
+   }
+  },
+  "contaminated_groups": [],
+  "topic_groups": [
+   {
+    "topic": "ETH旧钱包转账",
+    "articles": 3,
+    "predicted_groups": 1,
+    "user_reported_status_quo_events": 3
+   },
+   {
+    "topic": "Prabang被黑",
+    "articles": 3,
+    "predicted_groups": 1,
+    "user_reported_status_quo_events": 2
+   },
+   {
+    "topic": "Allium安全事件与恢复",
+    "articles": 6,
+    "predicted_groups": 1,
+    "user_reported_status_quo_events": 3
+   },
+   {
+    "topic": "韩股同一行情快报",
+    "articles": 2,
+    "predicted_groups": 1,
+    "user_reported_status_quo_events": 2
+   }
+  ]
+ }
+]

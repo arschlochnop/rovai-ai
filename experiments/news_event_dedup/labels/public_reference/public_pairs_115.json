@@ -1,0 +1,1067 @@
+{
+  "notice": "115对均已公开；98对在最近一天直接可见，17对非主窗口单列。不是私有B或盲测。",
+  "pairs": [
+    {
+      "left_id": "01a1815b-269f-7392-acd7-3c97b093025c",
+      "right_id": "01a18156-88fc-7441-81a4-0c87e9e63f33",
+      "label": "same_event",
+      "reason": "报道同一日BTC ETF净流入1.76亿美元，IBIT与FBTC数据一致；来源前缀与格式不同。",
+      "source": "既有23对公开阅读记录，开发参考",
+      "original_label": "同事件候选"
+    },
+    {
+      "left_id": "01a18155-b635-7521-b1f5-0ce6ba1f7770",
+      "right_id": "01a18150-1f15-74b6-90fd-7ae4e9023859",
+      "label": "same_event",
+      "reason": "主体均为RLUSD，穆迪A2与P-1评级及储备、流动性、赎回安排一致。",
+      "source": "既有23对公开阅读记录，开发参考",
+      "original_label": "同事件候选"
+    },
+    {
+      "left_id": "01a18144-6216-734a-99e9-d11112450405",
+      "right_id": "01a18144-50c2-76f6-be1e-10c2d44c3ef6",
+      "label": "same_event",
+      "reason": "均为三名巨鲸转入Coinbase Prime共6168 BTC、价值4.985亿美元；差异为措辞和来源前缀。",
+      "source": "既有23对公开阅读记录，开发参考",
+      "original_label": "同事件候选"
+    },
+    {
+      "left_id": "01a17d7d-b1ef-723f-83d4-079e8d3a5747",
+      "right_id": "01a17d7b-9a18-7470-90ee-62b0078adc89",
+      "label": "same_event",
+      "reason": "General Compute同一轮1亿美元A轮融资、8亿美元估值、两家领投方及芯片采购事实一致。",
+      "source": "既有23对公开阅读记录，开发参考",
+      "original_label": "同事件候选"
+    },
+    {
+      "left_id": "01a17cc4-8b30-745f-a669-1b1d3c49086e",
+      "right_id": "01a17c9b-a029-7752-a2da-747170153533",
+      "label": "same_event",
+      "reason": "同为WORPT稳定币兑换泰铢及PromptPay支付项目，开发方与监管沙盒一致。",
+      "source": "既有23对公开阅读记录，开发参考",
+      "original_label": "同事件候选"
+    },
+    {
+      "left_id": "01a17d02-db82-72b9-b381-2477ef687d37",
+      "right_id": "01a17cfe-4049-744a-bc7f-bae84b8dced7",
+      "label": "same_event",
+      "reason": "Bybit同次上线EIDO/EQT/STM合约，杠杆与手续费优惠一致。",
+      "source": "既有23对公开阅读记录，开发参考",
+      "original_label": "同事件候选"
+    },
+    {
+      "left_id": "01a18011-a282-7328-8641-ff36ce2f317b",
+      "right_id": "01a1800b-330c-716a-8b17-724824800a98",
+      "label": "same_event",
+      "reason": "同为Avalanche上Tranche Vault闪电贷攻击，Valinor、约两笔交易及101万美元损失一致。",
+      "source": "既有23对公开阅读记录，开发参考",
+      "original_label": "同事件候选"
+    },
+    {
+      "left_id": "01a18133-dddc-759a-9ca1-5e5bd732ac89",
+      "right_id": "01a1812e-5dda-74a5-8576-c1423b107288",
+      "label": "same_event",
+      "reason": "Predict.fun同次代币经济公告，10亿总量、16%解锁及首季7000万枚空投等正文一致。",
+      "source": "既有23对公开阅读记录，开发参考",
+      "original_label": "同事件候选"
+    },
+    {
+      "left_id": "01a17d90-b0e5-7096-a0f3-9a94d3270cc3",
+      "right_id": "01a17d79-ec4f-720d-813b-e4319e06e829",
+      "label": "same_event",
+      "reason": "Luxor同轮1600万美元战略融资，CMT Digital领投，业务用途一致。",
+      "source": "既有23对公开阅读记录，开发参考",
+      "original_label": "同事件候选"
+    },
+    {
+      "left_id": "01a17d0b-13b7-70b4-b9f8-4e6e27c591a8",
+      "right_id": "01a17d09-4f66-77e4-bf61-78c271174d76",
+      "label": "same_event",
+      "reason": "同为Udesk脚本注入恶意代码，窃取会话并替换充值地址；报道详略不同。",
+      "source": "既有23对公开阅读记录，开发参考",
+      "original_label": "同事件候选"
+    },
+    {
+      "left_id": "01a17db9-f5ef-718e-88ec-bce17baaeebe",
+      "right_id": "01a17db8-12d7-72c2-9859-3e91070fb330",
+      "label": "same_event",
+      "reason": "Predicate同轮800万美元A轮融资，Blockchain Capital领投、三家参投方一致。",
+      "source": "既有23对公开阅读记录，开发参考",
+      "original_label": "同事件候选"
+    },
+    {
+      "left_id": "01a18067-6e9d-7577-a99a-df9852c0eb5c",
+      "right_id": "01a18062-0b93-7622-ae4e-c472d4d19f0e",
+      "label": "same_event",
+      "reason": "同为Coinbase针对Amplitude事件的回应，未发现内部系统被访问、客户资金未受影响等一致。",
+      "source": "既有23对公开阅读记录，开发参考",
+      "original_label": "同事件候选"
+    },
+    {
+      "left_id": "01a17ed0-20df-71de-a25c-3458de4f3335",
+      "right_id": "01a17e9e-a9d6-7486-8571-de296c6b138a",
+      "label": "different_event",
+      "reason": "931 BTC由Kraken转向未知钱包；另一篇为2.82亿USDT由未知钱包转入Bitfinex，币种、数量、方向、交易所均不同。",
+      "source": "既有23对公开阅读记录，开发参考",
+      "original_label": "不同事件"
+    },
+    {
+      "left_id": "01a17f47-37ed-747b-9cc1-5a6041605990",
+      "right_id": "01a17ee7-100b-74b0-a38a-127680bdfb30",
+      "label": "different_event",
+      "reason": "BTC突破81000美元与BNB跌破750美元，币种、价格和方向不同，仅共享行情模板。",
+      "source": "既有23对公开阅读记录，开发参考",
+      "original_label": "不同事件"
+    },
+    {
+      "left_id": "01a17e65-d40a-71d0-ba53-c33a13586c29",
+      "right_id": "01a17e18-2bcc-71a3-816e-3adbfdfbdbad",
+      "label": "different_event",
+      "reason": "Cancore720万美元种子轮与Spicenet500万美元A轮，融资主体、金额与轮次不同。",
+      "source": "既有23对公开阅读记录，开发参考",
+      "original_label": "不同事件"
+    },
+    {
+      "left_id": "01a18029-63d3-7131-bf58-2f754567b084",
+      "right_id": "01a18010-b4a3-76d0-9a69-dd98f7fba4da",
+      "label": "different_event",
+      "reason": "PEPE巨鲸转移1.45万亿枚代币与HYPE巨鲸买入12.3万枚，币种、数量、动作不同。",
+      "source": "既有23对公开阅读记录，开发参考",
+      "original_label": "不同事件"
+    },
+    {
+      "left_id": "01a17c1c-2e76-750d-9642-e939d4cdf07e",
+      "right_id": "01a17c1c-2c9a-72d9-89e0-96d4b2e36d85",
+      "label": "different_event",
+      "reason": "SOL ETF与ETH ETF，币种及净流出金额、产品明细不同，共享日度资金流模板。",
+      "source": "既有23对公开阅读记录，开发参考",
+      "original_label": "不同事件"
+    },
+    {
+      "left_id": "01a18159-61a2-7565-b4b4-0b361319b260",
+      "right_id": "01a1814b-97bb-7358-9f82-9b2fb84ff1e0",
+      "label": "uncertain",
+      "reason": "均包含同日BTC ETF资金流，但另一篇还包含ETH ETF净流出；不是全文重复，是否同一事件需业务口径。",
+      "source": "既有23对公开阅读记录，开发参考",
+      "original_label": "部分内容重叠"
+    },
+    {
+      "left_id": "01a18007-8c59-7588-8a4d-d3e5da3d4b2a",
+      "right_id": "01a17ffe-67bd-70ca-a915-7bd30b137f77",
+      "label": "uncertain",
+      "reason": "同日韩股行情，但4%与5%涨幅及个股数值变化，是行情进展，不能当同一条重复快讯删除。",
+      "source": "既有23对公开阅读记录，开发参考",
+      "original_label": "同主题进展"
+    },
+    {
+      "left_id": "01a18035-5a11-7719-9cb4-5664d9d879dc",
+      "right_id": "01a1802e-f7ba-7117-8e3a-23b27f171bb0",
+      "label": "same_event",
+      "reason": "两篇正文均为7小时前提取4000 ETH后抵押借出600万USDT，抵押总量、借款总额及浮亏一致。",
+      "source": "既有23对公开阅读记录，开发参考",
+      "original_label": "同事件候选"
+    },
+    {
+      "left_id": "01a17c1c-2e76-750d-9642-e939d4cdf07e",
+      "right_id": "01a17c1c-2e06-7490-b0fb-9bd204e8cb57",
+      "label": "different_event",
+      "reason": "SOL ETF净流出822.87万美元与HYPE ETF净流出429.84万美元，资产和基金不同；却成为SOL的最高分候选。",
+      "source": "既有23对公开阅读记录，开发参考",
+      "original_label": "不同事件"
+    },
+    {
+      "left_id": "01a17d1e-4cd6-7181-a9e6-1541930089cc",
+      "right_id": "01a17d10-a88b-77db-a507-c64dcb1fe452",
+      "label": "different_event",
+      "reason": "贝莱德IBIT钱包转入1698 BTC与ETHA/ETHB钱包转入45240 ETH，币种、钱包、数量与金额不同；却成为BTC报道的最高分候选。",
+      "source": "既有23对公开阅读记录，开发参考",
+      "original_label": "不同事件"
+    },
+    {
+      "left_id": "01a17c1c-2e06-7490-b0fb-9bd204e8cb57",
+      "right_id": "01a17c1c-2de9-7219-a50a-8c73ccd0f230",
+      "label": "different_event",
+      "reason": "HYPE ETF净流出429.84万美元与NEAR/ZEC ETF合计净流入336.26万美元，资产及流向不同；却成为HYPE报道的最高分候选。",
+      "source": "既有23对公开阅读记录，开发参考",
+      "original_label": "不同事件"
+    },
+    {
+      "left_id": "01a18561-e088-7416-b9fa-3334752b252d",
+      "right_id": "01a18561-f9a6-749f-82b9-23983c0f5e7e",
+      "label": "same_event",
+      "reason": "钱包0x6D30、沉寂三年、2119枚ETH、499万美元、Coinbase与7小时前一致。标题语序、三/3、地址截写、数字分隔及正文附加判断不同。",
+      "source": "已公开4类同具体事件阅读记录，开发参考",
+      "topic": "ETH旧钱包转账"
+    },
+    {
+      "left_id": "01a18561-e088-7416-b9fa-3334752b252d",
+      "right_id": "01a18562-e150-7732-8245-609307912ccc",
+      "label": "same_event",
+      "reason": "钱包0x6D30、沉寂三年、2119枚ETH、499万美元、Coinbase与7小时前一致。标题语序、三/3、地址截写、数字分隔及正文附加判断不同。",
+      "source": "已公开4类同具体事件阅读记录，开发参考",
+      "topic": "ETH旧钱包转账"
+    },
+    {
+      "left_id": "01a18561-f9a6-749f-82b9-23983c0f5e7e",
+      "right_id": "01a18562-e150-7732-8245-609307912ccc",
+      "label": "same_event",
+      "reason": "钱包0x6D30、沉寂三年、2119枚ETH、499万美元、Coinbase与7小时前一致。标题语序、三/3、地址截写、数字分隔及正文附加判断不同。",
+      "source": "已公开4类同具体事件阅读记录，开发参考",
+      "topic": "ETH旧钱包转账"
+    },
+    {
+      "left_id": "01a1855b-8dda-735d-b50e-9f50c86b3ed6",
+      "right_id": "01a1855c-7c68-77e5-8bfa-d26f16a1c350",
+      "label": "same_event",
+      "reason": "同一交易所，10月24日发现异常、26日通报、约1亿韩元损失、停服及补偿承诺一致。标题调序，正文多了“据韩联社报道”和末尾“（韩联社）”；现有固定头清理不覆盖这些。",
+      "source": "已公开4类同具体事件阅读记录，开发参考",
+      "topic": "Prabang被黑"
+    },
+    {
+      "left_id": "01a1855b-8dda-735d-b50e-9f50c86b3ed6",
+      "right_id": "01a18561-eefd-7765-a272-8fd471bbc6cf",
+      "label": "same_event",
+      "reason": "同一交易所，10月24日发现异常、26日通报、约1亿韩元损失、停服及补偿承诺一致。标题调序，正文多了“据韩联社报道”和末尾“（韩联社）”；现有固定头清理不覆盖这些。",
+      "source": "已公开4类同具体事件阅读记录，开发参考",
+      "topic": "Prabang被黑"
+    },
+    {
+      "left_id": "01a1855c-7c68-77e5-8bfa-d26f16a1c350",
+      "right_id": "01a18561-eefd-7765-a272-8fd471bbc6cf",
+      "label": "same_event",
+      "reason": "同一交易所，10月24日发现异常、26日通报、约1亿韩元损失、停服及补偿承诺一致。标题调序，正文多了“据韩联社报道”和末尾“（韩联社）”；现有固定头清理不覆盖这些。",
+      "source": "已公开4类同具体事件阅读记录，开发参考",
+      "topic": "Prabang被黑"
+    },
+    {
+      "left_id": "01a18551-62f3-746f-8a9c-4c7b028bedee",
+      "right_id": "01a18552-6054-7361-8357-4b17fe6de5dd",
+      "label": "same_event",
+      "reason": "同一公司的未经授权访问事件与核心平台恢复公告。标题调序、未/未经、正文缩写和删段不同；保留各篇补充细节，但应聚合到同一事件。",
+      "source": "已公开4类同具体事件阅读记录，开发参考",
+      "topic": "Allium安全事件与恢复"
+    },
+    {
+      "left_id": "01a18551-62f3-746f-8a9c-4c7b028bedee",
+      "right_id": "01a18553-5143-76c3-9504-dff897781835",
+      "label": "same_event",
+      "reason": "同一公司的未经授权访问事件与核心平台恢复公告。标题调序、未/未经、正文缩写和删段不同；保留各篇补充细节，但应聚合到同一事件。",
+      "source": "已公开4类同具体事件阅读记录，开发参考",
+      "topic": "Allium安全事件与恢复"
+    },
+    {
+      "left_id": "01a18551-62f3-746f-8a9c-4c7b028bedee",
+      "right_id": "01a18554-34bf-7716-823e-016a3e11e683",
+      "label": "same_event",
+      "reason": "同一公司的未经授权访问事件与核心平台恢复公告。标题调序、未/未经、正文缩写和删段不同；保留各篇补充细节，但应聚合到同一事件。",
+      "source": "已公开4类同具体事件阅读记录，开发参考",
+      "topic": "Allium安全事件与恢复"
+    },
+    {
+      "left_id": "01a18551-62f3-746f-8a9c-4c7b028bedee",
+      "right_id": "01a18558-c58b-73d2-a35f-bebc8e04f5b8",
+      "label": "same_event",
+      "reason": "同一公司的未经授权访问事件与核心平台恢复公告。标题调序、未/未经、正文缩写和删段不同；保留各篇补充细节，但应聚合到同一事件。",
+      "source": "已公开4类同具体事件阅读记录，开发参考",
+      "topic": "Allium安全事件与恢复"
+    },
+    {
+      "left_id": "01a18551-62f3-746f-8a9c-4c7b028bedee",
+      "right_id": "01a1855c-78a9-7499-b44a-a73bbb0c2a41",
+      "label": "same_event",
+      "reason": "同一公司的未经授权访问事件与核心平台恢复公告。标题调序、未/未经、正文缩写和删段不同；保留各篇补充细节，但应聚合到同一事件。",
+      "source": "已公开4类同具体事件阅读记录，开发参考",
+      "topic": "Allium安全事件与恢复"
+    },
+    {
+      "left_id": "01a18552-6054-7361-8357-4b17fe6de5dd",
+      "right_id": "01a18553-5143-76c3-9504-dff897781835",
+      "label": "same_event",
+      "reason": "同一公司的未经授权访问事件与核心平台恢复公告。标题调序、未/未经、正文缩写和删段不同；保留各篇补充细节，但应聚合到同一事件。",
+      "source": "已公开4类同具体事件阅读记录，开发参考",
+      "topic": "Allium安全事件与恢复"
+    },
+    {
+      "left_id": "01a18552-6054-7361-8357-4b17fe6de5dd",
+      "right_id": "01a18554-34bf-7716-823e-016a3e11e683",
+      "label": "same_event",
+      "reason": "同一公司的未经授权访问事件与核心平台恢复公告。标题调序、未/未经、正文缩写和删段不同；保留各篇补充细节，但应聚合到同一事件。",
+      "source": "已公开4类同具体事件阅读记录，开发参考",
+      "topic": "Allium安全事件与恢复"
+    },
+    {
+      "left_id": "01a18552-6054-7361-8357-4b17fe6de5dd",
+      "right_id": "01a18558-c58b-73d2-a35f-bebc8e04f5b8",
+      "label": "same_event",
+      "reason": "同一公司的未经授权访问事件与核心平台恢复公告。标题调序、未/未经、正文缩写和删段不同；保留各篇补充细节，但应聚合到同一事件。",
+      "source": "已公开4类同具体事件阅读记录，开发参考",
+      "topic": "Allium安全事件与恢复"
+    },
+    {
+      "left_id": "01a18552-6054-7361-8357-4b17fe6de5dd",
+      "right_id": "01a1855c-78a9-7499-b44a-a73bbb0c2a41",
+      "label": "same_event",
+      "reason": "同一公司的未经授权访问事件与核心平台恢复公告。标题调序、未/未经、正文缩写和删段不同；保留各篇补充细节，但应聚合到同一事件。",
+      "source": "已公开4类同具体事件阅读记录，开发参考",
+      "topic": "Allium安全事件与恢复"
+    },
+    {
+      "left_id": "01a18553-5143-76c3-9504-dff897781835",
+      "right_id": "01a18554-34bf-7716-823e-016a3e11e683",
+      "label": "same_event",
+      "reason": "同一公司的未经授权访问事件与核心平台恢复公告。标题调序、未/未经、正文缩写和删段不同；保留各篇补充细节，但应聚合到同一事件。",
+      "source": "已公开4类同具体事件阅读记录，开发参考",
+      "topic": "Allium安全事件与恢复"
+    },
+    {
+      "left_id": "01a18553-5143-76c3-9504-dff897781835",
+      "right_id": "01a18558-c58b-73d2-a35f-bebc8e04f5b8",
+      "label": "same_event",
+      "reason": "同一公司的未经授权访问事件与核心平台恢复公告。标题调序、未/未经、正文缩写和删段不同；保留各篇补充细节，但应聚合到同一事件。",
+      "source": "已公开4类同具体事件阅读记录，开发参考",
+      "topic": "Allium安全事件与恢复"
+    },
+    {
+      "left_id": "01a18553-5143-76c3-9504-dff897781835",
+      "right_id": "01a1855c-78a9-7499-b44a-a73bbb0c2a41",
+      "label": "same_event",
+      "reason": "同一公司的未经授权访问事件与核心平台恢复公告。标题调序、未/未经、正文缩写和删段不同；保留各篇补充细节，但应聚合到同一事件。",
+      "source": "已公开4类同具体事件阅读记录，开发参考",
+      "topic": "Allium安全事件与恢复"
+    },
+    {
+      "left_id": "01a18554-34bf-7716-823e-016a3e11e683",
+      "right_id": "01a18558-c58b-73d2-a35f-bebc8e04f5b8",
+      "label": "same_event",
+      "reason": "同一公司的未经授权访问事件与核心平台恢复公告。标题调序、未/未经、正文缩写和删段不同；保留各篇补充细节，但应聚合到同一事件。",
+      "source": "已公开4类同具体事件阅读记录，开发参考",
+      "topic": "Allium安全事件与恢复"
+    },
+    {
+      "left_id": "01a18554-34bf-7716-823e-016a3e11e683",
+      "right_id": "01a1855c-78a9-7499-b44a-a73bbb0c2a41",
+      "label": "same_event",
+      "reason": "同一公司的未经授权访问事件与核心平台恢复公告。标题调序、未/未经、正文缩写和删段不同；保留各篇补充细节，但应聚合到同一事件。",
+      "source": "已公开4类同具体事件阅读记录，开发参考",
+      "topic": "Allium安全事件与恢复"
+    },
+    {
+      "left_id": "01a18558-c58b-73d2-a35f-bebc8e04f5b8",
+      "right_id": "01a1855c-78a9-7499-b44a-a73bbb0c2a41",
+      "label": "same_event",
+      "reason": "同一公司的未经授权访问事件与核心平台恢复公告。标题调序、未/未经、正文缩写和删段不同；保留各篇补充细节，但应聚合到同一事件。",
+      "source": "已公开4类同具体事件阅读记录，开发参考",
+      "topic": "Allium安全事件与恢复"
+    },
+    {
+      "left_id": "01a1855e-4fb8-772f-b780-484bae0a281e",
+      "right_id": "01a18561-0270-774e-94ae-7411c9c8e972",
+      "label": "same_event",
+      "reason": "KOSPI同报5831.67点、日内跌3.00%、三星近6%、SK海力士0.4%。标题韩股/KOSPI差异，正文额外保留日期与“据行情数据显示”。不是更早跌1.8%的另一条行情。",
+      "source": "已公开4类同具体事件阅读记录，开发参考",
+      "topic": "韩股同一行情快报"
+    },
+    {
+      "left_id": "01a18562-e120-77bb-a9db-6fa5c24b31fb",
+      "right_id": "01a18562-e3f6-7206-b301-253acb7ccad7",
+      "label": "same_event",
+      "reason": "同为 BTC 跌破 80000 的同一时刻快照，仅交易所与报价格式不同",
+      "strata": [
+        "L1_同资产不同快照"
+      ],
+      "source": "公开人工基准A，已披露，仅样本内对照"
+    },
+    {
+      "left_id": "01a18562-ca11-70fa-984d-4e302861339f",
+      "right_id": "01a18562-e3f6-7206-b301-253acb7ccad7",
+      "label": "same_event",
+      "reason": "同为 BTC 跌破 80000；跌幅口径不同（日内 vs 24H），非事实冲突",
+      "strata": [
+        "L1_同资产不同快照"
+      ],
+      "source": "公开人工基准A，已披露，仅样本内对照"
+    },
+    {
+      "left_id": "01a18562-ca11-70fa-984d-4e302861339f",
+      "right_id": "01a18562-e120-77bb-a9db-6fa5c24b31fb",
+      "label": "same_event",
+      "reason": "同 4",
+      "strata": [
+        "L1_同资产不同快照"
+      ],
+      "source": "公开人工基准A，已披露，仅样本内对照"
+    },
+    {
+      "left_id": "01a1829f-2e1a-7574-a8cd-cdcf77343fb2",
+      "right_id": "01a182a3-bf66-7073-840e-cc507ef654cb",
+      "label": "same_event",
+      "reason": "同一 Glassnode 报告；B 缺末尾段落，数字仅千分位差异",
+      "strata": [
+        "L2_同标题数字实质不同"
+      ],
+      "source": "公开人工基准A，已披露，仅样本内对照"
+    },
+    {
+      "left_id": "01a18306-9b0f-763f-b594-d7200f0657cd",
+      "right_id": "01a18310-d2b4-7707-be26-bb6b310cfc70",
+      "label": "same_event",
+      "reason": "同一中期选举预测数据；A 补了消息源名称",
+      "strata": [
+        "L2_同标题数字实质不同"
+      ],
+      "source": "公开人工基准A，已披露，仅样本内对照"
+    },
+    {
+      "left_id": "01a184f3-f851-725a-963d-ee56c9c32829",
+      "right_id": "01a184f8-9c79-70b2-9ab0-fe89216095a8",
+      "label": "same_event",
+      "reason": "同一赌约；126,210.5 与 126,210.50 仅格式差异",
+      "strata": [
+        "L2_同标题数字实质不同"
+      ],
+      "source": "公开人工基准A，已披露，仅样本内对照"
+    },
+    {
+      "left_id": "01a182f0-ab2a-7571-b9ee-c0bcfc62af92",
+      "right_id": "01a182f9-c2db-710a-a091-0b56bde2396c",
+      "label": "same_event",
+      "reason": "同一美银周度资金流；数字一致",
+      "strata": [
+        "L2_同标题数字实质不同"
+      ],
+      "source": "公开人工基准A，已披露，仅样本内对照"
+    },
+    {
+      "left_id": "01a1826e-b6b5-77db-ac8a-4f13a3bf76e0",
+      "right_id": "01a1827d-55ee-748d-94a1-05ace995c30c",
+      "label": "same_event",
+      "reason": "同一 MIP-35 提案；A 多预算续期细节",
+      "strata": [
+        "L2_同标题数字实质不同"
+      ],
+      "source": "公开人工基准A，已披露，仅样本内对照"
+    },
+    {
+      "left_id": "01a18294-3d8c-7038-aeda-85641cab7fab",
+      "right_id": "01a18298-c2f3-7093-a7fc-08aaa5fcd32c",
+      "label": "same_event",
+      "reason": "同一 DTCC 代币化服务上线；A 多 Ondo 历史背景",
+      "strata": [
+        "L2_同标题数字实质不同",
+        "L5_信息增量"
+      ],
+      "source": "公开人工基准A，已披露，仅样本内对照"
+    },
+    {
+      "left_id": "01a182c2-2a36-76e6-97d3-108afbebb96b",
+      "right_id": "01a182d7-106f-7100-a4ed-3ec34053fe13",
+      "label": "same_event",
+      "reason": "同一 FASE 基金会成立；A 多创始成员与首批项目",
+      "strata": [
+        "L2_同标题数字实质不同",
+        "L5_信息增量"
+      ],
+      "source": "公开人工基准A，已披露，仅样本内对照"
+    },
+    {
+      "left_id": "01a182bb-95fc-752c-8679-a3bf89aa6632",
+      "right_id": "01a182bc-839f-7574-a194-3c5db95fd80f",
+      "label": "same_event",
+      "reason": "同一 FASE 成立；B 多第二批项目",
+      "strata": [
+        "L2_同标题数字实质不同"
+      ],
+      "source": "公开人工基准A，已披露，仅样本内对照"
+    },
+    {
+      "left_id": "01a182b9-a3bc-7088-9956-c75caec4b87a",
+      "right_id": "01a182bc-839f-7574-a194-3c5db95fd80f",
+      "label": "same_event",
+      "reason": "同 16",
+      "strata": [
+        "L2_同标题数字实质不同"
+      ],
+      "source": "公开人工基准A，已披露，仅样本内对照"
+    },
+    {
+      "left_id": "01a18292-4005-744a-a775-7447d03ff5e2",
+      "right_id": "01a18293-4967-7620-95b0-fa286a9a1abe",
+      "label": "same_event",
+      "reason": "同一 Ondo 加入 DTCC 生态；A 为一句话摘要",
+      "strata": [
+        "L2_同标题数字实质不同"
+      ],
+      "source": "公开人工基准A，已披露，仅样本内对照"
+    },
+    {
+      "left_id": "01a18296-f7fb-723d-8051-820154529663",
+      "right_id": "01a18297-e365-709c-8e8c-8ab2ff2e347f",
+      "label": "same_event",
+      "reason": "同一 Compound 钱包增持；A 多链上交易路径",
+      "strata": [
+        "L5_信息增量"
+      ],
+      "source": "公开人工基准A，已披露，仅样本内对照"
+    },
+    {
+      "left_id": "01a18296-f7fb-723d-8051-820154529663",
+      "right_id": "01a1829c-6907-7601-98fe-1708f36eb986",
+      "label": "same_event",
+      "reason": "同 19",
+      "strata": [
+        "L5_信息增量"
+      ],
+      "source": "公开人工基准A，已披露，仅样本内对照"
+    },
+    {
+      "left_id": "01a182fc-a07d-70d6-aab1-45ba5b2e2e00",
+      "right_id": "01a18308-7ff9-719f-9fd2-f471e66286e4",
+      "label": "same_event",
+      "reason": "同一 Strategy 股息修正案；A 多投票比例",
+      "strata": [
+        "L5_信息增量"
+      ],
+      "source": "公开人工基准A，已披露，仅样本内对照"
+    },
+    {
+      "left_id": "01a18508-33b6-75ba-b140-d63fa8e2553c",
+      "right_id": "01a1850f-8197-700b-bfbc-d884fe3e132a",
+      "label": "same_event",
+      "reason": "同一中信证券研报；A 多中东与油价段落",
+      "strata": [
+        "L5_信息增量"
+      ],
+      "source": "公开人工基准A，已披露，仅样本内对照"
+    },
+    {
+      "left_id": "01a18508-33b6-75ba-b140-d63fa8e2553c",
+      "right_id": "01a1850a-ebe6-7179-8a05-d1233e9b3270",
+      "label": "same_event",
+      "reason": "同 22",
+      "strata": [
+        "L5_信息增量"
+      ],
+      "source": "公开人工基准A，已披露，仅样本内对照"
+    },
+    {
+      "left_id": "01a18508-33b6-75ba-b140-d63fa8e2553c",
+      "right_id": "01a1850b-cbbe-7233-bb99-dc4a62947a3e",
+      "label": "same_event",
+      "reason": "同 22",
+      "strata": [
+        "L5_信息增量"
+      ],
+      "source": "公开人工基准A，已披露，仅样本内对照"
+    },
+    {
+      "left_id": "01a182c2-2a36-76e6-97d3-108afbebb96b",
+      "right_id": "01a182de-4e99-73e4-890a-92489fd8b23b",
+      "label": "same_event",
+      "reason": "同一 FASE 成立（与 15 同源组）",
+      "strata": [
+        "L5_信息增量"
+      ],
+      "source": "公开人工基准A，已披露，仅样本内对照"
+    },
+    {
+      "left_id": "01a182cf-cd42-779e-b8fb-f31a866d0568",
+      "right_id": "01a182d4-5130-75e5-940d-495577af8094",
+      "label": "same_event",
+      "reason": "同一 IREN 3.63 亿美元融资；A 多贷款方",
+      "strata": [
+        "L5_信息增量"
+      ],
+      "source": "公开人工基准A，已披露，仅样本内对照"
+    },
+    {
+      "left_id": "01a1835d-98c3-746b-9ed7-0e3710f8ce97",
+      "right_id": "01a18360-6509-7550-9851-d0eed5b7f579",
+      "label": "same_event",
+      "reason": "同一 Pump.fun 上线 Elysium；A 多费率细节",
+      "strata": [
+        "L5_信息增量"
+      ],
+      "source": "公开人工基准A，已披露，仅样本内对照"
+    },
+    {
+      "left_id": "01a18237-ae3b-70c9-a25d-867c08f31a52",
+      "right_id": "01a1823d-fd58-75c1-bd0f-a557368e7986",
+      "label": "same_event",
+      "reason": "同一 OKXICE 反对名单更新；A 多历史计数",
+      "strata": [
+        "L5_信息增量"
+      ],
+      "source": "公开人工基准A，已披露，仅样本内对照"
+    },
+    {
+      "left_id": "01a18235-d2d3-7677-a913-8ea3bfc33ff5",
+      "right_id": "01a1823d-fd58-75c1-bd0f-a557368e7986",
+      "label": "same_event",
+      "reason": "同 33",
+      "strata": [
+        "L5_信息增量"
+      ],
+      "source": "公开人工基准A，已披露，仅样本内对照"
+    },
+    {
+      "left_id": "01a18237-a1d4-7783-b2cd-790d243f66bd",
+      "right_id": "01a1823d-fd58-75c1-bd0f-a557368e7986",
+      "label": "same_event",
+      "reason": "同 33",
+      "strata": [
+        "L5_信息增量"
+      ],
+      "source": "公开人工基准A，已披露，仅样本内对照"
+    },
+    {
+      "left_id": "01a1823d-359f-74a0-8550-c3d3a16570cf",
+      "right_id": "01a1823d-fd58-75c1-bd0f-a557368e7986",
+      "label": "same_event",
+      "reason": "同 33",
+      "strata": [
+        "L5_信息增量"
+      ],
+      "source": "公开人工基准A，已披露，仅样本内对照"
+    },
+    {
+      "left_id": "01a18237-a1d4-7783-b2cd-790d243f66bd",
+      "right_id": "01a1823f-0726-7773-9842-5226d506a255",
+      "label": "same_event",
+      "reason": "同 33",
+      "strata": [
+        "L5_信息增量"
+      ],
+      "source": "公开人工基准A，已披露，仅样本内对照"
+    },
+    {
+      "left_id": "01a181b4-f20e-71f6-acd2-7479ab8295f3",
+      "right_id": "01a181b7-9a56-75ca-9918-870c9d29169f",
+      "label": "same_event",
+      "reason": "同一杉宇·创计划；A 多策略描述",
+      "strata": [
+        "L5_信息增量"
+      ],
+      "source": "公开人工基准A，已披露，仅样本内对照"
+    },
+    {
+      "left_id": "01a181df-160d-7719-a001-6628ae876be1",
+      "right_id": "01a181e2-ba31-77d0-b650-654aad9d2efd",
+      "label": "same_event",
+      "reason": "同一韩国警方立案前调查；A 多涉案机构",
+      "strata": [
+        "L5_信息增量"
+      ],
+      "source": "公开人工基准A，已披露，仅样本内对照"
+    },
+    {
+      "left_id": "01a181df-160d-7719-a001-6628ae876be1",
+      "right_id": "01a181e3-a5ce-70a0-84ee-3e87fd42eb8a",
+      "label": "same_event",
+      "reason": "同 40",
+      "strata": [
+        "L5_信息增量"
+      ],
+      "source": "公开人工基准A，已披露，仅样本内对照"
+    },
+    {
+      "left_id": "01a182fd-966b-7066-b512-45c29144fc8d",
+      "right_id": "01a18300-5882-74b0-bb08-9155bf34bd23",
+      "label": "same_event",
+      "reason": "同一 Pimco 减持；A 多持仓细节",
+      "strata": [
+        "L5_信息增量"
+      ],
+      "source": "公开人工基准A，已披露，仅样本内对照"
+    },
+    {
+      "left_id": "01a182fd-966b-7066-b512-45c29144fc8d",
+      "right_id": "01a18304-d251-711d-85ec-6ff513bb9c67",
+      "label": "same_event",
+      "reason": "同 43",
+      "strata": [
+        "L5_信息增量"
+      ],
+      "source": "公开人工基准A，已披露，仅样本内对照"
+    },
+    {
+      "left_id": "01a183d8-58d4-750e-adc9-e0b113983cba",
+      "right_id": "01a183e6-0a6d-7320-972d-6a93150e34b6",
+      "label": "same_event",
+      "reason": "B 的能源价格表态被 A 原句包含",
+      "strata": [
+        "L5_信息增量"
+      ],
+      "source": "公开人工基准A，已披露，仅样本内对照"
+    },
+    {
+      "left_id": "01a1831c-8d17-7131-98e8-315a2e51fda5",
+      "right_id": "01a1831f-6510-7113-8ca0-3eecd68ed139",
+      "label": "same_event",
+      "reason": "同一 IMF 人事；IMF 与「国际货币基金组织」为同一主体",
+      "strata": [
+        "L6_普通改写"
+      ],
+      "source": "公开人工基准A，已披露，仅样本内对照"
+    },
+    {
+      "left_id": "01a18548-4eb4-70fc-ba97-421cebc7255f",
+      "right_id": "01a1854c-dce5-75b3-b896-99687c0a9c2c",
+      "label": "same_event",
+      "reason": "同一 FuriosaAI 轮次；A 多股东明细",
+      "strata": [
+        "L6_普通改写"
+      ],
+      "source": "公开人工基准A，已披露，仅样本内对照"
+    },
+    {
+      "left_id": "01a18283-9844-76de-840c-e9dd0392969b",
+      "right_id": "01a18286-7696-7404-af08-c3061fccc22b",
+      "label": "same_event",
+      "reason": "同 52",
+      "strata": [
+        "L6_普通改写"
+      ],
+      "source": "公开人工基准A，已披露，仅样本内对照"
+    },
+    {
+      "left_id": "01a184d2-ff5d-77ac-8560-2b8406620987",
+      "right_id": "01a184d7-a201-73ab-ae9f-de9f979d5aaa",
+      "label": "same_event",
+      "reason": "同一 FuriosaAI 6.2 亿美元轮次（不同稿）",
+      "strata": [
+        "L6_普通改写"
+      ],
+      "source": "公开人工基准A，已披露，仅样本内对照"
+    },
+    {
+      "left_id": "01a182bf-43a6-7657-b715-4810940d7beb",
+      "right_id": "01a182c2-de54-72fc-af06-4e3ec448b87d",
+      "label": "same_event",
+      "reason": "同一 Plato A 轮；A 多董事会信息",
+      "strata": [
+        "L6_普通改写"
+      ],
+      "source": "公开人工基准A，已披露，仅样本内对照"
+    },
+    {
+      "left_id": "01a182bc-8358-72ea-b3a5-86ac82b851c6",
+      "right_id": "01a182c2-de8b-746c-90cd-26134fab4bab",
+      "label": "same_event",
+      "reason": "同一世界银行报告；标题侧重不同条目",
+      "strata": [
+        "L6_普通改写"
+      ],
+      "source": "公开人工基准A，已披露，仅样本内对照"
+    },
+    {
+      "left_id": "01a1834f-d4d8-7294-aed7-d0ab14fd95c7",
+      "right_id": "01a18350-db84-779a-8a0b-b216c8516512",
+      "label": "same_event",
+      "reason": "同一 YC 指南；标题侧重不同",
+      "strata": [
+        "L6_普通改写"
+      ],
+      "source": "公开人工基准A，已披露，仅样本内对照"
+    },
+    {
+      "left_id": "01a1834f-d4d8-7294-aed7-d0ab14fd95c7",
+      "right_id": "01a18352-a605-7700-a20f-7c5c97cc5ea7",
+      "label": "same_event",
+      "reason": "同 58",
+      "strata": [
+        "L6_普通改写"
+      ],
+      "source": "公开人工基准A，已披露，仅样本内对照"
+    },
+    {
+      "left_id": "01a1829f-2e1a-7574-a8cd-cdcf77343fb2",
+      "right_id": "01a1829f-314f-70b9-a6c2-dd49069465f2",
+      "label": "same_event",
+      "reason": "同一 Glassnode 报告（与 8 同源组）",
+      "strata": [
+        "L6_普通改写"
+      ],
+      "source": "公开人工基准A，已披露，仅样本内对照"
+    },
+    {
+      "left_id": "01a18251-679c-750e-ab89-49e83634ebce",
+      "right_id": "01a18257-c08e-72c9-a4ac-2ce49f8f0802",
+      "label": "same_event",
+      "reason": "同一 alicharts 巨鲸数据；语序不同",
+      "strata": [
+        "L6_普通改写"
+      ],
+      "source": "公开人工基准A，已披露，仅样本内对照"
+    },
+    {
+      "left_id": "01a18285-8c1d-732b-a531-01962ef55369",
+      "right_id": "01a18288-449c-7228-adb0-8b834cb91459",
+      "label": "same_event",
+      "reason": "同一 PEPE/孙宇晨链上数据",
+      "strata": [
+        "L6_普通改写"
+      ],
+      "source": "公开人工基准A，已披露，仅样本内对照"
+    },
+    {
+      "left_id": "01a18524-9845-7290-a904-ec4d6f22694e",
+      "right_id": "01a18527-4f16-700c-a8a0-fd780752d068",
+      "label": "same_event",
+      "reason": "同一 APX Lending 公告",
+      "strata": [
+        "L6_普通改写"
+      ],
+      "source": "公开人工基准A，已披露，仅样本内对照"
+    },
+    {
+      "left_id": "01a18351-a803-7780-b791-f9093b66569f",
+      "right_id": "01a18358-24eb-71e3-83fa-882051df08ee",
+      "label": "same_event",
+      "reason": "同一彭博 Solana 报道",
+      "strata": [
+        "L6_普通改写"
+      ],
+      "source": "公开人工基准A，已披露，仅样本内对照"
+    },
+    {
+      "left_id": "01a18519-8531-7063-aa52-7f9e9d1c07cb",
+      "right_id": "01a18520-e7b8-76f9-9707-5349487e5d43",
+      "label": "same_event",
+      "reason": "同一 SOL ETF 净流出数据",
+      "strata": [
+        "L6_普通改写"
+      ],
+      "source": "公开人工基准A，已披露，仅样本内对照"
+    },
+    {
+      "left_id": "01a181d4-e4c9-741e-9864-6b8c447796cb",
+      "right_id": "01a181e1-c7ea-730f-86c3-6da5d8374ec5",
+      "label": "same_event",
+      "reason": "同一恒生指数公告",
+      "strata": [
+        "L6_普通改写"
+      ],
+      "source": "公开人工基准A，已披露，仅样本内对照"
+    },
+    {
+      "left_id": "01a181d4-e4c9-741e-9864-6b8c447796cb",
+      "right_id": "01a181e3-9427-7140-982b-2aea783e2fd7",
+      "label": "same_event",
+      "reason": "同 66",
+      "strata": [
+        "L6_普通改写"
+      ],
+      "source": "公开人工基准A，已披露，仅样本内对照"
+    },
+    {
+      "left_id": "01a181d6-ceb0-7714-bf72-6f1735d72000",
+      "right_id": "01a181e3-9427-7140-982b-2aea783e2fd7",
+      "label": "same_event",
+      "reason": "同 66",
+      "strata": [
+        "L6_普通改写"
+      ],
+      "source": "公开人工基准A，已披露，仅样本内对照"
+    },
+    {
+      "left_id": "01a18295-2ae9-74ea-b808-abbc4590d565",
+      "right_id": "01a18298-c2af-7704-aefe-a4b71fd5df5e",
+      "label": "same_event",
+      "reason": "同一 Casap B 轮",
+      "strata": [
+        "L6_普通改写"
+      ],
+      "source": "公开人工基准A，已披露，仅样本内对照"
+    },
+    {
+      "left_id": "01a18465-5395-7111-99c6-20ac393dd26f",
+      "right_id": "01a18469-f49f-720a-a273-f8b5345a15d6",
+      "label": "same_event",
+      "reason": "同一迈威尔收购传闻",
+      "strata": [
+        "L6_普通改写"
+      ],
+      "source": "公开人工基准A，已披露，仅样本内对照"
+    },
+    {
+      "left_id": "01a18331-bc7e-7229-b64b-f013c3e5cb6c",
+      "right_id": "01a18333-a332-7266-a6ad-ecfcf9b01d50",
+      "label": "same_event",
+      "reason": "同一巴西市场报道",
+      "strata": [
+        "L6_普通改写"
+      ],
+      "source": "公开人工基准A，已披露，仅样本内对照"
+    },
+    {
+      "left_id": "01a18331-bc7e-7229-b64b-f013c3e5cb6c",
+      "right_id": "01a18339-07e8-70d1-b278-8eddfd2d0480",
+      "label": "same_event",
+      "reason": "同 73",
+      "strata": [
+        "L6_普通改写"
+      ],
+      "source": "公开人工基准A，已披露，仅样本内对照"
+    },
+    {
+      "left_id": "01a18342-1e59-77b1-8d30-86a2257a7b80",
+      "right_id": "01a18346-c660-707f-a058-8a757b96c203",
+      "label": "different_event",
+      "reason": "Kamino 抵押贷款 与 Anthropic IPO 风险，不同主体不同事件",
+      "strata": [
+        "L7_易负例"
+      ],
+      "source": "公开人工基准A，已披露，仅样本内对照"
+    },
+    {
+      "left_id": "01a1821d-5c9b-72d4-9faa-78528c9f64d1",
+      "right_id": "01a18221-12fc-71c2-9c35-97549a5243ba",
+      "label": "different_event",
+      "reason": "Bitget 股票基差研报 与 DBS 代币化货币调查，不同事件",
+      "strata": [
+        "L7_易负例"
+      ],
+      "source": "公开人工基准A，已披露，仅样本内对照"
+    },
+    {
+      "left_id": "01a18268-3789-726e-9637-9fa515e182a7",
+      "right_id": "01a1826f-7811-7217-9fa3-acb2bf18af80",
+      "label": "different_event",
+      "reason": "美国提前投票 与 Upwind 融资，不同事件",
+      "strata": [
+        "L7_易负例"
+      ],
+      "source": "公开人工基准A，已披露，仅样本内对照"
+    },
+    {
+      "left_id": "01a1829a-a657-719b-ae2d-40556ecba9c1",
+      "right_id": "01a182ac-12c3-743b-97ca-76333dac1cf2",
+      "label": "different_event",
+      "reason": "SK 海力士评级 与 美债净买入，不同事件",
+      "strata": [
+        "L7_易负例"
+      ],
+      "source": "公开人工基准A，已披露，仅样本内对照"
+    },
+    {
+      "left_id": "01a18538-b68a-76ce-90bc-b09845ba9f5e",
+      "right_id": "01a18555-0cfc-76b6-b4b7-e74b3c154ba3",
+      "label": "different_event",
+      "reason": "三星财报 与 支付宝声明，不同事件",
+      "strata": [
+        "L7_易负例"
+      ],
+      "source": "公开人工基准A，已披露，仅样本内对照"
+    },
+    {
+      "left_id": "01a18425-45c1-726d-b521-6664e1a95ae8",
+      "right_id": "01a1844a-c3f5-74bd-933c-379d63492e7f",
+      "label": "different_event",
+      "reason": "特朗普关税 与 Alphabet 财报，不同事件",
+      "strata": [
+        "L7_易负例"
+      ],
+      "source": "公开人工基准A，已披露，仅样本内对照"
+    },
+    {
+      "left_id": "01a181ea-03eb-7597-89c0-8b0d2bb6e65e",
+      "right_id": "01a181ea-e318-70c2-9ebd-97f2981eb96f",
+      "label": "different_event",
+      "reason": "日本比特币产业融资 与 微软/Alphabet 财报预告，不同事件",
+      "strata": [
+        "L7_易负例"
+      ],
+      "source": "公开人工基准A，已披露，仅样本内对照"
+    },
+    {
+      "left_id": "01a182e2-1177-7294-8861-ca1860a157ac",
+      "right_id": "01a18309-7392-7365-9f6a-b24c1a1af9ae",
+      "label": "different_event",
+      "reason": "Genmab 生物科技 与 Mantle 预算，不同事件",
+      "strata": [
+        "L7_易负例"
+      ],
+      "source": "公开人工基准A，已披露，仅样本内对照"
+    },
+    {
+      "left_id": "01a182d7-106f-7100-a4ed-3ec34053fe13",
+      "right_id": "01a182eb-4554-7481-9892-eeac8f26a864",
+      "label": "different_event",
+      "reason": "代币化黄金 XAUa 与 FASE 基金会，不同事件",
+      "strata": [
+        "L7_易负例"
+      ],
+      "source": "公开人工基准A，已披露，仅样本内对照"
+    },
+    {
+      "left_id": "01a18308-9119-75e3-b900-e808328b2a36",
+      "right_id": "01a18320-5e1b-768e-a026-c3c87734326d",
+      "label": "different_event",
+      "reason": "Bitwise 目标价 与 Avail 隐私工具，不同事件",
+      "strata": [
+        "L7_易负例"
+      ],
+      "source": "公开人工基准A，已披露，仅样本内对照"
+    },
+    {
+      "left_id": "01a184fc-4e79-71e1-93bb-7a74becafea3",
+      "right_id": "01a18514-16fe-727c-8055-977e7d1a77f8",
+      "label": "different_event",
+      "reason": "特朗普媒体协议 与 迈威尔收购，不同事件",
+      "strata": [
+        "L7_易负例"
+      ],
+      "source": "公开人工基准A，已披露，仅样本内对照"
+    },
+    {
+      "left_id": "01a18501-cc1c-727b-b641-477b1de9039e",
+      "right_id": "01a18508-37f8-700a-80e7-08a55aa9e3a4",
+      "label": "different_event",
+      "reason": "CryptoQuant 观点 与 美联储决议，不同事件",
+      "strata": [
+        "L7_易负例"
+      ],
+      "source": "公开人工基准A，已披露，仅样本内对照"
+    },
+    {
+      "left_id": "01a1829f-2366-7206-b4ba-131d855493f8",
+      "right_id": "01a182ae-aaa4-74fa-af7f-6d86e154b67f",
+      "label": "different_event",
+      "reason": "长鑫存储 HBM3E 与 Ripple 收入指引，不同事件",
+      "strata": [
+        "L7_易负例"
+      ],
+      "source": "公开人工基准A，已披露，仅样本内对照"
+    },
+    {
+      "left_id": "01a1832b-5bf9-71ff-b9cb-4b3d232b6bf4",
+      "right_id": "01a1832c-2319-76a8-aa06-5e2637f80407",
+      "label": "different_event",
+      "reason": "Anthropic 法律工具 与 WTI 油价，不同事件",
+      "strata": [
+        "L7_易负例"
+      ],
+      "source": "公开人工基准A，已披露，仅样本内对照"
+    },
+    {
+      "left_id": "01a181eb-e511-72cc-b1bd-8f1b44a7d0cc",
+      "right_id": "01a181f9-a0b7-728b-8dc4-41938329aa7f",
+      "label": "different_event",
+      "reason": "币安 PREDICT 空投 与 Japan Bitcoin Industry 融资，不同事件",
+      "strata": [
+        "L7_易负例"
+      ],
+      "source": "公开人工基准A，已披露，仅样本内对照"
+    },
+    {
+      "left_id": "01a181df-19d5-72a3-a8fb-980354c56ecd",
+      "right_id": "01a181fb-ab60-71d2-a067-4bed01daccf3",
+      "label": "different_event",
+      "reason": "MARA 转账 与 PEPE 持仓，不同事件",
+      "strata": [
+        "L7_易负例"
+      ],
+      "source": "公开人工基准A，已披露，仅样本内对照"
+    }
+  ]
+}

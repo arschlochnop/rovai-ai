@@ -1,0 +1,215 @@
+{
+ "run_dir": "runs/fact_v1",
+ "argv": [
+  "run_replay.py",
+  "--input",
+  "/root/.claude/uploads/ebbb30f4-339c-5eb8-8b28-c0460cd544c5/4706cc15-0-____.json",
+  "--comparator",
+  "fact",
+  "--out",
+  "runs/fact_v1"
+ ],
+ "started_utc": "2026-10-29T06:24:54.413721+00:00",
+ "finished_utc": "2026-10-29T06:25:22.451088+00:00",
+ "python": "3.13.17 (main, Oct 22 2026, 14:06:04) [GCC 13.3.0]",
+ "platform": "Linux-6.18.44-fc-v185-x86_64-with-glibc2.39",
+ "dependencies": "仅 Python 标准库（未安装/未使用第三方包）",
+ "input": {
+  "path": "/root/.claude/uploads/ebbb30f4-339c-5eb8-8b28-c0460cd544c5/4706cc15-0-____.json",
+  "sha256": "6fedb6053d9e78d693b7124bd7b775322cbd0b8aaa254f3cd416a52658dcd798",
+  "meta": {
+   "until_utc": "2026-10-29T02:00:57.703494",
+   "since_utc": "2026-10-28T02:00:57.703494",
+   "transaction_read_only": "on",
+   "group_id": "01a17c1b-e8c9-7346-982a-9db3b515875f"
+  },
+  "checks": {
+   "article_count": 2606,
+   "unique_ids": 2606,
+   "time_parse_failures": 0,
+   "strictly_increasing_after_sort": true,
+   "file_order_equals_sorted_order": true,
+   "fraction_digit_histogram": {
+    "collected": {
+     "3": 6,
+     "4": 22,
+     "5": 243,
+     "6": 2335
+    },
+    "updated": {
+     "3": 3,
+     "4": 21,
+     "5": 223,
+     "6": 2359
+    },
+    "published": {
+     "0": 2309,
+     "1": 2,
+     "2": 24,
+     "3": 271
+    }
+   },
+   "main_count": 1492,
+   "before_main_count": 1114,
+   "after_until_count": 0,
+   "warmup_count": 50,
+   "first_collected": "2026-10-27T06:46:23.377141",
+   "last_collected": "2026-10-29T02:00:13.046983",
+   "main_first": {
+    "id": "01a1803e-70ff-7603-a3a9-1ffe7923a5a9",
+    "collected": "2026-10-28T02:02:18.239426"
+   },
+   "main_last": {
+    "id": "01a18562-e3f6-7206-b301-253acb7ccad7",
+    "collected": "2026-10-29T02:00:13.046983"
+   }
+  }
+ },
+ "code_sha256": {
+  "dedup/__init__.py": "24d6ed1452d52adb190f42ec96c0f2773d35bd35c531c9473fd89147d46cc3a1",
+  "dedup/background.py": "0de91b1362bb2293cb27aa4f813ac3f7099e0c8ce3017d9fe2e666650059dcde",
+  "dedup/comparator_exact.py": "7488212bf7d5d0fdcd6a3b4389a729a13f10788112a52ab3b45b740c1557f83e",
+  "dedup/comparator_fact.py": "99c019fdcc78e257d4004c96ea576c58d6c03a934c3a36c70c93fba6684312d1",
+  "dedup/contract.py": "06d1cf59f2ccf17f7ec26d4a32234fbf6398d226598e7d31ada337ca0dbc8176",
+  "dedup/evaluate.py": "1402f0b32d9b9034bdf6f0c7d42b8fcc35d5ce3195df22dcc42a1943c1c60ad5",
+  "dedup/facts.py": "340491eb67f2dd1974aa6fa462b86d0a182ead40f93e1039b8e2f2692b5352b1",
+  "dedup/grouping.py": "45a17a48e0ddf681a5d5626cca2cb81f4881b55a32c05c6afe318abc01ec6250",
+  "dedup/replay.py": "2206e912ad730cb6bbe04cd7594cdb0b4152fb2dba8ee1d1de0259f153548d53",
+  "dedup/snapshot.py": "137a0f1b373ea44fd25f32b9a9f3de4c8276530698e3d544708e562eadd166d8",
+  "dedup/textnorm.py": "e5efc120492ab5d8a4e29d61583ce7476f52c3fcf3160151961fb57e9c873393",
+  "run_audit.py": "52a4f73a4de29b73f37fb62f62410083c38905ee0b8aa35473ff079cd06040eb",
+  "run_eval.py": "9dd9c0040e145bcca5c5e985abaacddcbb9e9ff161dd4dbeeb0a3155c29e12af",
+  "run_replay.py": "c50ba8bfd683bd55888420a8755873235ec031cf369f643d4d91ca1fa2ecda87",
+  "tools/sample_candidates.py": "62c7a6e3c157e9d9da3724bfa40a0dc588209fd581754b62cc4a65605bc2f61a",
+  "tools/split_labels.py": "4b4232bf6363929a21605ce450d30edabcf42f69409e4e4c2970f5e45babfe5a",
+  "tools/write_dev_labels_v1.py": "6a7ae1451385bd5f71568634eeef030ccf3c6faa0784a83e2190995d10e9c26c"
+ },
+ "comparator": {
+  "module": "dedup.comparator_fact",
+  "version": "fact-1.0.0",
+  "config": {
+   "name": "fact_enhanced",
+   "text_high": 0.55,
+   "text_mid": 0.3,
+   "text_disjoint": 0.12,
+   "near_dup_containment": 0.88,
+   "title_near_jaccard": 0.6,
+   "exact_min_len": 6,
+   "anchor_strong": 0.8,
+   "fact_path_anchor_score": 1.6,
+   "fact_path_min_items": 2,
+   "text_path_anchor_score": 0.6,
+   "near_dup_anchor_score": 0.25,
+   "rare_latin_max_df": 2,
+   "semirare_latin_max_df": 10,
+   "rare_title_cjk_max_df": 1,
+   "conflict_override_anchor": 3.0,
+   "snapshot_max_pub_gap_minutes": 45,
+   "subject_mismatch_max_anchor": 0.8,
+   "semantic": {
+    "enabled": false,
+    "reason": "运行环境无本地 embedding 模型，huggingface.co 被网络策略拒绝"
+   }
+  }
+ },
+ "background": {
+  "file": "background_df.json.gz",
+  "n_docs": 1064,
+  "content_hash": "45a1b05ae592ce118d6b11fcf32ea00bb6f20c8dc86c0cd57098fd7ec2bbaf63",
+  "source": {
+   "snapshot_sha256": "6fedb6053d9e78d693b7124bd7b775322cbd0b8aaa254f3cd416a52658dcd798",
+   "sorted_index_range": [
+    0,
+    1064
+   ],
+   "rule": "回放起点之前采集的全部文章"
+  }
+ },
+ "semantic_model": null,
+ "labels": "回放不读取任何标签；评测由 run_eval.py 单独进行",
+ "window_order": {
+  "order_key": "(collected 解析为 UTC, id) 升序",
+  "window": 50,
+  "replay_from": "warmup",
+  "replay_start_index": 1064,
+  "warmup_start_index": 1064,
+  "main_start_index": 1114,
+  "main_end_index_exclusive": 2606,
+  "first_replayed_id": "01a1801e-689b-7420-ac86-c178514b4d75",
+  "last_replayed_id": "01a18562-e3f6-7206-b301-253acb7ccad7",
+  "replay_id_sequence_sha256": "027e298d3aa1ec2b121b99e232242bf71ebd7df1105a98e3fe9e7ff207fc3808"
+ },
+ "timings_seconds": {
+  "snapshot_load_and_parse": 0.0424,
+  "background_build": 0.9075,
+  "article_prepare_by_phase": {
+   "warmup": 0.0611,
+   "main": 1.9512,
+   "pre": 0.0
+  },
+  "pair_compare_by_phase": {
+   "warmup": 0.4609,
+   "main": 20.0206,
+   "pre": 0.0
+  },
+  "grouping_by_phase": {
+   "warmup": 0.0014,
+   "main": 0.105,
+   "pre": 0.0
+  },
+  "output_write": 2.293,
+  "summary": 1.816,
+  "note": "主评测耗时分母只用 main 段；预热段（warmup）成本单列；无模型初始化/向量编码成本（语义未运行）"
+ },
+ "counts": {
+  "pairs": {
+   "warmup": 1225,
+   "main": 74600,
+   "pre": 0
+  },
+  "articles": {
+   "warmup": 50,
+   "main": 1492,
+   "pre": 0
+  },
+  "labels_main": {
+   "same_event": 1250,
+   "different_event": 71766,
+   "uncertain": 1584
+  },
+  "labels_warmup": {
+   "same_event": 43,
+   "different_event": 1160,
+   "uncertain": 22
+  },
+  "actions_main": {
+   "join": 668,
+   "new": 797,
+   "ambiguous_new": 27
+  },
+  "actions_warmup": {
+   "join": 21,
+   "new": 29,
+   "ambiguous_new": 0
+  }
+ },
+ "outputs_sha256": {
+  "assignments.jsonl": {
+   "sha256": "b054cfd7f91c7f4fd65fb27bf69258b02f5ab8ecb5a981698a7c048e62abfdcd",
+   "bytes": 667508
+  },
+  "background_df.json.gz": {
+   "sha256": "6f78c973d3dfe7959bb68bbf2a6328f8eaacf51bd00741d662128e28fadd9205",
+   "bytes": 470963
+  },
+  "pairs.jsonl": {
+   "sha256": "1d4e1f396499c677c9aecc23462fdaad19ed944a029b87ed1081e540f0a2b17e",
+   "bytes": 123541664
+  },
+  "summary.json": {
+   "sha256": "4f02fcb6b25fb1bee4bfebec1a1fbbb10b78074a4ac7dee9f40797011f6d305f",
+   "bytes": 2609
+  }
+ },
+ "manifest_note": "manifest 不包含自身 hash；summary.json 单独保存"
+}
