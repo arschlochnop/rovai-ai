@@ -24,10 +24,10 @@ from .background import Background, char_ngrams, empty_background
 from .contract import validate_result
 from .facts import (
     ArticleFacts, Quantity, compare_values, extract_facts, subject_identity, subjects_relation,
-    units_compatible, GENERIC_LATIN, ALIASES, CJK,
+    units_compatible, claim_units, GENERIC_LATIN, ALIASES, CJK,
 )
 
-VERSION = "fact-1.0.0"
+VERSION = "fact-2.0.0"
 
 DEFAULT_CONFIG = {
     "name": "fact_enhanced",
@@ -51,6 +51,10 @@ DEFAULT_CONFIG = {
     # —— 结构/时间保护 ——
     "snapshot_max_pub_gap_minutes": 45,
     "subject_mismatch_max_anchor": 0.8,  # 主体互斥且锚点低于此 → different
+    # —— v2 新增（来源：v1 在 dev 拆分上的真实误合并：$TORCH/$AI/$PRIORS 同模板、皮查伊同场不同表态）——
+    "exclusive_entity_max_anchor": 1.6,  # 双方标题各有对方全文没有的实体，且共享锚点低于此 → different
+    "statement_exclusive_ratio": 0.5,  # 同一发言主体：双方表态各有 ≥50% 单元不见于对方全文 → 不同表态
+    "statement_min_exclusive_units": 3,
     # 语义补充：当前环境无可用模型，固定关闭（见 README）
     "semantic": {"enabled": False, "reason": "运行环境无本地 embedding 模型，huggingface.co 被网络策略拒绝"},
 }
@@ -391,10 +395,49 @@ def _compound_partial(A: Prepared, B: Prepared) -> str | None:
                 missing.append(q)
         if not shared_ids or not missing:
             continue
+        shared_named = set().union(*[{x for x in s if not x.startswith("zh:")} for s in shared_ids])
         for q in missing:
             ids = subject_identity(q.subject)
-            if ids and all(subjects_relation(ids, s) == "different" for s in shared_ids):
+            named = {x for x in ids if not x.startswith("zh:")}
+            # v2：缺失事实必须带有与共享事实不同的“具名”主体（拉丁实体/别名），
+            # 只是中文短语不同（“第一季空投”“持仓”）视为同一事件的信息增量
+            if named and shared_named and not (named & shared_named) and \
+                    all(subjects_relation(ids, s) == "different" for s in shared_ids):
                 return f"标题事实 {q.raw}（主体 {q.subject}）在另一篇中没有对应，且与共享事实主体不同"
+    return None
+
+
+def _exclusive_title_entities(A: Prepared, B: Prepared) -> tuple[list, list]:
+    """双方标题中“对方全文（含别名）完全没有”的非通用拉丁实体/cashtag。"""
+    def excl(X: Prepared, Y: Prepared) -> list:
+        out = []
+        for t in sorted(X.facts.title_latin):
+            if len(t) < 2 or t in Y.facts.latin_tokens:
+                continue
+            if _present({ALIASES.get(t, t)}, Y):
+                continue
+            out.append(t)
+        return out
+    return excl(A, B), excl(B, A)
+
+
+def _statement_divergence(A: Prepared, B: Prepared, cfg: dict) -> str | None:
+    """同一发言主体的两条标题表态：各自有过半内容单元不见于对方全文 → 不同表态。"""
+    sa, sb = A.facts.statement, B.facts.statement
+    if not sa or not sb:
+        return None
+    ra = subjects_relation(subject_identity(sa[0]), subject_identity(sb[0]))
+    if ra not in ("same", "related") and sa[0] != sb[0]:
+        return None
+    ua, ub = claim_units(sa[1]), claim_units(sb[1])
+    fa_units, fb_units = claim_units(A.facts.full_norm), claim_units(B.facts.full_norm)
+    ea, eb = ua - fb_units, ub - fa_units
+    if not ua or not ub:
+        return None
+    ratio_a, ratio_b = len(ea) / len(ua), len(eb) / len(ub)
+    if (ratio_a >= cfg["statement_exclusive_ratio"] and ratio_b >= cfg["statement_exclusive_ratio"]
+            and len(ea) >= cfg["statement_min_exclusive_units"] and len(eb) >= cfg["statement_min_exclusive_units"]):
+        return (f"同一发言主体（{sa[0]} / {sb[0]}）的两条不同表态：各自有 {ratio_a:.0%} / {ratio_b:.0%} 的内容不见于对方")
     return None
 
 
@@ -489,6 +532,8 @@ def compare_prepared(A: Prepared, B: Prepared, config: dict | None = None) -> di
     }
 
     near_dup = exact or (cont >= cfg["near_dup_containment"])
+    excl_a, excl_b = _exclusive_title_entities(A, B)
+    stmt_div = _statement_divergence(A, B, cfg)
     codes: list[str] = []
     label, reason = "uncertain", ""
 
@@ -512,9 +557,14 @@ def compare_prepared(A: Prepared, B: Prepared, config: dict | None = None) -> di
         else:
             done("different_event", f"事实冲突：{top.get('detail')}（{top.get('left', '')} vs {top.get('right', '')}）",
                  "hard_conflict")
+    elif excl_a and excl_b and anchor_score < cfg["exclusive_entity_max_anchor"]:
+        done("different_event", f"同模板不同主体：标题实体 {excl_a} 与 {excl_b} 互不出现在对方全文中，无足够共享事实",
+             "exclusive_entity_mismatch")
     elif mutual_absent and anchor_score < cfg["subject_mismatch_max_anchor"]:
         done("different_event", f"标题主体互斥且互不出现（{fa.title_subject} vs {fb.title_subject}），无足够共享事实",
              "subject_mismatch")
+    elif stmt_div and anchor_score < cfg["fact_path_anchor_score"]:
+        done("different_event", stmt_div, "statement_divergence")
     else:
         partial = _compound_partial(A, B)
         stance_mismatch = fa.stance != fb.stance and "deny" in (fa.stance, fb.stance)
@@ -537,7 +587,11 @@ def compare_prepared(A: Prepared, B: Prepared, config: dict | None = None) -> di
               and (title_rare or latin_sup or anchor_score >= cfg["text_path_anchor_score"])):
             same_ok = ("same_event", f"标题近乎相同（字符重合 {tj:.2f}）、主体一致且有稀有实体/事实锚点，无冲突",
                        "title_near_duplicate")
-        if same_ok and partial:
+        if same_ok and excl_a and excl_b:
+            done("uncertain", f"支持证据存在，但双方标题各有对方没有的实体 {excl_a} / {excl_b}", "exclusive_entity_with_support")
+        elif same_ok and stmt_div:
+            done("uncertain", f"{stmt_div}；虽有共享事实，不判为同一", "statement_divergence_with_support")
+        elif same_ok and partial:
             done("uncertain", f"{partial}：复合报道与单项报道只部分重叠，不判为同一事件", "compound_partial")
         elif same_ok and stance_mismatch:
             done("uncertain", "一方为否认/澄清，另一方不是；立场不同，可能是同一事件的不同进展", "stance_mismatch")
@@ -582,6 +636,8 @@ def compare_prepared(A: Prepared, B: Prepared, config: dict | None = None) -> di
             "stance": [fa.stance, fb.stance],
             "title_subjects": [fa.title_subject, fb.title_subject],
             "subject_relation": subj_rel,
+            "exclusive_title_entities": [excl_a, excl_b],
+            "statement_divergence": stmt_div,
             "subject_agreement": subj_ok,
             "score_note": SCORE_NOTE,
         },

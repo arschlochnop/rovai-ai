@@ -30,6 +30,17 @@ from dedup.snapshot import comparator_view, load_snapshot, sha256_file  # noqa: 
 COMPARATORS = {"exact": comparator_exact, "fact": comparator_fact}
 
 
+def git_state() -> dict:
+    import subprocess
+    try:
+        head = subprocess.run(["git", "rev-parse", "HEAD"], cwd=ROOT, capture_output=True, text=True).stdout.strip()
+        dirty = subprocess.run(["git", "status", "--porcelain", "--", "."], cwd=ROOT, capture_output=True,
+                               text=True).stdout.strip()
+        return {"commit": head, "experiment_dir_dirty": bool(dirty)}
+    except OSError:
+        return {"commit": None, "experiment_dir_dirty": None}
+
+
 def code_hashes() -> dict:
     out = {}
     for p in sorted(list((ROOT / "dedup").glob("*.py")) + list(ROOT.glob("*.py")) + list((ROOT / "tools").glob("*.py"))):
@@ -200,6 +211,7 @@ def main() -> None:
         "input": {"path": str(Path(args.input).resolve()), "sha256": snap.sha256, "meta": snap.meta,
                   "checks": snap.checks},
         "code_sha256": code_hashes(),
+        "git": git_state(),
         "comparator": {"module": comp.__name__, "version": comp.VERSION, "config": serial_cfg},
         "background": bg_info,
         "semantic_model": None,

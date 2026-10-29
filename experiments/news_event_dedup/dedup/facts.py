@@ -364,6 +364,8 @@ ALIASES: dict[str, str] = {
 }
 
 _LATIN_TOKEN_RE = re.compile(r"(?<![a-z0-9])\$?([a-z][a-z0-9]*(?:[.\-&'][a-z0-9]+)*)")
+# “$AI”“$TORCH”这类 cashtag 明确指代资产，即使与通用词同形也按实体处理（v2）
+_CASHTAG_RE = re.compile(r"\$([a-z][a-z0-9]{0,11})(?![a-z0-9])")
 
 _ADDR_FULL_RE = re.compile(r"(?<![0-9a-z])0x[0-9a-f]{40}(?![0-9a-z])")
 _TX_FULL_RE = re.compile(r"(?<![0-9a-z])0x[0-9a-f]{64}(?![0-9a-z])")
@@ -411,6 +413,8 @@ class ArticleFacts:
     roundup_signals: dict
     compound_title: bool
     content_len: int
+    cashtags: set = field(default_factory=set)
+    statement: tuple | None = None  # (发言主体, 表态内容)，标题为“X：……”或“X称……”时
     extra: dict = field(default_factory=dict)
 
 
@@ -458,6 +462,10 @@ def _unit_after(text: str, pos: int) -> tuple[str, str, int]:
         m = _LATIN_UNIT_RE.match(rest)
         if m and m.group(1) not in _GENERIC_LATIN_UNIT_STOP:
             return "token", m.group(1), base + 1 + m.end()
+        # “6,168 枚比特币”：枚后紧跟中文资产名时按通用别名归一（v2）
+        for alias, key in ALIASES.items():
+            if not re.fullmatch(r"[a-z0-9&]+", alias) and rest.startswith(alias):
+                return "token", key, base + 1 + len(alias)
         return "token", "?", base + 1
     if s2.startswith("点") and not s2.startswith("点击"):
         return "points", "点", base + 1
@@ -774,6 +782,34 @@ def title_subject_phrase(title_norm: str) -> str:
     return normalize_subject(cand)
 
 
+_STATEMENT_COLON_RE = re.compile(r"^([^:：]{1,20})[:：](.{2,})$")
+_STATEMENT_SAY_RE = re.compile(r"^(.{2,12}?)(?:称|表示|警告|认为|指出)(.{2,})$")
+
+
+def statement_parts(title_norm: str) -> tuple | None:
+    """标题为“发言主体：表态”或“发言主体称/表示……”时，拆出 (主体, 表态)；否则 None。"""
+    t = title_norm.strip()
+    m = _STATEMENT_COLON_RE.match(t) or _STATEMENT_SAY_RE.match(t)
+    if not m:
+        return None
+    speaker, claim = m.group(1).strip(), m.group(2).strip()
+    if not speaker or not claim:
+        return None
+    return speaker, claim
+
+
+def claim_units(text: str) -> set[str]:
+    """表态内容的比较单元：中文连续片段的 2-gram + 拉丁词 + 数字串。"""
+    units: set[str] = set()
+    for run in re.findall(rf"[{CJK}]+", text):
+        if len(run) == 1:
+            units.add(run)
+        units.update(run[i:i + 2] for i in range(len(run) - 1))
+    units.update(t for t in re.findall(r"[a-z][a-z0-9.\-]+", text) if len(t) >= 2)
+    units.update(re.findall(r"\d+(?:\.\d+)?", text))
+    return units
+
+
 def extract_facts(view: dict) -> ArticleFacts:
     """从比较器视图（白名单字段）抽取事实。"""
     title_raw = tn.strip_title(tn.normalize(view["title"]))
@@ -815,6 +851,10 @@ def extract_facts(view: dict) -> ArticleFacts:
     latin = {t for t in latin if len(t) >= 2 and not re.fullmatch(r"0x[0-9a-f]+", t)}
     title_latin = {m.group(1) for m in _LATIN_TOKEN_RE.finditer(title)}
     title_latin = {t for t in title_latin if len(t) >= 2 and t not in GENERIC_LATIN}
+    cashtags = set(_CASHTAG_RE.findall(full))
+    title_cashtags = set(_CASHTAG_RE.findall(title))
+    latin |= cashtags
+    title_latin |= title_cashtags
 
     stance = ""
     if _DENY_RE.search(title):
@@ -846,6 +886,7 @@ def extract_facts(view: dict) -> ArticleFacts:
         title_latin=title_latin, title_subject=t_subject, title_subject_ids=subject_identity(t_subject),
         title_fact_subjects=title_q_subjects, venues=venues, stance=stance, roundup=roundup,
         roundup_signals=sig, compound_title=compound, content_len=len(content_norm),
+        cashtags=cashtags, statement=statement_parts(title),
     )
 
 
