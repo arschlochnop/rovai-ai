@@ -27,7 +27,7 @@ from .facts import (
     units_compatible, claim_units, GENERIC_LATIN, ALIASES, CJK,
 )
 
-VERSION = "fact-3.0.0"
+VERSION = "fact-4.0.0"
 
 DEFAULT_CONFIG = {
     "name": "fact_enhanced",
@@ -55,7 +55,7 @@ DEFAULT_CONFIG = {
     "exclusive_entity_max_anchor": 1.6,  # 双方标题各有对方全文没有的实体，且共享锚点低于此 → different
     "statement_exclusive_ratio": 0.5,  # 同一发言主体：双方表态各有 ≥50% 单元不见于对方全文 → 不同表态
     "statement_min_exclusive_units": 3,
-    # v3：表态分歧只在共享事实锚点 < fact_path_anchor_score 时判 different；
+    # v3：表态分歧只在共享事实锚点 < fact_path_anchor_score 时起作用；v4 起只阻止 same、不再断言 different；
     # 共享事实充分时不再被措辞差异否决（来源：v2 把 Iron Fish、币安 PREDICT 空投同一公告的转述拆散）
     # 语义补充：当前环境无可用模型，固定关闭（见 README）
     "semantic": {"enabled": False, "reason": "运行环境无本地 embedding 模型，huggingface.co 被网络策略拒绝"},
@@ -566,7 +566,8 @@ def compare_prepared(A: Prepared, B: Prepared, config: dict | None = None) -> di
         done("different_event", f"标题主体互斥且互不出现（{fa.title_subject} vs {fb.title_subject}），无足够共享事实",
              "subject_mismatch")
     elif stmt_div and anchor_score < cfg["fact_path_anchor_score"]:
-        done("different_event", stmt_div, "statement_divergence")
+        # v4：措辞分歧只说明“无法确认同一”，不是不同事件的证据（v3 把 Bitwise 同一报告、CZ 同一帖子的转述判成了不同）
+        done("uncertain", stmt_div + "；措辞分歧不足以证明是不同事件，也无法确认同一", "statement_divergence")
     else:
         partial = _compound_partial(A, B)
         stance_mismatch = fa.stance != fb.stance and "deny" in (fa.stance, fb.stance)
