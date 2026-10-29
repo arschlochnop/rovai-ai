@@ -786,6 +786,12 @@ _STATEMENT_COLON_RE = re.compile(r"^([^:：]{1,20})[:：](.{2,})$")
 _STATEMENT_SAY_RE = re.compile(r"^(.{2,12}?)(?:称|表示|警告|认为|指出)(.{2,})$")
 
 
+_SPEAKER_VERB_RE = re.compile(
+    r"公布|发布|宣布|推出|上线|完成|披露|计划|启动|开启|新增|批准|通过|调整|提交|签署|达成|任命|起诉|调查|"
+    r"转入|转出|存入|买入|卖出|增持|减持|融资|上涨|下跌|涨|跌|跌破|突破|将|拟"
+)
+
+
 def statement_parts(title_norm: str) -> tuple | None:
     """标题为“发言主体：表态”或“发言主体称/表示……”时，拆出 (主体, 表态)；否则 None。"""
     t = title_norm.strip()
@@ -794,6 +800,9 @@ def statement_parts(title_norm: str) -> tuple | None:
         return None
     speaker, claim = m.group(1).strip(), m.group(2).strip()
     if not speaker or not claim:
+        return None
+    # v3：发言主体必须是名词短语；含动作词的冒号前缀（“币安公布PREDICT空投领取方案：”）是事件标题，不是发言
+    if _SPEAKER_VERB_RE.search(speaker):
         return None
     return speaker, claim
 

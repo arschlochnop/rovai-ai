@@ -27,7 +27,7 @@ from .facts import (
     units_compatible, claim_units, GENERIC_LATIN, ALIASES, CJK,
 )
 
-VERSION = "fact-2.0.0"
+VERSION = "fact-3.0.0"
 
 DEFAULT_CONFIG = {
     "name": "fact_enhanced",
@@ -55,6 +55,8 @@ DEFAULT_CONFIG = {
     "exclusive_entity_max_anchor": 1.6,  # 双方标题各有对方全文没有的实体，且共享锚点低于此 → different
     "statement_exclusive_ratio": 0.5,  # 同一发言主体：双方表态各有 ≥50% 单元不见于对方全文 → 不同表态
     "statement_min_exclusive_units": 3,
+    # v3：表态分歧只在共享事实锚点 < fact_path_anchor_score 时判 different；
+    # 共享事实充分时不再被措辞差异否决（来源：v2 把 Iron Fish、币安 PREDICT 空投同一公告的转述拆散）
     # 语义补充：当前环境无可用模型，固定关闭（见 README）
     "semantic": {"enabled": False, "reason": "运行环境无本地 embedding 模型，huggingface.co 被网络策略拒绝"},
 }
@@ -589,8 +591,6 @@ def compare_prepared(A: Prepared, B: Prepared, config: dict | None = None) -> di
                        "title_near_duplicate")
         if same_ok and excl_a and excl_b:
             done("uncertain", f"支持证据存在，但双方标题各有对方没有的实体 {excl_a} / {excl_b}", "exclusive_entity_with_support")
-        elif same_ok and stmt_div:
-            done("uncertain", f"{stmt_div}；虽有共享事实，不判为同一", "statement_divergence_with_support")
         elif same_ok and partial:
             done("uncertain", f"{partial}：复合报道与单项报道只部分重叠，不判为同一事件", "compound_partial")
         elif same_ok and stance_mismatch:
