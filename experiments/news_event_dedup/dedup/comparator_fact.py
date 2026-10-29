@@ -27,7 +27,7 @@ from .facts import (
     units_compatible, claim_units, GENERIC_LATIN, ALIASES, CJK,
 )
 
-VERSION = "fact-4.0.0"
+VERSION = "fact-4.1.0"
 
 DEFAULT_CONFIG = {
     "name": "fact_enhanced",

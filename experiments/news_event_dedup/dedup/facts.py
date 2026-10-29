@@ -689,10 +689,15 @@ def _extract_quantities(segment: str, *, in_title: bool, venue: str, title_subje
                 right = clause[uend:uend + 4]
                 sign = 0
                 pre = clause[max(0, a - 1):a]
-                if pre in ("-", "−") and (a < 2 or not clause[a - 2].isalnum()):
+                # 负号前是 ASCII 字母数字（如 gpt-6.1、3.75%-4%）时是连字符；中文字符后（“为-90.7亿”）是负号
+                before = clause[a - 2] if a >= 2 else ""
+                hyphen = bool(before) and before.isascii() and (before.isalnum() or before in "%)")
+                if pre in ("-", "−", "－") and not hyphen:
                     sign = -1
-                elif pre == "+" and (a < 2 or not clause[a - 2].isalnum()):
+                elif pre == "+" and not hyphen:
                     sign = 1
+                if sign == -1:
+                    value = -value  # 符号进入数值本身，-90.7 与 90.7 不会被判等
                 role, direction, rpos = _find_role(full_left)
                 parens_val = False
                 if last_token_qty is not None and ucat == "currency":
